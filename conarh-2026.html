@@ -120,30 +120,21 @@
     #conarh-lp .cj-hero .cj-hero-note{font-size:16px;margin-top:14px;color:rgba(255,255,255,.82);max-width:560px;}
     #conarh-lp .cj-hero .cj-hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
 
-    /* Card decorativo (mock do cartão Caju em CSS) */
+    /* Imagem do hero (evento de RH) — mesmo formato arredondado/flutuante */
     #conarh-lp .cj-hero-art{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;}
-    #conarh-lp .cj-card{
-      width:330px;max-width:100%;border-radius:26px;padding:26px;color:#fff;position:relative;
-      background:linear-gradient(135deg,#FF7A3C 0%,var(--cj-red) 55%,var(--cj-red-700) 100%);
-      box-shadow:0 40px 80px -30px rgba(0,0,0,.55);transform:rotate(-6deg);
+    #conarh-lp .cj-hero-photo{position:relative;width:100%;max-width:440px;transform:rotate(-3deg);}
+    #conarh-lp .cj-hero-photo img{
+      width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
+      border-radius:28px;border:6px solid #fff;
+      box-shadow:0 40px 80px -30px rgba(0,0,0,.55);display:block;
     }
-    #conarh-lp .cj-card::before{
-      content:"";position:absolute;inset:0;border-radius:26px;
-      background:radial-gradient(120% 90% at 90% 0%,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 55%);
-    }
-    #conarh-lp .cj-card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;}
-    #conarh-lp .cj-card-brand{font-weight:800;font-size:22px;letter-spacing:-.02em;}
-    #conarh-lp .cj-card-chip{width:44px;height:34px;border-radius:8px;background:linear-gradient(135deg,#ffe08a,#f4b740);opacity:.95;}
-    #conarh-lp .cj-card-label{position:relative;margin-top:56px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
-    #conarh-lp .cj-card-value{position:relative;font-size:30px;font-weight:800;margin-top:4px;}
-    #conarh-lp .cj-card-row{position:relative;display:flex;justify-content:space-between;margin-top:26px;font-size:13px;opacity:.9;}
-    #conarh-lp .cj-card-badge{
+    #conarh-lp .cj-photo-badge{
       position:absolute;top:-18px;right:-14px;z-index:2;transform:rotate(8deg);
       background:#fff;color:var(--cj-red);font-weight:700;font-size:13px;
       padding:10px 16px;border-radius:14px;box-shadow:0 16px 30px -16px rgba(0,0,0,.5);
       display:flex;flex-direction:column;line-height:1.1;text-align:center;
     }
-    #conarh-lp .cj-card-badge b{font-size:20px;}
+    #conarh-lp .cj-photo-badge b{font-size:20px;}
 
     /* ==========================================================
        2ª DOBRA — TRÊS FRENTES
@@ -172,10 +163,10 @@
     #conarh-lp .cj-solcard .cj-btn{margin-top:26px;}
 
     /* ==========================================================
-       SAÚDE E BEM-ESTAR — pacotes
+       BLOCOS DE OFERTA (dentro da 2ª dobra)
     ========================================================== */
-    #conarh-lp .cj-saude{background:var(--cj-cream-2);}
-    #conarh-lp .cj-saude h2{font-size:clamp(26px,3.2vw,40px);}
+    #conarh-lp .cj-block{margin-top:56px;}
+    #conarh-lp .cj-block-title{font-size:clamp(24px,3vw,34px);}
     #conarh-lp .cj-pill-tag{
       display:inline-flex;align-items:center;gap:8px;
       font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;
@@ -296,19 +287,16 @@
         </div>
       </div>
 
-      <div class="cj-hero-art" aria-hidden="true">
-        <div class="cj-card">
-          <div class="cj-card-badge"><span>Ofertas</span><b>CONARH</b></div>
-          <div class="cj-card-top">
-            <span class="cj-card-brand">caju</span>
-            <span class="cj-card-chip"></span>
-          </div>
-          <div class="cj-card-label">Benefícios flexíveis</div>
-          <div class="cj-card-value">R$ 1.500,00</div>
-          <div class="cj-card-row">
-            <span>•••• •••• •••• 2026</span>
-            <span>VISA</span>
-          </div>
+      <div class="cj-hero-art">
+        <div class="cj-hero-photo">
+          <!--
+            DICA: substitua o src abaixo por uma imagem própria da Caju,
+            enviada pelo Asset Manager do Webflow. Imagem sugerida: profissionais
+            de RH em um evento/feira corporativa (formato paisagem).
+          -->
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1100&q=80"
+               alt="Profissionais de RH reunidos em um evento corporativo" loading="lazy">
+          <div class="cj-photo-badge"><span>Ofertas</span><b>CONARH</b></div>
         </div>
       </div>
     </div>
@@ -321,77 +309,78 @@
       <h2>Uma oferta em três frentes para o seu RH</h2>
       <p class="cj-lead" style="margin-top:18px;">Aproveite o CONARH para negociar as melhores condições nas soluções da Caju.</p>
 
-      <div class="cj-grid-2">
-        <!-- Despesas Corporativas -->
-        <div class="cj-solcard">
-          <span class="cj-tag">💳 Despesas Corporativas</span>
-          <h3>Gestão de despesas sem dor de cabeça</h3>
-          <ul class="cj-list">
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Cartão corporativo e reembolsos em um só lugar, com controle em tempo real</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Conciliação automática e menos retrabalho para o financeiro</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Condição especial para clientes e novos contratantes durante o CONARH</span></li>
-          </ul>
-          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
-        </div>
+      <!-- ----- Frente 1: Saúde e Bem-estar (em destaque, primeiro) ----- -->
+      <div class="cj-block">
+        <span class="cj-pill-tag">🌿 Saúde e Bem-estar</span>
+        <h3 class="cj-block-title">Escolha o pacote ideal para o seu time</h3>
+        <p class="cj-lead" style="margin-top:14px;">Parcerias que cuidam de quem faz acontecer. Combine as soluções para garantir as melhores ofertas.</p>
 
-        <!-- Gestão de Pessoas -->
-        <div class="cj-solcard">
-          <span class="cj-tag">👥 Gestão de Pessoas</span>
-          <h3>Plataforma completa, do admissional ao dia a dia</h3>
-          <ul class="cj-list">
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Totalmente integrado à gestão de benefícios da Caju</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Desconto especial para novos clientes e clientes Caju com benefícios flexíveis já contratados</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
-          </ul>
-          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+        <div class="cj-grid-3">
+          <!-- Pacote 1 -->
+          <div class="cj-pack">
+            <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco</div>
+            <p class="cj-pack-sub">Bem-estar físico e cuidado com os pets do time.</p>
+            <ul class="cj-list">
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Bem-estar físico com a rede Wellhub</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Benefício pet para os colaboradores com a Guapeco</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+            </ul>
+            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+          </div>
+
+          <!-- Pacote 2 (destaque) -->
+          <div class="cj-pack cj-pack--feat">
+            <span class="cj-pack-flag">Mais escolhido</span>
+            <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa</div>
+            <p class="cj-pack-sub">Adiciona saúde mental e nutrição ao pacote.</p>
+            <ul class="cj-list">
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo do pacote anterior</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Consulta com psicólogos e nutricionistas via Conexa Saúde</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+            </ul>
+            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+          </div>
+
+          <!-- Pacote 3 -->
+          <div class="cj-pack">
+            <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa <span class="cj-plus">+</span> Optum</div>
+            <p class="cj-pack-sub">Cuidado completo, do físico ao suporte 360º.</p>
+            <ul class="cj-list">
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo dos pacotes anteriores</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Suporte 360º ao colaborador, com direcionamento jurídico e financeiro com Optum</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+            </ul>
+            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ==================== SAÚDE E BEM-ESTAR — PACOTES ==================== -->
-  <div class="cj-section cj-saude">
-    <div class="cj-wrap">
-      <span class="cj-pill-tag">🌿 Saúde e Bem-estar</span>
-      <h2>Escolha o pacote ideal para o seu time</h2>
-      <p class="cj-lead" style="margin-top:18px;">Parcerias que cuidam de quem faz acontecer. Combine as soluções para garantir as melhores ofertas.</p>
+      <!-- ----- Frentes 2 e 3: Despesas Corporativas e Gestão de Pessoas ----- -->
+      <div class="cj-block">
+        <div class="cj-grid-2">
+          <!-- Despesas Corporativas -->
+          <div class="cj-solcard">
+            <span class="cj-tag">💳 Despesas Corporativas</span>
+            <h3>Gestão de despesas sem dor de cabeça</h3>
+            <ul class="cj-list">
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Cartão corporativo e reembolsos em um só lugar, com controle em tempo real</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Conciliação automática e menos retrabalho para o financeiro</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Condição especial para clientes e novos contratantes durante o CONARH</span></li>
+            </ul>
+            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+          </div>
 
-      <div class="cj-grid-3">
-        <!-- Pacote 1 -->
-        <div class="cj-pack">
-          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco</div>
-          <p class="cj-pack-sub">Bem-estar físico e cuidado com os pets do time.</p>
-          <ul class="cj-list">
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Bem-estar físico com a rede Wellhub</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Benefício pet para os colaboradores com a Guapeco</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
-          </ul>
-          <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
-        </div>
-
-        <!-- Pacote 2 (destaque) -->
-        <div class="cj-pack cj-pack--feat">
-          <span class="cj-pack-flag">Mais escolhido</span>
-          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa</div>
-          <p class="cj-pack-sub">Adiciona telemedicina ao pacote de bem-estar.</p>
-          <ul class="cj-list">
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo do pacote anterior</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Telemedicina com atendimento via Conexa</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
-          </ul>
-          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
-        </div>
-
-        <!-- Pacote 3 -->
-        <div class="cj-pack">
-          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa <span class="cj-plus">+</span> Optum</div>
-          <p class="cj-pack-sub">O cuidado completo: físico, pet, médico e emocional.</p>
-          <ul class="cj-list">
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo dos pacotes anteriores</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Suporte à saúde mental e bem-estar emocional com Optum</span></li>
-            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
-          </ul>
-          <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+          <!-- Gestão de Pessoas -->
+          <div class="cj-solcard">
+            <span class="cj-tag">👥 Gestão de Pessoas</span>
+            <h3>Plataforma completa, do admissional ao dia a dia</h3>
+            <ul class="cj-list">
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Totalmente integrado à gestão de benefícios da Caju</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Desconto especial para novos clientes e clientes Caju com benefícios flexíveis já contratados</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+            </ul>
+            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+          </div>
         </div>
       </div>
 
@@ -400,7 +389,7 @@
         <div class="cj-why-badge">💚</div>
         <div>
           <h4>Por que Caju</h4>
-          <p>Uma experiência de alto nível para o RH e o colaborador: suporte de verdade, produto completo e um time que entende o seu momento.</p>
+          <p>Escolha a plataforma que reúne benefícios, despesas, gestão de pessoas e parceiros de saúde e bem-estar em um só lugar: menos contratos, menos complexidade operacional para o RH e uma experiência que o colaborador realmente ama.</p>
         </div>
       </div>
     </div>
@@ -443,37 +432,37 @@
           <div class="cj-detcard-ico">💳</div>
           <span class="cj-kicker">Solução Caju</span>
           <h3>Despesas Corporativas</h3>
-          <p>Cartão corporativo, reembolsos e prestação de contas em uma única plataforma, com controle em tempo real e conciliação automática para o financeiro.</p>
+          <p>Tire o peso de administrar as despesas do seu time. Deposite saldos corporativos no mesmo cartão Caju que a sua equipe já usa ou receba solicitações de reembolsos de forma centralizada no App.</p>
         </div>
         <div class="cj-detcard">
           <div class="cj-detcard-ico">👥</div>
           <span class="cj-kicker">Solução Caju</span>
           <h3>Gestão de Pessoas</h3>
-          <p>Do admissional ao dia a dia em um só lugar — admissão digital, jornada do colaborador e documentos integrados à gestão de benefícios da Caju.</p>
+          <p>Do admissional ao dia a dia, uma plataforma completa para o RH e o DP trabalharem de forma mais estratégica.</p>
         </div>
         <div class="cj-detcard">
           <div class="cj-detcard-ico">🏋️</div>
           <span class="cj-kicker">Parceiro</span>
           <h3>Wellhub</h3>
-          <p>Acesso à maior rede de academias, estúdios e apps de bem-estar do país para manter o time ativo, saudável e mais engajado.</p>
+          <p>Atividade física e bem-estar em uma assinatura flexível: acesso a milhares de academias, estúdios e apps de bem-estar, de treino a meditação, sono e nutrição.</p>
         </div>
         <div class="cj-detcard">
           <div class="cj-detcard-ico">🐾</div>
           <span class="cj-kicker">Parceiro</span>
           <h3>Guapeco</h3>
-          <p>Benefício pet que ajuda os colaboradores a cuidarem dos seus animais, com vantagens em consultas, produtos e serviços do universo pet.</p>
+          <p>O benefício pet que os colaboradores amam. A Guapeco cuida da saúde e do bem-estar dos animais de estimação do seu time e tem o melhor custo benefício do mercado em planos de saúde Pet.</p>
         </div>
         <div class="cj-detcard">
           <div class="cj-detcard-ico">🩺</div>
           <span class="cj-kicker">Parceiro</span>
           <h3>Conexa</h3>
-          <p>Telemedicina com atendimento médico online, para consultas rápidas e acompanhamento de saúde sem que o colaborador precise sair de casa.</p>
+          <p>Telemedicina e demais especialidades como psicólogos e nutricionistas, 24h para o seu time. A Conexa é o maior ecossistema digital de saúde da América Latina.</p>
         </div>
         <div class="cj-detcard">
           <div class="cj-detcard-ico">🧠</div>
           <span class="cj-kicker">Parceiro</span>
           <h3>Optum</h3>
-          <p>Suporte à saúde mental e ao bem-estar emocional, com acolhimento e acompanhamento especializado para cada momento do time.</p>
+          <p>Cuidado que vai além do corpo. O Programa de Apoio ao Colaborador (PAC) da Optum oferece suporte emocional, jurídico, financeiro e social sempre que o colaborador precisar.</p>
         </div>
       </div>
 
