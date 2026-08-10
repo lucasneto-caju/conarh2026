@@ -1,0 +1,560 @@
+<!--
+  ==========================================================================
+  Caju · Landing Page — Ofertas Caju no CONARH 2026
+  --------------------------------------------------------------------------
+  Bloco de HTML personalizado para ser colado dentro do Webflow, ENTRE o
+  header e o footer (que são componentes reutilizados do próprio site).
+
+  - Todo o CSS está escopado sob #conarh-lp para não afetar estilos globais
+    do Webflow.
+  - O formulário é o Fillout (id: sJApmNniMvus) embedado com o padrão custom
+    da Caju (iframe + repasse de UTM/client_id/origem/gclid via postMessage).
+  ==========================================================================
+-->
+
+<section id="conarh-lp" class="cj-lp">
+  <style>
+    /* ===== Fonte ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap');
+
+    /* ===== Tokens ===== */
+    #conarh-lp{
+      --cj-red:#F5004C;
+      --cj-red-600:#D60043;
+      --cj-red-700:#B10038;
+      --cj-orange:#FF6A2C;
+      --cj-cream:#FBEFE2;
+      --cj-cream-2:#FDF7F0;
+      --cj-green:#123D2C;
+      --cj-green-2:#17492F;
+      --cj-ink:#1B1614;
+      --cj-muted:#5D564F;
+      --cj-white:#FFFFFF;
+      --cj-border:rgba(18,22,20,.10);
+      --cj-shadow:0 24px 60px -28px rgba(20,20,20,.30);
+      --cj-shadow-sm:0 12px 30px -20px rgba(20,20,20,.30);
+      --cj-radius:28px;
+      --cj-radius-lg:40px;
+
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--cj-ink);
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      display:block;
+      overflow-x:hidden;
+    }
+
+    /* ===== Reset local ===== */
+    #conarh-lp *,#conarh-lp *::before,#conarh-lp *::after{box-sizing:border-box;}
+    #conarh-lp p{margin:0;}
+    #conarh-lp h1,#conarh-lp h2,#conarh-lp h3,#conarh-lp h4{margin:0;line-height:1.12;letter-spacing:-.01em;font-weight:700;}
+    #conarh-lp ul{margin:0;padding:0;list-style:none;}
+    #conarh-lp img{max-width:100%;display:block;}
+    #conarh-lp a{text-decoration:none;color:inherit;}
+
+    /* ===== Layout helpers ===== */
+    #conarh-lp .cj-wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 24px;}
+    #conarh-lp .cj-section{padding:88px 0;}
+    #conarh-lp .cj-overline{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--cj-red);margin-bottom:16px;
+    }
+    #conarh-lp .cj-eyebrow-line{width:26px;height:2px;background:var(--cj-red);border-radius:2px;}
+    #conarh-lp .cj-lead{font-size:18px;color:var(--cj-muted);max-width:640px;}
+    #conarh-lp .cj-center{text-align:center;}
+    #conarh-lp .cj-center .cj-lead{margin-left:auto;margin-right:auto;}
+
+    /* ===== Botões ===== */
+    #conarh-lp .cj-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;
+      padding:16px 30px;border-radius:999px;border:2px solid transparent;
+      transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease,border-color .18s ease;
+      white-space:nowrap;
+    }
+    #conarh-lp .cj-btn:hover{transform:translateY(-2px);}
+    #conarh-lp .cj-btn--primary{background:var(--cj-red);color:#fff;box-shadow:0 14px 30px -12px rgba(245,0,76,.6);}
+    #conarh-lp .cj-btn--primary:hover{background:var(--cj-red-600);}
+    #conarh-lp .cj-btn--light{background:#fff;color:var(--cj-red);}
+    #conarh-lp .cj-btn--light:hover{background:#fff;color:var(--cj-red-600);}
+    #conarh-lp .cj-btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);}
+    #conarh-lp .cj-btn--ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;}
+    #conarh-lp .cj-btn--ghost-red{background:transparent;color:var(--cj-red);border-color:rgba(245,0,76,.35);}
+    #conarh-lp .cj-btn--ghost-red:hover{background:rgba(245,0,76,.06);border-color:var(--cj-red);}
+    #conarh-lp .cj-btn--dark{background:var(--cj-green);color:#fff;}
+    #conarh-lp .cj-btn--dark:hover{background:var(--cj-green-2);}
+    #conarh-lp .cj-btn--block{width:100%;}
+
+    /* ===== Badges (pílulas) ===== */
+    #conarh-lp .cj-badges{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+    #conarh-lp .cj-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;
+      background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);
+      backdrop-filter:blur(4px);
+    }
+
+    /* ==========================================================
+       1ª DOBRA — HERO (fundo vermelho)
+    ========================================================== */
+    #conarh-lp .cj-hero{
+      background:
+        radial-gradient(120% 120% at 85% -10%, rgba(255,106,44,.35) 0%, rgba(255,106,44,0) 55%),
+        linear-gradient(160deg,var(--cj-red) 0%,var(--cj-red-600) 60%,var(--cj-red-700) 100%);
+      color:#fff;position:relative;overflow:hidden;
+    }
+    #conarh-lp .cj-hero::after{
+      content:"";position:absolute;right:-120px;bottom:-160px;width:460px;height:460px;
+      border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 70%);
+      pointer-events:none;
+    }
+    #conarh-lp .cj-hero .cj-wrap{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
+      padding-top:96px;padding-bottom:96px;
+    }
+    #conarh-lp .cj-hero h1{font-size:clamp(34px,4.6vw,58px);font-weight:800;color:#fff;}
+    #conarh-lp .cj-hero .cj-hero-sub{font-size:19px;margin-top:22px;color:rgba(255,255,255,.92);max-width:560px;}
+    #conarh-lp .cj-hero .cj-hero-note{font-size:16px;margin-top:14px;color:rgba(255,255,255,.82);max-width:560px;}
+    #conarh-lp .cj-hero .cj-hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+
+    /* Card decorativo (mock do cartão Caju em CSS) */
+    #conarh-lp .cj-hero-art{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;}
+    #conarh-lp .cj-card{
+      width:330px;max-width:100%;border-radius:26px;padding:26px;color:#fff;position:relative;
+      background:linear-gradient(135deg,#FF7A3C 0%,var(--cj-red) 55%,var(--cj-red-700) 100%);
+      box-shadow:0 40px 80px -30px rgba(0,0,0,.55);transform:rotate(-6deg);
+    }
+    #conarh-lp .cj-card::before{
+      content:"";position:absolute;inset:0;border-radius:26px;
+      background:radial-gradient(120% 90% at 90% 0%,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 55%);
+    }
+    #conarh-lp .cj-card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;}
+    #conarh-lp .cj-card-brand{font-weight:800;font-size:22px;letter-spacing:-.02em;}
+    #conarh-lp .cj-card-chip{width:44px;height:34px;border-radius:8px;background:linear-gradient(135deg,#ffe08a,#f4b740);opacity:.95;}
+    #conarh-lp .cj-card-label{position:relative;margin-top:56px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+    #conarh-lp .cj-card-value{position:relative;font-size:30px;font-weight:800;margin-top:4px;}
+    #conarh-lp .cj-card-row{position:relative;display:flex;justify-content:space-between;margin-top:26px;font-size:13px;opacity:.9;}
+    #conarh-lp .cj-card-badge{
+      position:absolute;top:-18px;right:-14px;z-index:2;transform:rotate(8deg);
+      background:#fff;color:var(--cj-red);font-weight:700;font-size:13px;
+      padding:10px 16px;border-radius:14px;box-shadow:0 16px 30px -16px rgba(0,0,0,.5);
+      display:flex;flex-direction:column;line-height:1.1;text-align:center;
+    }
+    #conarh-lp .cj-card-badge b{font-size:20px;}
+
+    /* ==========================================================
+       2ª DOBRA — TRÊS FRENTES
+    ========================================================== */
+    #conarh-lp .cj-frentes{background:var(--cj-cream);}
+    #conarh-lp .cj-frentes h2{font-size:clamp(28px,3.4vw,44px);}
+    #conarh-lp .cj-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px;}
+
+    #conarh-lp .cj-solcard{
+      background:#fff;border:1px solid var(--cj-border);border-radius:var(--cj-radius);
+      padding:36px;box-shadow:var(--cj-shadow-sm);display:flex;flex-direction:column;
+    }
+    #conarh-lp .cj-solcard .cj-tag{
+      display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+      font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;
+      background:rgba(245,0,76,.08);color:var(--cj-red);margin-bottom:18px;
+    }
+    #conarh-lp .cj-solcard h3{font-size:24px;margin-bottom:18px;}
+    #conarh-lp .cj-feat{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--cj-border);font-size:15.5px;color:#37322e;}
+    #conarh-lp .cj-feat:first-of-type{border-top:none;}
+    #conarh-lp .cj-check{
+      flex:0 0 auto;width:22px;height:22px;border-radius:50%;margin-top:2px;
+      background:var(--cj-red);color:#fff;display:flex;align-items:center;justify-content:center;
+      font-size:12px;font-weight:700;
+    }
+    #conarh-lp .cj-solcard .cj-btn{margin-top:26px;}
+
+    /* ==========================================================
+       SAÚDE E BEM-ESTAR — pacotes
+    ========================================================== */
+    #conarh-lp .cj-saude{background:var(--cj-cream-2);}
+    #conarh-lp .cj-saude h2{font-size:clamp(26px,3.2vw,40px);}
+    #conarh-lp .cj-pill-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;
+      background:var(--cj-green);color:#fff;margin-bottom:18px;
+    }
+    #conarh-lp .cj-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;align-items:stretch;}
+    #conarh-lp .cj-pack{
+      background:#fff;border:1px solid var(--cj-border);border-radius:var(--cj-radius);
+      padding:32px;display:flex;flex-direction:column;box-shadow:var(--cj-shadow-sm);position:relative;
+    }
+    #conarh-lp .cj-pack--feat{border:2px solid var(--cj-red);box-shadow:var(--cj-shadow);}
+    #conarh-lp .cj-pack-flag{
+      position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+      background:var(--cj-red);color:#fff;font-size:12px;font-weight:700;
+      padding:6px 14px;border-radius:999px;white-space:nowrap;letter-spacing:.02em;
+    }
+    #conarh-lp .cj-pack-logos{
+      font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--cj-green);
+      display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-bottom:6px;min-height:52px;
+    }
+    #conarh-lp .cj-pack-logos .cj-plus{color:var(--cj-red);font-weight:700;}
+    #conarh-lp .cj-pack-sub{font-size:13.5px;color:var(--cj-muted);margin-bottom:20px;}
+    #conarh-lp .cj-pack .cj-feat{font-size:15px;}
+    #conarh-lp .cj-pack .cj-btn{margin-top:auto;}
+    #conarh-lp .cj-pack .cj-list{flex:1 0 auto;margin-bottom:24px;}
+
+    /* Faixa "Por que Caju" */
+    #conarh-lp .cj-why{
+      margin-top:52px;background:var(--cj-green);color:#fff;border-radius:var(--cj-radius);
+      padding:36px 40px;display:flex;gap:22px;align-items:center;box-shadow:var(--cj-shadow);
+    }
+    #conarh-lp .cj-why-badge{
+      flex:0 0 auto;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,.12);font-size:26px;
+    }
+    #conarh-lp .cj-why h4{font-size:15px;letter-spacing:.10em;text-transform:uppercase;color:#ffd7c2;margin-bottom:6px;}
+    #conarh-lp .cj-why p{font-size:18px;color:rgba(255,255,255,.94);}
+
+    /* ==========================================================
+       3ª DOBRA — FORMULÁRIO
+    ========================================================== */
+    #conarh-lp .cj-formsec{background:var(--cj-red);color:#fff;scroll-margin-top:96px;}
+    #conarh-lp .cj-formsec .cj-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center;}
+    #conarh-lp .cj-formsec h2{font-size:clamp(28px,3.4vw,42px);color:#fff;}
+    #conarh-lp .cj-formsec .cj-form-sub{font-size:18px;margin-top:18px;color:rgba(255,255,255,.92);}
+    #conarh-lp .cj-form-list{margin-top:30px;display:flex;flex-direction:column;gap:16px;}
+    #conarh-lp .cj-form-list li{display:flex;gap:13px;align-items:flex-start;font-size:16.5px;color:rgba(255,255,255,.96);}
+    #conarh-lp .cj-form-list .cj-check{background:#fff;color:var(--cj-red);width:24px;height:24px;}
+    #conarh-lp .cj-form-card{
+      background:#fff;border-radius:var(--cj-radius-lg);padding:16px;box-shadow:var(--cj-shadow);
+    }
+    #conarh-lp .cj-form-privacy{
+      font-size:13px;color:var(--cj-muted);text-align:center;margin-top:6px;padding:6px 12px 10px;
+    }
+
+    /* ==========================================================
+       4ª DOBRA — DETALHES SOLUÇÕES & PARCEIROS
+    ========================================================== */
+    #conarh-lp .cj-detalhes{background:var(--cj-cream);}
+    #conarh-lp .cj-detalhes h2{font-size:clamp(26px,3.2vw,40px);}
+    #conarh-lp .cj-grid-detalhes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+    #conarh-lp .cj-detcard{
+      background:#fff;border:1px solid var(--cj-border);border-radius:24px;padding:28px;
+      box-shadow:var(--cj-shadow-sm);transition:transform .2s ease,box-shadow .2s ease;
+    }
+    #conarh-lp .cj-detcard:hover{transform:translateY(-4px);box-shadow:var(--cj-shadow);}
+    #conarh-lp .cj-detcard-ico{
+      width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      background:rgba(245,0,76,.08);font-size:24px;margin-bottom:16px;
+    }
+    #conarh-lp .cj-detcard h3{font-size:19px;margin-bottom:10px;}
+    #conarh-lp .cj-detcard p{font-size:15px;color:var(--cj-muted);}
+    #conarh-lp .cj-detcard .cj-kicker{font-size:12px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--cj-red);display:block;margin-bottom:10px;}
+
+    #conarh-lp .cj-final-cta{margin-top:48px;text-align:center;}
+    #conarh-lp .cj-footnote{
+      margin-top:22px;text-align:center;font-size:14px;color:var(--cj-muted);
+      display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+
+    /* ==========================================================
+       RESPONSIVO
+    ========================================================== */
+    @media (max-width:960px){
+      #conarh-lp .cj-section{padding:64px 0;}
+      #conarh-lp .cj-hero .cj-wrap{grid-template-columns:1fr;gap:40px;padding-top:72px;padding-bottom:72px;}
+      #conarh-lp .cj-hero-art{min-height:auto;margin-top:6px;}
+      #conarh-lp .cj-grid-2{grid-template-columns:1fr;}
+      #conarh-lp .cj-grid-3{grid-template-columns:1fr;}
+      #conarh-lp .cj-formsec .cj-wrap{grid-template-columns:1fr;gap:36px;}
+      #conarh-lp .cj-grid-detalhes{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width:600px){
+      #conarh-lp .cj-wrap{padding:0 18px;}
+      #conarh-lp .cj-section{padding:52px 0;}
+      #conarh-lp .cj-hero .cj-hero-cta{flex-direction:column;align-items:stretch;}
+      #conarh-lp .cj-hero .cj-btn{width:100%;}
+      #conarh-lp .cj-grid-detalhes{grid-template-columns:1fr;}
+      #conarh-lp .cj-why{flex-direction:column;text-align:center;align-items:center;padding:30px 24px;}
+      #conarh-lp .cj-solcard,#conarh-lp .cj-pack{padding:26px;}
+    }
+  </style>
+
+  <!-- ============================ 1ª DOBRA — HERO ============================ -->
+  <div class="cj-hero">
+    <div class="cj-wrap">
+      <div class="cj-hero-copy">
+        <div class="cj-badges">
+          <span class="cj-badge">🎉 Condições especiais de CONARH</span>
+          <span class="cj-badge">⏳ Ofertas por tempo limitado</span>
+        </div>
+        <h1>A Caju está com ofertas imperdíveis durante o CONARH 2026</h1>
+        <p class="cj-hero-sub">Desconto na contratação das soluções de Despesas Corporativas, Gestão de Pessoas e Saúde e Bem-estar.</p>
+        <p class="cj-hero-note">Fale com o nosso time e descubra a condição ideal para sua empresa.</p>
+        <div class="cj-hero-cta">
+          <a href="#conarh-form" class="cj-btn cj-btn--light">Fale com Vendas</a>
+          <a href="#conarh-solucoes" class="cj-btn cj-btn--ghost">Ver as soluções</a>
+        </div>
+      </div>
+
+      <div class="cj-hero-art" aria-hidden="true">
+        <div class="cj-card">
+          <div class="cj-card-badge"><span>Ofertas</span><b>CONARH</b></div>
+          <div class="cj-card-top">
+            <span class="cj-card-brand">caju</span>
+            <span class="cj-card-chip"></span>
+          </div>
+          <div class="cj-card-label">Benefícios flexíveis</div>
+          <div class="cj-card-value">R$ 1.500,00</div>
+          <div class="cj-card-row">
+            <span>•••• •••• •••• 2026</span>
+            <span>VISA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2ª DOBRA — UMA OFERTA EM TRÊS FRENTES ==================== -->
+  <div class="cj-section cj-frentes" id="conarh-solucoes">
+    <div class="cj-wrap">
+      <span class="cj-overline"><span class="cj-eyebrow-line"></span> Condições especiais CONARH</span>
+      <h2>Uma oferta em três frentes para o seu RH</h2>
+      <p class="cj-lead" style="margin-top:18px;">Aproveite o CONARH para negociar as melhores condições nas soluções da Caju.</p>
+
+      <div class="cj-grid-2">
+        <!-- Despesas Corporativas -->
+        <div class="cj-solcard">
+          <span class="cj-tag">💳 Despesas Corporativas</span>
+          <h3>Gestão de despesas sem dor de cabeça</h3>
+          <ul class="cj-list">
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Cartão corporativo e reembolsos em um só lugar, com controle em tempo real</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Conciliação automática e menos retrabalho para o financeiro</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Condição especial para clientes e novos contratantes durante o CONARH</span></li>
+          </ul>
+          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+        </div>
+
+        <!-- Gestão de Pessoas -->
+        <div class="cj-solcard">
+          <span class="cj-tag">👥 Gestão de Pessoas</span>
+          <h3>Plataforma completa, do admissional ao dia a dia</h3>
+          <ul class="cj-list">
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Totalmente integrado à gestão de benefícios da Caju</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Desconto especial para novos clientes e clientes Caju com benefícios flexíveis já contratados</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+          </ul>
+          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SAÚDE E BEM-ESTAR — PACOTES ==================== -->
+  <div class="cj-section cj-saude">
+    <div class="cj-wrap">
+      <span class="cj-pill-tag">🌿 Saúde e Bem-estar</span>
+      <h2>Escolha o pacote ideal para o seu time</h2>
+      <p class="cj-lead" style="margin-top:18px;">Parcerias que cuidam de quem faz acontecer. Combine as soluções para garantir as melhores ofertas.</p>
+
+      <div class="cj-grid-3">
+        <!-- Pacote 1 -->
+        <div class="cj-pack">
+          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco</div>
+          <p class="cj-pack-sub">Bem-estar físico e cuidado com os pets do time.</p>
+          <ul class="cj-list">
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Bem-estar físico com a rede Wellhub</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Benefício pet para os colaboradores com a Guapeco</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+          </ul>
+          <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+        </div>
+
+        <!-- Pacote 2 (destaque) -->
+        <div class="cj-pack cj-pack--feat">
+          <span class="cj-pack-flag">Mais escolhido</span>
+          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa</div>
+          <p class="cj-pack-sub">Adiciona telemedicina ao pacote de bem-estar.</p>
+          <ul class="cj-list">
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo do pacote anterior</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Telemedicina com atendimento via Conexa</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+          </ul>
+          <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+        </div>
+
+        <!-- Pacote 3 -->
+        <div class="cj-pack">
+          <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Guapeco <span class="cj-plus">+</span> Conexa <span class="cj-plus">+</span> Optum</div>
+          <p class="cj-pack-sub">O cuidado completo: físico, pet, médico e emocional.</p>
+          <ul class="cj-list">
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo dos pacotes anteriores</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Suporte à saúde mental e bem-estar emocional com Optum</span></li>
+            <li class="cj-feat"><span class="cj-check">✓</span><span>Válido para empresas com mais de 20 colaboradores</span></li>
+          </ul>
+          <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+        </div>
+      </div>
+
+      <!-- Por que Caju -->
+      <div class="cj-why">
+        <div class="cj-why-badge">💚</div>
+        <div>
+          <h4>Por que Caju</h4>
+          <p>Uma experiência de alto nível para o RH e o colaborador: suporte de verdade, produto completo e um time que entende o seu momento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 3ª DOBRA — FORMULÁRIO ==================== -->
+  <div class="cj-section cj-formsec" id="conarh-form">
+    <div class="cj-wrap">
+      <div class="cj-form-copy">
+        <h2>Preencha o formulário e fale com nosso time</h2>
+        <p class="cj-form-sub">Nosso time de vendas entra em contato para te mostrar a condição certa para o seu perfil — seja você cliente Caju ou não.</p>
+        <ul class="cj-form-list">
+          <li><span class="cj-check">✓</span><span>Condições especiais Caju no CONARH 2026</span></li>
+          <li><span class="cj-check">✓</span><span>Despesas Corporativas, Gestão de Pessoas e Saúde e Bem-estar</span></li>
+          <li><span class="cj-check">✓</span><span>Atendimento personalizado por perfil e porte de empresa</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="cj-form-card">
+          <!-- ===== Fillout embed (form: sJApmNniMvus) ===== -->
+          <div id="fillout-wrapper" style="width:100%;margin:0;padding:0;border-radius:32px;overflow:hidden;line-height:0;"></div>
+        </div>
+        <p class="cj-form-privacy">Seus dados são usados apenas para contato do nosso time comercial.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 4ª DOBRA — DETALHES DAS SOLUÇÕES & PARCEIROS ==================== -->
+  <div class="cj-section cj-detalhes">
+    <div class="cj-wrap cj-center">
+      <span class="cj-overline" style="justify-content:center;"><span class="cj-eyebrow-line"></span> Soluções &amp; parceiros</span>
+      <h2>Conheça os detalhes das soluções e parceiros Caju</h2>
+      <p class="cj-lead">Aproveite o CONARH para negociar as melhores condições nas soluções da Caju.</p>
+    </div>
+
+    <div class="cj-wrap">
+      <div class="cj-grid-detalhes">
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">💳</div>
+          <span class="cj-kicker">Solução Caju</span>
+          <h3>Despesas Corporativas</h3>
+          <p>Cartão corporativo, reembolsos e prestação de contas em uma única plataforma, com controle em tempo real e conciliação automática para o financeiro.</p>
+        </div>
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">👥</div>
+          <span class="cj-kicker">Solução Caju</span>
+          <h3>Gestão de Pessoas</h3>
+          <p>Do admissional ao dia a dia em um só lugar — admissão digital, jornada do colaborador e documentos integrados à gestão de benefícios da Caju.</p>
+        </div>
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">🏋️</div>
+          <span class="cj-kicker">Parceiro</span>
+          <h3>Wellhub</h3>
+          <p>Acesso à maior rede de academias, estúdios e apps de bem-estar do país para manter o time ativo, saudável e mais engajado.</p>
+        </div>
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">🐾</div>
+          <span class="cj-kicker">Parceiro</span>
+          <h3>Guapeco</h3>
+          <p>Benefício pet que ajuda os colaboradores a cuidarem dos seus animais, com vantagens em consultas, produtos e serviços do universo pet.</p>
+        </div>
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">🩺</div>
+          <span class="cj-kicker">Parceiro</span>
+          <h3>Conexa</h3>
+          <p>Telemedicina com atendimento médico online, para consultas rápidas e acompanhamento de saúde sem que o colaborador precise sair de casa.</p>
+        </div>
+        <div class="cj-detcard">
+          <div class="cj-detcard-ico">🧠</div>
+          <span class="cj-kicker">Parceiro</span>
+          <h3>Optum</h3>
+          <p>Suporte à saúde mental e ao bem-estar emocional, com acolhimento e acompanhamento especializado para cada momento do time.</p>
+        </div>
+      </div>
+
+      <div class="cj-final-cta">
+        <a href="#conarh-form" class="cj-btn cj-btn--primary">Quero contratar</a>
+        <p class="cj-footnote">⏳ Ofertas válidas apenas para contratações feitas até o dia 30 de setembro.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FILLOUT — SCRIPT DE EMBED (com repasse de UTM/CID/gclid) ==================== -->
+  <script>
+  (function() {
+    function getStoredUTM() {
+      try {
+        const store = (window.parent !== window ? window.parent : window).localStorage;
+        return JSON.parse(store.getItem("utm") || "{}");
+      } catch(e) { return {}; }
+    }
+    function getClientId() {
+      try {
+        const cookieStr = (window.parent !== window ? window.parent : window).document.cookie;
+        const m = cookieStr.match(/(?:^|;\s*)_ga=([^;]+)/);
+        if (!m) return "";
+        const v = decodeURIComponent(m[1]).split(".");
+        return v.length >= 4 ? v[v.length-2] + "." + v[v.length-1] : m[1];
+      } catch(e) { return ""; }
+    }
+    function getOrigem() {
+      try {
+        const pathname = (window.parent !== window ? window.parent : window).location.pathname;
+        return pathname.replace(/^\/+/, "") || "home";
+      } catch(e) { return ""; }
+    }
+    function getGclid() {
+      try {
+        const urlParams = new URLSearchParams(
+          (window.parent !== window ? window.parent : window).location.search
+        );
+        return urlParams.get("gclid") || "";
+      } catch(e) { return ""; }
+    }
+
+    const utm = getStoredUTM();
+    const urlParams = new URLSearchParams(
+      (window.parent !== window ? window.parent : window).location.search
+    );
+    const cid    = getClientId();
+    const org    = getOrigem();
+    const gclid  = getGclid();
+    const params = new URLSearchParams();
+
+    const urlHasUTM = urlParams.get("utm_source");
+    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(function(k) {
+      const val = urlHasUTM ? (urlParams.get(k) || utm[k]) : urlParams.get(k);
+      if (val) params.set(k, val);
+    });
+
+    if (cid)   params.set("client_id", cid);
+    if (org)   params.set("origem", org);
+    if (gclid) params.set("gclid", gclid);
+
+    const formUrl = "https://forms.caju.com.br/t/sJApmNniMvus?" + params.toString();
+    const iframe  = document.createElement("iframe");
+    iframe.src      = formUrl;
+    iframe.style.cssText = "width:100%;height:600px;margin:0;padding:0;border:0;display:block;border-radius:32px;overflow:hidden;";
+    iframe.allow    = "microphone; camera; geolocation";
+    iframe.title    = "sJApmNniMvus";
+
+    document.getElementById("fillout-wrapper").appendChild(iframe);
+
+    // Ajusta altura via postMessage do Fillout
+    window.addEventListener("message", function(e) {
+      try {
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        const height = data.height || data.embedHeight;
+        if (height && e.source === iframe.contentWindow) {
+          iframe.style.height = height + "px";
+        }
+      } catch(err) {}
+    });
+  })();
+  </script>
+</section>
