@@ -120,13 +120,13 @@
     #conarh-lp .cj-hero .cj-hero-note{font-size:16px;margin-top:14px;color:rgba(255,255,255,.82);max-width:560px;}
     #conarh-lp .cj-hero .cj-hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
 
-    /* Imagem do hero (evento de RH) — mesmo formato arredondado/flutuante */
+    /* Imagem do hero (foto de marca) — moldura arredondada/flutuante */
     #conarh-lp .cj-hero-art{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;}
-    #conarh-lp .cj-hero-photo{position:relative;width:100%;max-width:440px;transform:rotate(-3deg);}
+    #conarh-lp .cj-hero-photo{position:relative;width:100%;max-width:400px;}
     #conarh-lp .cj-hero-photo img{
-      width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
-      border-radius:28px;border:6px solid #fff;
-      box-shadow:0 40px 80px -30px rgba(0,0,0,.55);display:block;
+      width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+      border-radius:28px;
+      box-shadow:0 40px 80px -30px rgba(0,0,0,.55);display:block;background:rgba(255,255,255,.08);
     }
     #conarh-lp .cj-photo-badge{
       position:absolute;top:-18px;right:-14px;z-index:2;transform:rotate(8deg);
@@ -290,12 +290,12 @@
       <div class="cj-hero-art">
         <div class="cj-hero-photo">
           <!--
-            DICA: substitua o src abaixo por uma imagem própria da Caju,
-            enviada pelo Asset Manager do Webflow. Imagem sugerida: profissionais
-            de RH em um evento/feira corporativa (formato paisagem).
+            IMAGEM DO HERO: foto de marca (mãos segurando os cartões Caju).
+            >>> Suba a imagem no Asset Manager do Webflow e cole a URL dela no src abaixo. <<<
+            A moldura já está no formato retrato (3:4) para essa foto.
           -->
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1100&q=80"
-               alt="Profissionais de RH reunidos em um evento corporativo" loading="lazy">
+          <img src="COLE_AQUI_A_URL_DA_IMAGEM_NO_WEBFLOW"
+               alt="Duas mãos segurando cartões Caju em frente ao logo da Caju" loading="lazy">
           <div class="cj-photo-badge"><span>Ofertas</span><b>CONARH</b></div>
         </div>
       </div>
