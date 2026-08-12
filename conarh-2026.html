@@ -673,14 +673,37 @@
         'live.com', 'icloud.com', 'bol.com.br', 'uol.com.br', 'terra.com.br'
       ];
 
+      // Faixa de colaboradores (mesma escada do formulário de porque-caju).
+      // Retorna a string da faixa; para número inválido o chamador omite as chaves.
+      function faixaColaboradores(n) {
+        if (n <= 19)   return '1_a_19_colaboradores';
+        if (n <= 50)   return '20_a_50_colaboradores';
+        if (n <= 99)   return '51_a_99_colaboradores';
+        if (n <= 250)  return '100_a_250_colaboradores';
+        if (n <= 499)  return '251_a_499_colaboradores';
+        if (n <= 1000) return '500_a_1000_colaboradores';
+        if (n <= 1500) return '1001_a_1500_colaboradores';
+        if (n <= 3000) return '1501_a_3000_colaboradores';
+        return 'acima_de_3001_colaboradores';
+      }
+
+      var parameters = {
+        email_domain: genericos.indexOf(dominio.toLowerCase()) === -1 ? 'corp' : 'personal',
+        role:         getField('Cargo')
+      };
+
+      // employee_exact_count é o número digitado (tipo number); employee_count é a faixa
+      // derivada dele (tipo string). Sem número válido, nenhuma das duas chaves entra no push.
+      var exato = parseInt(getField('Número de colaboradores'), 10);
+      if (!isNaN(exato)) {
+        parameters.employee_count       = faixaColaboradores(exato);
+        parameters.employee_exact_count = exato;
+      }
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'e_001_122_002_059_059_003',
-        parameters: {
-          email_domain:   genericos.indexOf(dominio.toLowerCase()) === -1 ? 'corp' : 'personal',
-          employee_count: getField('Número de colaboradores'),
-          role:           getField('Cargo')
-        }
+        parameters: parameters
       });
     });
   })();
