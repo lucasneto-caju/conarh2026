@@ -321,8 +321,8 @@
         <p class="cj-hero-sub">Desconto na contratação das soluções de Despesas Corporativas, Gestão de Pessoas e Saúde e Bem-estar.</p>
         <p class="cj-hero-note">Fale com o nosso time e descubra a condição ideal para sua empresa.</p>
         <div class="cj-hero-cta">
-          <a href="#conarh-form" class="cj-btn cj-btn--light">Fale com Vendas</a>
-          <a href="#conarh-solucoes" class="cj-btn cj-btn--ghost">Ver as soluções</a>
+          <a href="#conarh-form" class="cj-btn cj-btn--light" data-cj-tag="hero-vendas">Fale com Vendas</a>
+          <a href="#conarh-solucoes" class="cj-btn cj-btn--ghost" data-cj-tag="hero-solucoes">Ver as soluções</a>
         </div>
       </div>
 
@@ -365,7 +365,7 @@
               <li class="cj-feat"><span class="cj-check">✓</span><span>Bem-estar físico com a rede Wellhub</span></li>
               <li class="cj-feat"><span class="cj-check">✓</span><span>Diagnóstico gratuito da NR1 pela Wellhub</span></li>
             </ul>
-            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
 
           <!-- Pacote 2: Wellhub + Conexa -->
@@ -376,7 +376,7 @@
               <li class="cj-feat"><span class="cj-check">✓</span><span>Telemedicina, psicólogos e nutricionistas via Conexa Saúde</span></li>
               <li class="cj-feat"><span class="cj-check">✓</span><span>Descontos em farmácias, laboratórios e educadores físicos no Conexa</span></li>
             </ul>
-            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub-conexa" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
 
           <!-- Pacote 3: Wellhub + Conexa + Optum -->
@@ -386,7 +386,7 @@
               <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo dos pacotes anteriores</span></li>
               <li class="cj-feat"><span class="cj-check">✓</span><span>Suporte 360º ao colaborador, com direcionamento jurídico e financeiro com Optum</span></li>
             </ul>
-            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block">Fale com Vendas</a>
+            <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub-conexa-optum" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
         </div>
 
@@ -399,7 +399,7 @@
               <p>O melhor custo benefício do mercado em planos de saúde Pet. Adicione a Guapeco a qualquer pacote sem custos, a partir de 12 meses de isenção.</p>
             </div>
           </div>
-          <a href="#conarh-form" class="cj-btn cj-btn--primary">Fale com Vendas</a>
+          <a href="#conarh-form" class="cj-btn cj-btn--primary" data-cj-tag="oferta" data-cj-label="guapeco" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
         </div>
 
         <!-- Fine print exclusivo das ofertas de Saúde e Bem-estar -->
@@ -421,7 +421,7 @@
               <strong><span>🏷️</span> Plano completo com até 50% de desconto por 12 meses.</strong>
               <small>Válido para novos clientes e clientes Caju elegíveis com mais de 20 colaboradores.</small>
             </div>
-            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block" data-cj-tag="oferta" data-cj-label="gestao-de-pessoas" data-cj-product="gestao-de-pessoas">Fale com Vendas</a>
           </div>
 
           <!-- Despesas Corporativas -->
@@ -435,7 +435,7 @@
             <div class="cj-offer-box">
               <strong><span>🏷️</span> Plano completo com até 50% de desconto até o final de 2026.</strong>
             </div>
-            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block">Fale com Vendas</a>
+            <a href="#conarh-form" class="cj-btn cj-btn--primary cj-btn--block" data-cj-tag="oferta" data-cj-label="despesas-corporativas" data-cj-product="despesas-corporativas">Fale com Vendas</a>
           </div>
         </div>
       </div>
@@ -523,7 +523,7 @@
       </div>
 
       <div class="cj-final-cta">
-        <a href="#conarh-form" class="cj-btn cj-btn--primary">Quero contratar</a>
+        <a href="#conarh-form" class="cj-btn cj-btn--primary" data-cj-tag="quero-contratar">Quero contratar</a>
         <p class="cj-footnote">⏳ Ofertas válidas apenas para contratações feitas até o dia 30 de setembro.</p>
       </div>
     </div>
@@ -599,6 +599,84 @@
           iframe.style.height = height + "px";
         }
       } catch(err) {}
+    });
+  })();
+  </script>
+
+  <!-- ==================== TAGUEAMENTO — dataLayer / GTM (Flow 201 · CONARH 2026) ====================
+       Regras obrigatórias:
+       (1) a chave `event` recebe a HASH (nunca o alias legível);
+       (2) todo parâmetro vai DENTRO do objeto `parameters`.
+       Escopo: apenas o miolo da página (header/menu/footer/"Quero Caju" são tagueados universalmente).
+  ==================================================================================================== -->
+  <script>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+
+    function pushEvent(hash, parameters) {
+      var payload = { event: hash };
+      if (parameters) payload.parameters = parameters;
+      window.dataLayer.push(payload);
+    }
+
+    // ----- Evento 1 — Visita à página (no carregamento, sem parâmetros) -----
+    pushEvent('e_001_122_001_000_000_002');
+
+    // ----- Eventos 2, 3, 4 e 6 — cliques (event delegation dentro da LP) -----
+    var root = document.getElementById('conarh-lp') || document;
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest && e.target.closest('[data-cj-tag]');
+      if (!el || !root.contains(el)) return;
+
+      switch (el.getAttribute('data-cj-tag')) {
+        case 'hero-vendas':      // 2. "Fale com Vendas" no banner do topo
+          pushEvent('e_001_122_037_023_891_001');
+          break;
+        case 'hero-solucoes':    // 3. "Ver as soluções" no banner do topo
+          pushEvent('e_001_122_037_023_611_001');
+          break;
+        case 'oferta':           // 4. "Fale com Vendas" nas ofertas (1 evento p/ os 6 botões)
+          pushEvent('e_001_122_071_154_891_001', {
+            label:   el.getAttribute('data-cj-label'),
+            product: el.getAttribute('data-cj-product')
+          });
+          break;
+        case 'quero-contratar':  // 6. "Quero contratar" no fim da página
+          pushEvent('e_001_122_075_023_157_001');
+          break;
+      }
+    });
+
+    // ----- Evento 5 — Envio do formulário Fillout (via postMessage) -----
+    // ATENÇÃO: usa o postMessage `type: "form_submit"` (traz os campos).
+    // NÃO usar o `event: "fillout_submitted"`, que chega depois e sem os dados.
+    // >>> Conferir no Fillout se os nomes dos campos são exatamente estes antes de publicar. <<<
+    window.addEventListener('message', function (e) {
+      var data = e.data;
+      if (!data || data.type !== 'form_submit') return;
+
+      var questions = data.questions || [];
+      function getField(name) {
+        var q = questions.find(function (q) { return q.name === name; });
+        return q ? q.value : '';
+      }
+
+      var email = getField('E-mail');
+      var dominio = String(email).split('@')[1] || '';
+      var genericos = [
+        'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.br',
+        'live.com', 'icloud.com', 'bol.com.br', 'uol.com.br', 'terra.com.br'
+      ];
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'e_001_122_002_059_059_003',
+        parameters: {
+          email_domain:   genericos.indexOf(dominio.toLowerCase()) === -1 ? 'corp' : 'personal',
+          employee_count: getField('Número de colaboradores'),
+          role:           getField('Cargo')
+        }
+      });
     });
   })();
   </script>
