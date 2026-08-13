@@ -231,6 +231,14 @@
     #conarh-lp .cj-pack .cj-btn{margin-top:auto;}
     #conarh-lp .cj-pack .cj-list{flex:1 0 auto;margin-bottom:24px;}
 
+    /* Logos dos parceiros no topo de cada pacote (moedinhas redondas empilhadas) */
+    #conarh-lp .cj-pack-brands{display:flex;align-items:center;margin-bottom:14px;min-height:46px;}
+    #conarh-lp .cj-brand{
+      width:46px;height:46px;border-radius:50%;object-fit:contain;background:#fff;
+      border:2px solid #fff;box-shadow:0 6px 16px -8px rgba(18,22,20,.35);padding:3px;
+    }
+    #conarh-lp .cj-pack-brands .cj-brand + .cj-brand{margin-left:-12px;}
+
     /* Selo do combo (oferta CONARH) dentro de cada pacote */
     #conarh-lp .cj-combo{
       position:relative;margin-bottom:22px;
@@ -380,6 +388,10 @@
         <div class="cj-grid-3">
           <!-- Pacote 1: Wellhub -->
           <div class="cj-pack">
+            <!-- Logos: trocar cada src pela URL do asset no Webflow (arquivos no Drive: wellhub-logo.png) -->
+            <div class="cj-pack-brands">
+              <img class="cj-brand" src="REPLACE_LOGO_WELLHUB" alt="Wellhub" loading="lazy" onerror="this.style.display='none'">
+            </div>
             <div class="cj-pack-logos">Wellhub</div>
             <ul class="cj-list">
               <li class="cj-feat"><span class="cj-check">✓</span><span>Bem-estar físico com a rede Wellhub</span></li>
@@ -395,11 +407,15 @@
 
           <!-- Pacote 2: Wellhub + Conexa -->
           <div class="cj-pack">
+            <!-- Logos: trocar cada src pela URL do asset no Webflow (arquivos no Drive: wellhub-logo.png, conexa-logo.png) -->
+            <div class="cj-pack-brands">
+              <img class="cj-brand" src="REPLACE_LOGO_WELLHUB" alt="Wellhub" loading="lazy" onerror="this.style.display='none'">
+              <img class="cj-brand" src="REPLACE_LOGO_CONEXA" alt="Conexa" loading="lazy" onerror="this.style.display='none'">
+            </div>
             <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Conexa</div>
             <ul class="cj-list">
               <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo do pacote anterior</span></li>
               <li class="cj-feat"><span class="cj-check">✓</span><span>Telemedicina, psicólogos e nutricionistas via Conexa Saúde</span></li>
-              <li class="cj-feat"><span class="cj-check">✓</span><span>Descontos em farmácias, laboratórios e educadores físicos no Conexa</span></li>
             </ul>
             <div class="cj-combo">
               <span class="cj-combo-flag">🎁 Oferta CONARH</span>
@@ -411,10 +427,17 @@
 
           <!-- Pacote 3: Wellhub + Conexa + Optum -->
           <div class="cj-pack">
+            <!-- Logos: trocar cada src pela URL do asset no Webflow (arquivos no Drive: wellhub-logo.png, conexa-logo.png, optum-logo.png) -->
+            <div class="cj-pack-brands">
+              <img class="cj-brand" src="REPLACE_LOGO_WELLHUB" alt="Wellhub" loading="lazy" onerror="this.style.display='none'">
+              <img class="cj-brand" src="REPLACE_LOGO_CONEXA" alt="Conexa" loading="lazy" onerror="this.style.display='none'">
+              <img class="cj-brand" src="REPLACE_LOGO_OPTUM" alt="Optum" loading="lazy" onerror="this.style.display='none'">
+            </div>
             <div class="cj-pack-logos">Wellhub <span class="cj-plus">+</span> Conexa <span class="cj-plus">+</span> Optum</div>
             <ul class="cj-list">
               <li class="cj-feat"><span class="cj-check">✓</span><span>Tudo dos pacotes anteriores</span></li>
               <li class="cj-feat"><span class="cj-check">✓</span><span>Suporte 360º ao colaborador, com direcionamento jurídico e financeiro com Optum</span></li>
+              <li class="cj-feat"><span class="cj-check">✓</span><span>Descontos em farmácias, laboratórios e educadores físicos no Conexa</span></li>
             </ul>
             <div class="cj-combo">
               <span class="cj-combo-flag">🎁 Oferta CONARH</span>
