@@ -7,8 +7,9 @@
 
   - Todo o CSS está escopado sob #cj-conarh-strip para não afetar estilos
     globais do Webflow.
-  - Fundo laranja #FF7500. O texto usa o grafite da marca (#1B1614) porque
-    branco sobre esse laranja fica com contraste baixo (2,7:1).
+  - Fundo laranja #FF7500 com texto branco (escolha de marca; o contraste
+    fica em 2,7:1, abaixo do minimo do WCAG AA, por isso o texto usa peso
+    600/700 e uma sombra sutil para ganhar legibilidade).
   - Tipografia Poppins, mesma da LP do CONARH 2026.
   - A faixa inteira é um único link clicável para /conarh-2026.
   ==========================================================================
@@ -23,7 +24,7 @@
     #cj-conarh-strip{
       --cj-orange:#FF7500;
       --cj-orange-600:#F06A00;
-      --cj-ink:#1B1614;
+      --cj-white:#FFFFFF;
 
       display:block;
       width:100%;
@@ -48,7 +49,7 @@
       padding:14px 24px;
       text-align:center;
       text-decoration:none;
-      color:var(--cj-ink);
+      color:var(--cj-white);
       background:var(--cj-orange);
       transition:background .3s ease, box-shadow .3s ease;
       cursor:pointer;
@@ -93,6 +94,8 @@
       font-weight:600;
       letter-spacing:-.005em;
       line-height:1.35;
+      /* Sombra sutil: ajuda a leitura do branco sobre o laranja */
+      text-shadow:0 1px 2px rgba(122,45,0,.30);
     }
     /* Sublinhado que cresce a partir do centro */
     #cj-conarh-strip .cj-strip-text::after{
@@ -103,7 +106,7 @@
       width:0;
       height:1.5px;
       border-radius:2px;
-      background:rgba(27,22,20,.75);
+      background:rgba(255,255,255,.85);
       transform:translateX(-50%);
       transition:width .32s cubic-bezier(.4,0,.2,1);
     }
@@ -118,15 +121,15 @@
       width:24px;
       height:24px;
       border-radius:999px;
-      background:rgba(27,22,20,.10);
-      border:1px solid rgba(27,22,20,.28);
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.42);
       transition:transform .3s cubic-bezier(.4,0,.2,1), background .3s ease, border-color .3s ease;
     }
     #cj-conarh-strip .cj-strip-arrow svg{
       width:12px;
       height:12px;
       display:block;
-      stroke:var(--cj-ink);
+      stroke:var(--cj-white);
       stroke-width:2.2;
       fill:none;
       stroke-linecap:round;
@@ -138,27 +141,27 @@
     @media (hover:hover) and (pointer:fine){
       #cj-conarh-strip .cj-strip:hover{
         background:var(--cj-orange-600);
-        box-shadow:inset 0 -2px 0 0 rgba(27,22,20,.20);
+        box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.30);
       }
       #cj-conarh-strip .cj-strip:hover .cj-strip-text::after{width:100%;}
       #cj-conarh-strip .cj-strip:hover .cj-strip-arrow{
         transform:translateX(5px);
-        background:var(--cj-ink);
-        border-color:var(--cj-ink);
+        background:var(--cj-white);
+        border-color:var(--cj-white);
       }
       #cj-conarh-strip .cj-strip:hover .cj-strip-arrow svg{stroke:var(--cj-orange);}
     }
     #cj-conarh-strip .cj-strip:focus-visible{
       background:var(--cj-orange-600);
-      box-shadow:inset 0 -2px 0 0 rgba(27,22,20,.20);
-      outline:2px solid var(--cj-ink);
+      box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.30);
+      outline:2px solid var(--cj-white);
       outline-offset:-4px;
     }
     #cj-conarh-strip .cj-strip:focus-visible .cj-strip-text::after{width:100%;}
     #cj-conarh-strip .cj-strip:focus-visible .cj-strip-arrow{
       transform:translateX(5px);
-      background:var(--cj-ink);
-      border-color:var(--cj-ink);
+      background:var(--cj-white);
+      border-color:var(--cj-white);
     }
     #cj-conarh-strip .cj-strip:focus-visible .cj-strip-arrow svg{stroke:var(--cj-orange);}
     #cj-conarh-strip .cj-strip:active{background:var(--cj-orange-600);}
