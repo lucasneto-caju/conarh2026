@@ -7,8 +7,9 @@
 
   - Todo o CSS está escopado sob #cj-conarh-strip para não afetar estilos
     globais do Webflow.
-  - Cores e tipografia seguem os tokens da LP do CONARH 2026
-    (--cj-red #DC0320, --cj-red-600 #C2031C, --cj-orange #FF6A2C, Poppins).
+  - Fundo laranja #FF7500. O texto usa o grafite da marca (#1B1614) porque
+    branco sobre esse laranja fica com contraste baixo (2,7:1).
+  - Tipografia Poppins, mesma da LP do CONARH 2026.
   - A faixa inteira é um único link clicável para /conarh-2026.
   ==========================================================================
 -->
@@ -18,12 +19,11 @@
     /* ===== Fonte ===== */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
 
-    /* ===== Tokens (herdados da LP do CONARH) ===== */
+    /* ===== Tokens ===== */
     #cj-conarh-strip{
-      --cj-red:#DC0320;
-      --cj-red-600:#C2031C;
-      --cj-red-700:#A80218;
-      --cj-orange:#FF6A2C;
+      --cj-orange:#FF7500;
+      --cj-orange-600:#F06A00;
+      --cj-ink:#1B1614;
 
       display:block;
       width:100%;
@@ -48,12 +48,9 @@
       padding:14px 24px;
       text-align:center;
       text-decoration:none;
-      color:#fff;
-      /* Mesma lógica de fundo do hero da LP: vermelho com brilho laranja */
-      background:
-        radial-gradient(130% 200% at 82% -20%, rgba(255,106,44,.38) 0%, rgba(255,106,44,0) 60%),
-        linear-gradient(100deg, var(--cj-red) 0%, var(--cj-red-600) 62%, var(--cj-red-700) 100%);
-      transition:box-shadow .3s ease, filter .3s ease;
+      color:var(--cj-ink);
+      background:var(--cj-orange);
+      transition:background .3s ease, box-shadow .3s ease;
       cursor:pointer;
     }
 
@@ -68,7 +65,7 @@
       pointer-events:none;
       background:linear-gradient(100deg,
         rgba(255,255,255,0) 0%,
-        rgba(255,255,255,.20) 50%,
+        rgba(255,255,255,.38) 50%,
         rgba(255,255,255,0) 100%);
       transform:skewX(-18deg);
       opacity:0;
@@ -90,12 +87,6 @@
     }
 
     /* ===== Conteúdo ===== */
-    #cj-conarh-strip .cj-strip-ico{
-      flex:0 0 auto;
-      font-size:16px;
-      line-height:1;
-      transition:transform .3s ease;
-    }
     #cj-conarh-strip .cj-strip-text{
       position:relative;
       font-size:15.5px;
@@ -112,7 +103,7 @@
       width:0;
       height:1.5px;
       border-radius:2px;
-      background:rgba(255,255,255,.85);
+      background:rgba(27,22,20,.75);
       transform:translateX(-50%);
       transition:width .32s cubic-bezier(.4,0,.2,1);
     }
@@ -127,53 +118,50 @@
       width:24px;
       height:24px;
       border-radius:999px;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.30);
+      background:rgba(27,22,20,.10);
+      border:1px solid rgba(27,22,20,.28);
       transition:transform .3s cubic-bezier(.4,0,.2,1), background .3s ease, border-color .3s ease;
     }
     #cj-conarh-strip .cj-strip-arrow svg{
       width:12px;
       height:12px;
       display:block;
-      stroke:#fff;
+      stroke:var(--cj-ink);
       stroke-width:2.2;
       fill:none;
       stroke-linecap:round;
       stroke-linejoin:round;
+      transition:stroke .3s ease;
     }
 
     /* ===== Hover (só em dispositivos com mouse) / foco ===== */
     @media (hover:hover) and (pointer:fine){
       #cj-conarh-strip .cj-strip:hover{
-        filter:brightness(1.07) saturate(1.05);
-        box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.22);
+        background:var(--cj-orange-600);
+        box-shadow:inset 0 -2px 0 0 rgba(27,22,20,.20);
       }
       #cj-conarh-strip .cj-strip:hover .cj-strip-text::after{width:100%;}
       #cj-conarh-strip .cj-strip:hover .cj-strip-arrow{
         transform:translateX(5px);
-        background:#fff;
-        border-color:#fff;
+        background:var(--cj-ink);
+        border-color:var(--cj-ink);
       }
-      #cj-conarh-strip .cj-strip:hover .cj-strip-arrow svg{stroke:var(--cj-red);}
-      #cj-conarh-strip .cj-strip:hover .cj-strip-ico{transform:scale(1.12) rotate(-6deg);}
+      #cj-conarh-strip .cj-strip:hover .cj-strip-arrow svg{stroke:var(--cj-orange);}
     }
     #cj-conarh-strip .cj-strip:focus-visible{
-      filter:brightness(1.07) saturate(1.05);
-      box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.22);
+      background:var(--cj-orange-600);
+      box-shadow:inset 0 -2px 0 0 rgba(27,22,20,.20);
+      outline:2px solid var(--cj-ink);
+      outline-offset:-4px;
     }
     #cj-conarh-strip .cj-strip:focus-visible .cj-strip-text::after{width:100%;}
     #cj-conarh-strip .cj-strip:focus-visible .cj-strip-arrow{
       transform:translateX(5px);
-      background:#fff;
-      border-color:#fff;
+      background:var(--cj-ink);
+      border-color:var(--cj-ink);
     }
-    #cj-conarh-strip .cj-strip:focus-visible .cj-strip-arrow svg{stroke:var(--cj-red);}
-    #cj-conarh-strip .cj-strip:focus-visible .cj-strip-ico{transform:scale(1.12) rotate(-6deg);}
-    #cj-conarh-strip .cj-strip:focus-visible{
-      outline:2px solid #fff;
-      outline-offset:-4px;
-    }
-    #cj-conarh-strip .cj-strip:active{filter:brightness(.96);}
+    #cj-conarh-strip .cj-strip:focus-visible .cj-strip-arrow svg{stroke:var(--cj-orange);}
+    #cj-conarh-strip .cj-strip:active{background:var(--cj-orange-600);}
 
     /* ===== Responsivo ===== */
     @media (max-width:600px){
@@ -183,19 +171,16 @@
         min-height:52px;
       }
       #cj-conarh-strip .cj-strip-text{font-size:14px;}
-      #cj-conarh-strip .cj-strip-ico{font-size:15px;}
       #cj-conarh-strip .cj-strip-arrow{width:22px;height:22px;}
     }
 
     /* ===== Acessibilidade: reduzir movimento ===== */
     @media (prefers-reduced-motion:reduce){
       #cj-conarh-strip .cj-strip,
-      #cj-conarh-strip .cj-strip-ico,
       #cj-conarh-strip .cj-strip-arrow,
       #cj-conarh-strip .cj-strip-text::after{transition:none;}
       #cj-conarh-strip .cj-strip:hover::before,
       #cj-conarh-strip .cj-strip:focus-visible::before{animation:none;opacity:0;}
-      #cj-conarh-strip .cj-strip:hover .cj-strip-ico{transform:none;}
       #cj-conarh-strip .cj-strip:hover .cj-strip-arrow{transform:none;}
     }
   </style>
@@ -203,7 +188,6 @@
   <a class="cj-strip"
      href="https://www.caju.com.br/conarh-2026"
      aria-label="Conheça nossas ofertas especiais para o CONARH 2026">
-    <span class="cj-strip-ico" aria-hidden="true">🎉</span>
     <span class="cj-strip-text">Conheça nossas ofertas especiais para o <strong>CONARH 2026</strong></span>
     <span class="cj-strip-arrow" aria-hidden="true">
       <svg viewBox="0 0 24 24" role="presentation" focusable="false">
