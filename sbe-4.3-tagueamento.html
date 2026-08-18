@@ -1,0 +1,163 @@
+<!-- ==========================================================================
+     Caju · /plataforma/saude-e-bem-estar — bloco de tagueamento (fluxo 114)
+     Substitui APENAS o bloco de tagueamento que já está antes do fim do body.
+     Nada mais da página precisa ser repassado: só o Evento 5 mudou.
+     ========================================================================== -->
+
+<script>
+/* ============================================================
+   Tagueamento — /plataforma/saude-e-bem-estar
+   Spec: req_saude_bem_estar_001 · fluxo 114 · 6 eventos
+   Regras: hash na chave `event`; parâmetro custom SEMPRE dentro
+   de `parameters`; label vem de data-tag-label, nunca de innerText.
+   ============================================================ */
+(function () {
+  window.dataLayer = window.dataLayer || [];
+
+  /* ---- Evento 1 · visita à página (disparo único) ---- */
+  if (!window.__sbeViewFired) {
+    window.__sbeViewFired = true;
+    window.dataLayer.push({ event: 'e_001_123_001_000_000_002' });
+  }
+
+  /* ---- Evento 2 · clique em CTA para o formulário ----
+     Delegado no document; capture para não depender da ordem
+     dos outros listeners da página. */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-tag-cta]');
+    if (!el) return;
+    window.dataLayer.push({
+      event: 'e_001_123_075_023_056_001',
+      parameters: { label: el.getAttribute('data-tag-label') || 'sem-label' }
+    });
+  }, true);
+
+  /* ---- Evento 3 · troca de aba RH / colaborador ----
+     NÃO IMPLEMENTADO: esta página não tem o componente de abas.
+     O comparativo é de duas colunas estáticas (plano de saúde vs
+     Caju), sem interação de troca. Hash e_001_123_075_037_986_001
+     reservada; avisado na entrega. Se a aba entrar na página,
+     marcar os botões com data-tag-tab + data-tag-label="rh"|"colaborador"
+     e replicar o listener do evento 2 trocando a hash. */
+
+  /* ---- Evento 6 · abertura de pergunta da FAQ ----
+     Capture = lê aria-expanded ANTES do toggle do acordeão
+     (que roda no bubble). Clique que fecha não conta. */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-tag-faq]');
+    if (!el) return;
+    if (el.getAttribute('aria-expanded') === 'true') return; /* já aberto: é fechamento */
+    window.dataLayer.push({
+      event: 'e_001_123_194_024_048_001',
+      parameters: { label: el.getAttribute('data-tag-label') }
+    });
+  }, true);
+
+  /* ---- Evento 4 · primeiro play no vídeo (YouTube IFrame API) ---- */
+  (function () {
+    var frame = document.getElementById('player-sbe');
+    if (!frame) return;
+    var fired = false;
+    function hook() {
+      new YT.Player(frame, {
+        events: {
+          onStateChange: function (ev) {
+            if (ev.data === YT.PlayerState.PLAYING && !fired) {
+              fired = true; /* só o primeiro play, não cada retomada */
+              window.dataLayer.push({
+                event: 'e_001_123_075_124_871_001',
+                parameters: { label: frame.getAttribute('data-tag-label') || 'video' }
+              });
+            }
+          }
+        }
+      });
+    }
+    if (window.YT && window.YT.Player) { hook(); return; }
+    /* não carregar a API duas vezes nem sobrescrever o callback global */
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      var s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(s);
+    }
+    var prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof prev === 'function') prev();
+      hook();
+    };
+  })();
+
+  /* ---- Evento 5 · envio do formulário Fillout (conversão) ----
+     Mesma implementação já validada em produção na LP do CONARH 2026.
+     Usa o postMessage `type: "form_submit"` (é o único que traz os campos
+     preenchidos, em `data.questions`). NÃO usar `event: "fillout_submitted"`,
+     que chega depois e sem os dados.
+     Sem checagem de e.origin: o embed roda em domínio próprio
+     (forms.caju.com.br) e a validação por `type` já basta — era justamente
+     o filtro de origem + o formato `data.answers` que impediam o disparo. */
+  window.addEventListener('message', function (e) {
+    var data = e.data;
+    if (!data || data.type !== 'form_submit') return;
+
+    if (window.__sbeFormSent) return; /* trava contra push duplicado */
+    window.__sbeFormSent = true;
+
+    var questions = data.questions || [];
+    /* aceita mais de um rótulo porque este formulário (1z1XwnnCiius) pode
+       nomear os campos de forma levemente diferente do form do CONARH.
+       >>> Conferir no Fillout os nomes exatos antes de publicar. <<< */
+    function getField(names) {
+      for (var i = 0; i < names.length; i++) {
+        for (var j = 0; j < questions.length; j++) {
+          if (questions[j].name === names[i]) return questions[j].value;
+        }
+      }
+      return '';
+    }
+
+    var email = getField(['E-mail', 'Email', 'E-mail corporativo']);
+    var dominio = String(email).split('@')[1] || '';
+    var genericos = [
+      'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.br',
+      'live.com', 'icloud.com', 'bol.com.br', 'uol.com.br', 'terra.com.br'
+    ];
+
+    /* Faixa de colaboradores (mesma escada do formulário de porque-caju). */
+    function faixaColaboradores(n) {
+      if (n <= 19)   return '1_a_19_colaboradores';
+      if (n <= 50)   return '20_a_50_colaboradores';
+      if (n <= 99)   return '51_a_99_colaboradores';
+      if (n <= 250)  return '100_a_250_colaboradores';
+      if (n <= 499)  return '251_a_499_colaboradores';
+      if (n <= 1000) return '500_a_1000_colaboradores';
+      if (n <= 1500) return '1001_a_1500_colaboradores';
+      if (n <= 3000) return '1501_a_3000_colaboradores';
+      return 'acima_de_3001_colaboradores';
+    }
+
+    var opcao = getField(['Solução de interesse', 'Opção', 'Interesse']);
+    var parameters = {
+      email_domain: genericos.indexOf(dominio.toLowerCase()) === -1 ? 'corp' : 'personal',
+      role:         getField(['Cargo']),
+      option:       Array.isArray(opcao) ? opcao.join(',') : (opcao || '')
+    };
+
+    /* employee_count é a faixa (string). Quando o campo já vem como faixa
+       (select), vai o próprio valor; quando vem número, converte. Sem valor,
+       a chave não entra no push. */
+    var colaboradores = getField(['Número de colaboradores', 'Quantidade de colaboradores']);
+    var exato = parseInt(colaboradores, 10);
+    if (!isNaN(exato)) {
+      parameters.employee_count = faixaColaboradores(exato);
+    } else if (colaboradores) {
+      parameters.employee_count = colaboradores;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'e_001_123_075_059_059_003',
+      parameters: parameters
+    });
+  });
+})();
+</script>
