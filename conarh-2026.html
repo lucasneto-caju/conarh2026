@@ -120,6 +120,23 @@
     #conarh-lp .cj-hero .cj-hero-note{font-size:16px;margin-top:14px;color:rgba(255,255,255,.82);max-width:560px;}
     #conarh-lp .cj-hero .cj-hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
 
+    /* Cronômetro regressivo do hero */
+    #conarh-lp .cj-countdown{margin-top:30px;}
+    #conarh-lp .cj-countdown-label{
+      font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      color:rgba(255,255,255,.85);margin-bottom:10px;
+    }
+    #conarh-lp .cj-countdown-grid{display:flex;gap:10px;flex-wrap:wrap;}
+    #conarh-lp .cj-cd-box{
+      background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);
+      border-radius:14px;padding:10px 0;min-width:66px;text-align:center;
+    }
+    #conarh-lp .cj-cd-num{font-size:30px;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums;}
+    #conarh-lp .cj-cd-unit{
+      font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+      color:rgba(255,255,255,.8);margin-top:6px;
+    }
+
     /* Imagem do hero (foto de marca) — moldura arredondada/flutuante */
     #conarh-lp .cj-hero-art{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;}
     #conarh-lp .cj-hero-photo{position:relative;width:100%;max-width:400px;}
@@ -349,9 +366,19 @@
           <span class="cj-badge">🎉 Condições especiais de CONARH</span>
           <span class="cj-badge">⏳ Ofertas por tempo limitado</span>
         </div>
-        <h1>A Caju está com ofertas imperdíveis durante o CONARH 2026</h1>
-        <p class="cj-hero-sub">Desconto na contratação das soluções de Despesas Corporativas, Gestão de Pessoas e Saúde e Bem-estar.</p>
+        <h1>Até 1 ano de Wellhub isento pro seu time</h1>
+        <p class="cj-hero-sub">E para o seu RH, até 50% OFF nos módulos de Gestão de Pessoas e Despesas. Ofertas exclusivas do CONARH 2026.</p>
         <p class="cj-hero-note">Fale com o nosso time e descubra a condição ideal para sua empresa.</p>
+        <!-- Cronômetro: contagem regressiva até 30/08/2026 (23:59, horário de Brasília) -->
+        <div class="cj-countdown" id="cj-countdown" data-deadline="2026-08-30T23:59:59-03:00">
+          <div class="cj-countdown-label">Ofertas do CONARH terminam em</div>
+          <div class="cj-countdown-grid">
+            <div class="cj-cd-box"><div class="cj-cd-num" data-cd="days">00</div><div class="cj-cd-unit">dias</div></div>
+            <div class="cj-cd-box"><div class="cj-cd-num" data-cd="hours">00</div><div class="cj-cd-unit">horas</div></div>
+            <div class="cj-cd-box"><div class="cj-cd-num" data-cd="mins">00</div><div class="cj-cd-unit">min</div></div>
+            <div class="cj-cd-box"><div class="cj-cd-num" data-cd="secs">00</div><div class="cj-cd-unit">seg</div></div>
+          </div>
+        </div>
         <div class="cj-hero-cta">
           <a href="#conarh-form" class="cj-btn cj-btn--light" data-cj-tag="hero-vendas">Fale com Vendas</a>
           <a href="#conarh-solucoes" class="cj-btn cj-btn--ghost" data-cj-tag="hero-solucoes">Ver as soluções</a>
@@ -360,21 +387,53 @@
 
       <div class="cj-hero-art">
         <div class="cj-hero-photo">
-          <!-- IMAGEM DO HERO: foto de marca (mãos segurando os cartões Caju), hospedada no CDN do Webflow. -->
-          <img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a7a3685b38bf45d29c810c0_caju-foto-conarh.avif"
-               alt="Duas mãos segurando cartões Caju em frente ao logo da Caju" loading="lazy">
+          <!-- IMAGEM DO HERO: imagem da campanha (CDN Webflow). Provisória — trocar pela definitiva da campanha de consideração quando o Pedro enviar. -->
+          <img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a845ec4579a72a086fb70bb_2141532.avif"
+               alt="Ofertas da Caju no CONARH 2026" loading="lazy">
           <div class="cj-photo-badge"><span>Ofertas</span><b>CONARH</b></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Cronômetro regressivo do hero -->
+  <script>
+  (function () {
+    var el = document.getElementById('cj-countdown');
+    if (!el) return;
+    var deadline = new Date(el.getAttribute('data-deadline')).getTime();
+    var out = {
+      days:  el.querySelector('[data-cd="days"]'),
+      hours: el.querySelector('[data-cd="hours"]'),
+      mins:  el.querySelector('[data-cd="mins"]'),
+      secs:  el.querySelector('[data-cd="secs"]')
+    };
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    var timer;
+    function tick() {
+      var diff = deadline - Date.now();
+      if (diff <= 0) {
+        el.innerHTML = '<div class="cj-countdown-label">Ofertas do CONARH encerradas</div>';
+        clearInterval(timer);
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      out.days.textContent  = pad(Math.floor(s / 86400));
+      out.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      out.mins.textContent  = pad(Math.floor((s % 3600) / 60));
+      out.secs.textContent  = pad(s % 60);
+    }
+    tick();
+    timer = setInterval(tick, 1000);
+  })();
+  </script>
+
   <!-- ==================== 2ª DOBRA — UMA OFERTA EM TRÊS FRENTES ==================== -->
   <div class="cj-section cj-frentes" id="conarh-solucoes">
     <div class="cj-wrap">
       <span class="cj-offer-highlight">
         <span>🎁</span>
-        <span>Até 1 ano grátis de Wellhub e benefícios de saúde e bem-estar, além de descontos exclusivos nos módulos da Caju!</span>
+        <span>Até 1 ano de isenção de Wellhub e benefícios de saúde e bem-estar, além de descontos exclusivos nos módulos da Caju!</span>
       </span>
       <h2>Uma oferta em três frentes para o seu RH</h2>
       <p class="cj-lead" style="margin-top:18px;">Aproveite o CONARH para negociar as melhores condições nas soluções da Caju.</p>
@@ -400,7 +459,7 @@
             <div class="cj-combo">
               <span class="cj-combo-flag">🎁 Oferta CONARH</span>
               <p class="cj-combo-lead">Até <b>12 meses</b> de isenção</p>
-              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub gratuita e vitalícia</p>
+              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub isenta e vitalícia</p>
             </div>
             <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
@@ -420,7 +479,7 @@
             <div class="cj-combo">
               <span class="cj-combo-flag">🎁 Oferta CONARH</span>
               <p class="cj-combo-lead">Até <b>6 meses</b> de isenção</p>
-              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub gratuita e vitalícia</p>
+              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub isenta e vitalícia</p>
             </div>
             <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub-conexa" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
@@ -442,7 +501,7 @@
             <div class="cj-combo">
               <span class="cj-combo-flag">🎁 Oferta CONARH</span>
               <p class="cj-combo-lead">Até <b>6 meses</b> de isenção</p>
-              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub gratuita e vitalícia</p>
+              <p class="cj-combo-sub">+ inclusão de dependente no Wellhub isenta e vitalícia</p>
             </div>
             <a href="#conarh-form" class="cj-btn cj-btn--ghost-red cj-btn--block" data-cj-tag="oferta" data-cj-label="wellhub-conexa-optum" data-cj-product="saude-e-bem-estar">Fale com Vendas</a>
           </div>
