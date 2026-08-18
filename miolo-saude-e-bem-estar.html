@@ -1,0 +1,827 @@
+<!-- ==========================================================================
+     Caju · /plataforma/saude-e-bem-estar — MIOLO DA PÁGINA
+     --------------------------------------------------------------------------
+     Só o que é específico desta página. Header (navbar + faixa do CONARH),
+     footer e os scripts universais do site (GTM, OneTrust, UTM preserver,
+     lightbox do YouTube) ficam de fora — são componentes/código global do
+     Webflow.
+
+     Única mudança em relação ao que está publicado: o Evento 5 do
+     tagueamento (envio do formulário Fillout), na PARTE 4.
+
+     São 4 blocos, cada um no seu lugar. A ordem importa: o CSS antes,
+     os embeds no corpo, os scripts por último.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     PARTE 1 — CSS + fontes
+     ONDE COLAR: Configurações da página → Código personalizado → Dentro da tag <head>
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>.cj-root{box-sizing:border-box;width:100%}.cj-root{--vermelho-leve:#FFEBF0;--vermelho-polpa:#FFD3D5;--vermelho-caju:#E80537;--vermelho-maduro:#4F0002;--roxo-leve:#FFE8F3;--roxo-polpa:#FFD0FD;--roxo-fruta:#A33DC2;--roxo-maduro:#41002C;--verde-leve:#E6FFCC;--verde-caju:#ABE95E;--verde-fruta:#5CA630;--verde-maduro:#162608;--amarelo-leve:#FFF5C8;--amarelo-polpa:#FFE97D;--amarelo-fruta:#FFCB2E;--amarelo-maduro:#562F04;--laranja-leve:#FFD7B5;--laranja-polpa:#FDAC68;--laranja-caju:#FF7327;--laranja-madura:#7F1C01;--superficie:#FCFCFC;--castanha-madura-50:#F5EFE7;--superficie-alt:#FCFCFC;--borda-card:rgba(0,0,0,.08);--marrom-display:#562F04;--branco:#fcfcfc;--neutro-25:#f3f3f3;--neutro-50:#d3d3d3;--neutro-75:#c1c1c1;--neutro-100:#b3b3b3;--neutro-200:#919191;--neutro-300:#747474;--neutro-400:#606060;--neutro-500:#4d4d4d;--neutro-600:#404040;--preto:#000000;--pitanga-400:#c3032c;--pitanga-500:#9e0222;--texto-primario:#000000;--texto-secundario:#4d4d4d;--texto-terciario:#717171;--accent:#E80537;--font-display:"Work Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--font-base:"Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--font-roboto:var(--font-base);--fs-2xs:14px;--fs-xs:16px;--fs-sm:18px;--fs-md:20px;--fs-lg:24px;--fs-xl:28px;--fs-2xl:32px;--fs-3xl:40px;--fs-4xl:44px;--fs-5xl:56px;--fw-title:700;--fw-card-title:500;--r-sm:8px;--r-md:12px;--r-base:16px;--r-lg:20px;--r-xl:24px;--r-card:24px;--r-section:40px;--r-pill:999px;--ease-entrance:cubic-bezier(0.39,0.57,0.56,1);--ease-exit:cubic-bezier(0.55,0.09,0.68,0.53);--ease-expressive:cubic-bezier(0.17,0.84,0.44,1);--dur-fast:110ms;--dur-moderate:150ms;--dur-moderate2:240ms;--dur-slow:400ms;--ease-out:cubic-bezier(0.23,1,0.32,1);--shadow-1:0 4px 16px -2px rgba(0,0,0,.16);--shadow-2:0 12px 24px -6px rgba(0,0,0,.16);--max-content:1440px;--card-pad:48px;--card-gap:24px;--pad-global:12px;--gap-section:12px;--pad-section-y:120px;--pad-section-x:80px}.cj-root,.cj-root *,.cj-root *::before,.cj-root *::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}.cj-root [id]{scroll-margin-top:24px}.cj-root{margin:0;padding:var(--pad-global);font-family:var(--font-base);font-size:var(--fs-xs);font-weight:400;line-height:1.5;color:var(--texto-secundario);background:var(--superficie-alt);-webkit-font-smoothing:antialiased}.cj-root h1,.cj-root h2,.cj-root h3,.cj-root h4{color:var(--texto-primario);font-weight:700;line-height:1.15;letter-spacing:-0.01em;margin:0}.cj-root .cj-h1,.cj-root .cj-h2{color:#000000}.cj-root p{margin:0}.cj-root a{color:inherit;text-decoration:none}.cj-root ul{margin:0;padding:0;list-style:none}.cj-root img{max-width:100%;display:block}.cj-root{width:100%}.cj-root .cj-stack{display:flex;flex-direction:column;gap:var(--gap-section)}.cj-root section{border-radius:var(--r-section);padding:var(--pad-section-y) clamp(24px,5vw,var(--pad-section-x));border:none;overflow:hidden}.cj-root section>*{max-width:var(--max-content);margin-inline:auto}.cj-root .cj-bg-white{background:var(--superficie)}.cj-root .cj-bg-gray{background:var(--castanha-madura-50)}.cj-root .cj-bg-soft{background:var(--superficie)}.cj-root .cj-demo-sec{background:var(--vermelho-caju);padding:var(--pad-section-y) clamp(24px,5vw,80px) 0}.cj-root .cj-demo-sec .cj-sec-head{text-align:center}.cj-root .cj-demo-sec .cj-lead{margin-inline:auto}.cj-root .cj-demo-sec .cj-reassurance{color:rgba(252,252,252,.72)}.cj-root .cj-demo-stage{max-width:var(--max-content);margin-inline:auto;background:rgba(79,0,2,.28);border-radius:var(--r-section) var(--r-section) 0 0;padding:clamp(24px,3vw,48px) clamp(24px,3vw,48px) 0}@media (max-width:700px){}.cj-root .cj-portes-sec{background:var(--castanha-madura-50)}.cj-root .cj-bg-dark{background:var(--verde-maduro)}.cj-root .cj-bg-dark.cj-on-dark{background-image:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a2f64fd3abdfa319220d409_fundo-forms-section.png");background-size:cover;background-position:50% 100%;background-repeat:no-repeat}.cj-root .cj-bg-orange{background-color:#2A1206;background-image:url("https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a839af3a9a20a96965efecf_213532.png");background-size:cover;background-position:100% 62%;background-repeat:no-repeat}@media (max-width:1560px){.cj-root .cj-bg-orange{background-position:right -22vw top 62%}}@media (max-width:1400px){.cj-root .cj-bg-orange{background-position:right -30vw top 62%}}@media (max-width:1200px){.cj-root .cj-bg-orange{background-position:right -36vw top 62%}}@media (max-width:1000px){.cj-root .cj-bg-orange{background-position:right -44vw top 62%}}@media (max-width:860px){.cj-root .cj-bg-orange{background-position:right -52vw top 62%}}.cj-root .cj-bg-transparent{background:var(--superficie)}.cj-root .cj-bg-black{background:var(--preto)}.cj-root .cj-bg-branco{background:var(--superficie)}.cj-root .cj-bg-black .cj-sec-head h2{color:#FCFCFC}.cj-root .cj-bg-black .cj-sec-head .cj-lead{color:rgba(252,252,252,.8)}.cj-root .cj-bg-orange h1{color:#FCFCFC}.cj-root .cj-bg-orange .cj-lead{color:rgba(252,252,252,.92)}.cj-root .cj-bg-orange .cj-reassurance{color:rgba(252,252,252,.82)}.cj-root h1,.cj-root h2,.cj-root h3,.cj-root h4,.cj-root .cj-h1,.cj-root .cj-h2,.cj-root .cj-h3,.cj-root .cj-ib-num,.cj-root .cj-ic-num,.cj-root .cj-ib-label,.cj-root .cj-compare-head,.cj-root .cj-portes-label,.cj-root .cj-caju-faq .cj-cat__title{font-family:var(--font-display)}.cj-root .cj-h1{font-size:var(--fs-5xl);font-weight:var(--fw-title)}.cj-root .cj-h2{font-size:var(--fs-3xl);font-weight:500}.cj-root .cj-h2-sm{font-size:clamp(30px,2.8vw,38px)}.cj-root .cj-h3{font-size:var(--fs-lg);font-weight:500}.cj-root .cj-lead{font-size:var(--fs-xs);color:var(--texto-secundario);line-height:1.6;font-family:var(--font-roboto)}.cj-root .cj-sec-head{max-width:920px;margin-inline:auto;text-align:center}.cj-root .cj-sec-head .cj-lead{max-width:720px;margin-inline:auto}.cj-root .cj-measure{max-width:760px}.cj-root .cj-mt-16{margin-top:16px}.cj-root .cj-mt-24{margin-top:24px}.cj-root .cj-mt-32{margin-top:32px}.cj-root .cj-mt-40{margin-top:40px}.cj-root .cj-mt-56{margin-top:56px}.cj-root .cj-mt-80{margin-top:80px}.cj-root .cj-cta{text-align:center}.cj-root .cj-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 32px;border-radius:var(--r-pill);border:none;font-family:var(--font-base);font-size:var(--fs-xs);font-weight:500;line-height:1;cursor:pointer;white-space:nowrap;appearance:none;text-decoration:none;transition:transform 160ms var(--ease-out),background-color var(--dur-moderate) var(--ease-out),color var(--dur-moderate) var(--ease-out),box-shadow var(--dur-moderate) var(--ease-out)}.cj-root .cj-btn:active{transform:scale(0.96)}.cj-root .cj-btn:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:var(--r-pill)}.cj-root .cj-on-dark .cj-btn:focus-visible,.cj-root .cj-bg-orange .cj-btn:focus-visible{outline-color:#FCFCFC}.cj-root .cj-btn-primary{background:var(--accent);color:#FCFCFC}.cj-root .cj-btn-light{background:var(--neutro-25);color:var(--preto)}.cj-root .cj-btn-dark{background:var(--preto);color:#FCFCFC}.cj-root .cj-btn-ghost{background:transparent;color:#4D4D4D;padding:0;border-radius:0;gap:8px;transition:opacity 160ms ease,color 160ms ease}.cj-root .cj-btn-ghost .cj-btn-ic{width:20px;height:20px;flex:none;display:block;transition:transform .2s var(--ease-out)}.cj-root .cj-btn-ghost:active{transform:none;opacity:.6}.cj-root .cj-btn-ghost{position:relative}.cj-root .cj-btn-ghost::after{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:44px;transform:translateY(-50%)}.cj-root .cj-btn-ghost:focus-visible{outline-offset:4px;border-radius:var(--r-sm)}@media (hover:hover) and (pointer:fine){.cj-root .cj-btn-primary:hover{background:var(--pitanga-400)}.cj-root .cj-btn-light:hover{background:var(--neutro-50)}.cj-root .cj-btn-dark:hover{background:#2A2A2A}.cj-root .cj-btn-ghost:hover .cj-btn-ic{transform:translateX(4px)}}.cj-root .cj-reassurance{font-size:var(--fs-2xs);color:var(--texto-terciario)}.cj-root .cj-card{background:#FCFCFC;border-radius:var(--r-card);padding:var(--card-pad);border:1px solid var(--borda-card)}.cj-root .cj-card-white{background:#FCFCFC}.cj-root .cj-portes-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;max-width:var(--max-content);margin-inline:auto}.cj-root .cj-portes-split.cj-is-reverse .cj-ps-copy{order:2}.cj-root .cj-portes-split.cj-is-reverse .cj-ps-media{order:1}.cj-root .cj-ps-copy{padding-inline:clamp(0px,2vw,32px)}.cj-root .cj-ps-media{aspect-ratio:4 / 3;border-radius:var(--r-card);background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#2a2a2a;outline:1px solid rgba(0,0,0,.1);outline-offset:-1px}.cj-root .cj-portes-head{display:inline-flex;align-items:center;gap:12px}.cj-root .cj-portes-ic{width:22px;height:22px;display:block;flex:none}.cj-root .cj-portes-label{color:var(--marrom-display);font-weight:500;font-size:var(--fs-sm);letter-spacing:.01em}.cj-root .cj-ps-copy p{color:var(--texto-secundario);font-size:var(--fs-sm);line-height:1.6;text-wrap:pretty}.cj-root .cj-ps-cta{margin-top:28px}.cj-root .cj-ps-cta .cj-btn-ghost{color:var(--vermelho-caju)}@media (max-width:900px){.cj-root .cj-portes-split{grid-template-columns:1fr;gap:24px}.cj-root .cj-portes-split.cj-is-reverse .cj-ps-copy{order:1}.cj-root .cj-portes-split.cj-is-reverse .cj-ps-media{order:2}.cj-root .cj-ps-copy{padding-inline:0}}.cj-root .cj-card-svc{display:flex;flex-direction:column;justify-content:space-between;gap:40px}.cj-root .cj-card-nr1{gap:80px}@media (max-width:700px){.cj-root .cj-card-nr1{gap:24px}}.cj-root .cj-card-svc .cj-chip{align-self:flex-start}.cj-root .cj-card-nr1{position:relative;overflow:hidden}.cj-root .cj-card-nr1>.cj-chip,.cj-root .cj-card-nr1>.cj-card-body{position:relative;z-index:1}.cj-root .cj-nowrap-d{white-space:nowrap}@media (max-width:980px){.cj-root .cj-brk-nr1,.cj-root .cj-brk-d{display:none}.cj-root .cj-nowrap-d{white-space:normal}}.cj-root .cj-card-square{aspect-ratio:1 / 1}.cj-root .cj-calc-copy{padding-left:24px}.cj-root .cj-calc-card{display:grid;grid-template-columns:1fr 1fr;padding:0;overflow:hidden;align-items:stretch}.cj-root .cj-calc-card .cj-calc-copy{padding:56px;padding-left:56px;align-self:center}.cj-root .cj-calc-ic{width:32px;height:32px;display:block;margin-bottom:22px}.cj-root .cj-calc-copy .cj-h3{margin-top:0}.cj-root .cj-calc-copy p{margin-top:24px}.cj-root .cj-calc-copy .cj-calc-btn{margin-top:24px}.cj-root .cj-calc-img{position:relative;overflow:hidden;min-height:460px}.cj-root .cj-calc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;outline:1px solid rgba(0,0,0,.1);outline-offset:-1px}.cj-root .cj-impact-card{display:flex;flex-direction:column;padding:0;overflow:hidden}.cj-root .cj-impact-card.cj-is-risco{background:#FFF5F6;border:1px solid rgba(79,0,2,.12)}.cj-root .cj-impact-card.cj-is-retorno{background:#F4FFE6;border:1px solid rgba(22,38,8,.12)}.cj-root .cj-impact-head{display:flex;align-items:flex-start;gap:12px;padding:40px var(--card-pad);color:#FCFCFC}.cj-root .cj-impact-head .cj-card-ic{width:32px;height:32px;flex:none;display:block;margin-top:4px}.cj-root .cj-impact-head-txt{min-width:0}.cj-root .cj-is-risco .cj-impact-head{background:#C3032C}.cj-root .cj-is-retorno .cj-impact-head{background:#407320}.cj-root .cj-impact-eyebrow{display:block;font-size:var(--fs-2xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(252,252,252,.82);margin-bottom:6px}.cj-root .cj-impact-card .cj-impact-head .cj-h3{color:#FCFCFC;text-wrap:balance}.cj-root .cj-impact-body{padding:12px var(--card-pad) calc(var(--card-pad) - 12px);display:flex;flex-direction:column;flex:1 1 auto}.cj-root .cj-impact-card .cj-feature-list li{padding:28px 0}.cj-root .cj-impact-card .cj-feature-list{margin-top:0}.cj-root .cj-is-risco .cj-feature-list li + li{box-shadow:inset 0 1px 0 rgba(79,0,2,.12)}.cj-root .cj-is-retorno .cj-feature-list li + li{box-shadow:inset 0 1px 0 rgba(22,38,8,.14)}@media (max-width:980px){.cj-root .cj-impact-head{padding:32px}.cj-root .cj-impact-body{padding:8px 32px 20px}}@media (max-width:980px){.cj-root .cj-calc-card{grid-template-columns:1fr}.cj-root .cj-calc-card .cj-calc-copy{padding:32px}.cj-root .cj-calc-img{min-height:240px;order:-1}}.cj-root .cj-calc-copy .cj-h3{max-width:360px}.cj-root .cj-calc-copy p{max-width:420px}.cj-root .cj-grid{display:grid;gap:var(--card-gap)}.cj-root .cj-grid-2{grid-template-columns:repeat(2,1fr)}.cj-root .cj-grid-3{grid-template-columns:repeat(3,1fr)}.cj-root .cj-chip{display:inline-flex;align-items:center}.cj-root .cj-chip .cj-chip-logos{display:inline-flex;align-items:center;gap:20px;flex-wrap:wrap;row-gap:12px}.cj-root .cj-chip .cj-chip-logo{height:34px;width:auto;display:block;flex:none}.cj-root .cj-chip .cj-chip-logo[aria-label="Zenklub"]{height:41.5px}.cj-root .cj-card-rh{background:#FFF6EE}.cj-root .cj-card-colab{background:#FFF3F4}.cj-root .cj-card-list{padding:0;overflow:hidden}.cj-root .cj-card-list>.cj-h3{padding:40px var(--card-pad);margin:0;display:flex;align-items:center;gap:12px;color:#FCFCFC}.cj-root .cj-card-list>.cj-h3 .cj-card-ic{width:32px;height:32px;flex:none;display:block}.cj-root .cj-card-list>.cj-feature-list{margin-top:0;padding:12px var(--card-pad) calc(var(--card-pad) - 12px)}.cj-root .cj-card-rh>.cj-h3{background:#FF7327}.cj-root .cj-card-colab>.cj-h3{background:#E80537}.cj-root .cj-card-list .cj-feature-list li{padding:28px 0}.cj-root .cj-card-rh .cj-feature-list li + li{box-shadow:inset 0 1px 0 rgba(127,28,1,.14)}.cj-root .cj-card-colab .cj-feature-list li + li{box-shadow:inset 0 1px 0 rgba(79,0,2,.12)}.cj-root .cj-calc-card{background:#FFF7E5}.cj-root .cj-pcard-wellhub{background:#F2496B}.cj-root .cj-pcard-conexa{background:#102740}.cj-root .cj-pcard-optum{background:#FF612B}.cj-root .cj-pcard-zenklub{background:#6732D1}.cj-root .cj-pcard-wellhub,.cj-root .cj-pcard-conexa,.cj-root .cj-pcard-optum,.cj-root .cj-pcard-zenklub{border-color:rgba(252,252,252,.18)}.cj-root .cj-pcard-wellhub .cj-h3,.cj-root .cj-pcard-conexa .cj-h3,.cj-root .cj-pcard-optum .cj-h3,.cj-root .cj-pcard-zenklub .cj-h3{color:#FCFCFC}.cj-root .cj-pcard-wellhub p,.cj-root .cj-pcard-conexa p,.cj-root .cj-pcard-optum p,.cj-root .cj-pcard-zenklub p{color:rgba(252,252,252,.86)}.cj-root .cj-pcard-wellhub .cj-subtag,.cj-root .cj-pcard-conexa .cj-subtag,.cj-root .cj-pcard-optum .cj-subtag,.cj-root .cj-pcard-zenklub .cj-subtag{color:rgba(252,252,252,.72)}.cj-root .cj-subtag{display:block;font-size:var(--fs-2xs);font-weight:500;color:#6E6E6E;letter-spacing:.04em}.cj-root .cj-card p,.cj-root .cj-card .cj-subtag{font-family:var(--font-roboto)}.cj-root .cj-card p{line-height:1.6}.cj-root .cj-feature-list li{display:flex;gap:14px;padding:20px 0;align-items:center}.cj-root .cj-feature-list li + li{box-shadow:inset 0 1px 0 rgba(0,0,0,.06)}.cj-root .cj-li-ic{flex:0 0 auto;width:40px;height:40px;display:block}.cj-root .cj-feature-list li p{color:var(--texto-secundario);text-wrap:pretty}.cj-root .cj-feature-list li strong{color:var(--texto-primario);font-weight:500}.cj-root .cj-compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap)}.cj-root .cj-compare-col{border-radius:var(--r-card);padding:0;overflow:hidden;display:flex;flex-direction:column}.cj-root .cj-compare-col .cj-compare-head{flex:0 0 auto}.cj-root .cj-compare-col .cj-compare-row{flex:1 1 0}.cj-root .cj-compare-col.cj-neg{background:#FCFCFC;border:1px solid rgba(86,47,4,.14)}.cj-root .cj-compare-col.cj-pos{background:#F4FFE6;border:1px solid rgba(22,38,8,.12)}.cj-root .cj-compare-head{display:flex;align-items:center;gap:12px;padding:40px var(--card-pad);margin:0;font-weight:500;font-size:var(--fs-md);color:#FCFCFC}.cj-root .cj-compare-head .cj-card-ic{width:32px;height:32px;flex:none;display:block}.cj-root .cj-compare-col.cj-neg .cj-compare-head{background:#747474}.cj-root .cj-compare-col.cj-pos .cj-compare-head{background:#407320}.cj-root .cj-compare-row{position:relative;padding:28px var(--card-pad);font-size:var(--fs-xs);line-height:1.6;display:flex;align-items:center;gap:14px;text-wrap:pretty}.cj-root .cj-compare-head + .cj-compare-row{padding-top:40px}.cj-root .cj-compare-col .cj-compare-row:last-child{padding-bottom:40px}.cj-root .cj-compare-row + .cj-compare-row::before{content:"";position:absolute;top:0;left:var(--card-pad);right:var(--card-pad);height:1px}.cj-root .cj-compare-col.cj-neg .cj-compare-row + .cj-compare-row::before{background:rgba(0,0,0,.10)}.cj-root .cj-compare-col.cj-pos .cj-compare-row + .cj-compare-row::before{background:rgba(22,38,8,.14)}.cj-root .cj-compare-col.cj-neg .cj-compare-row{color:var(--texto-secundario)}.cj-root .cj-compare-col.cj-pos .cj-compare-row{color:var(--texto-primario)}.cj-root .cj-impact-big{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap)}.cj-root .cj-ib-item{aspect-ratio:1 / 1;background:var(--vermelho-leve);border:1px solid rgba(79,0,2,.10);border-radius:var(--r-card);padding:var(--card-pad);display:flex;flex-direction:column;justify-content:space-between}.cj-root .cj-ib-ic{width:56px;height:56px;display:block;flex:none}.cj-root .cj-ib-txt{display:flex;flex-direction:column}.cj-root .cj-ib-source{font-size:var(--fs-2xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#993D00;margin-bottom:20px}.cj-root .cj-ib-num{font-size:clamp(56px,7vw,100px);font-weight:500;line-height:1;color:var(--accent);letter-spacing:-0.03em;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}.cj-root .cj-ib-label{font-size:clamp(20px,2vw,28px);font-weight:500;color:var(--marrom-display);line-height:1.2;margin-top:12px;letter-spacing:-0.01em;text-wrap:balance}.cj-root .cj-ib-desc{font-size:var(--fs-sm);color:var(--texto-secundario);line-height:1.6;margin-top:28px;text-wrap:pretty}.cj-root .cj-sec-head .cj-impact-sub{max-width:none;white-space:nowrap;width:max-content;position:relative;left:50%;transform:translateX(-50%);margin-inline:0}@media (max-width:1240px){.cj-root .cj-sec-head .cj-impact-sub{white-space:normal;width:auto;max-width:720px;left:auto;transform:none;margin-inline:auto}}.cj-root .cj-impact-lead{text-align:center;max-width:780px;margin-inline:auto;font-size:var(--fs-sm)}.cj-root .cj-impact-bridge{max-width:none;margin-top:120px;white-space:nowrap}@media (max-width:1100px){.cj-root .cj-impact-bridge{white-space:normal;max-width:780px}}.cj-root .cj-impact-claim{background:#FF7327;border-radius:var(--r-card) var(--r-card) 0 0;padding:40px clamp(24px,5vw,64px) 80px;text-align:center;max-width:var(--max-content);margin-inline:auto;margin-top:120px;margin-bottom:-40px}.cj-root .cj-impact-claim p{font-family:var(--font-display);color:#FCFCFC;font-size:var(--fs-sm);line-height:1.6;font-weight:500;text-wrap:pretty}.cj-root .cj-has-claim{padding-bottom:0;margin-bottom:calc(var(--gap-section) * -1)}.cj-root .cj-impact-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--card-gap)}.cj-root .cj-ic-card{background:#FCFCFC;border:1px solid var(--borda-card);border-radius:var(--r-card);padding:32px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between}.cj-root .cj-ic-ic{width:32px;height:32px;display:block;flex:none}.cj-root .cj-ic-card .cj-ic-num{margin-top:auto;padding-top:32px}.cj-root .cj-ic-num{font-size:clamp(30px,3.4vw,52px);font-weight:500;line-height:1;color:var(--accent);letter-spacing:-0.02em;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}.cj-root .cj-ic-txt{font-size:clamp(15px,1.1vw,16px);color:var(--texto-secundario);line-height:1.6;margin-top:16px;text-wrap:pretty}@media (max-width:980px){.cj-root .cj-impact-big{grid-template-columns:1fr}.cj-root .cj-impact-cards{grid-template-columns:repeat(2,1fr)}.cj-root .cj-ib-item,.cj-root .cj-ic-card{aspect-ratio:auto;min-height:260px}}@media (max-width:560px){.cj-root .cj-impact-cards{grid-template-columns:1fr}}.cj-root .cj-on-dark,.cj-root .cj-on-dark h2,.cj-root .cj-on-dark h3{color:#FCFCFC}.cj-root .cj-on-dark .cj-lead{color:rgba(252,252,252,.75)}.cj-root .cj-logos-wrap{text-align:center}.cj-root .cj-marquee{position:relative;overflow:hidden}.cj-root .cj-marquee::before,.cj-root .cj-marquee::after{content:"";position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none}.cj-root .cj-marquee::before{left:0;background:linear-gradient(to right,#000 10%,rgba(0,0,0,0))}.cj-root .cj-marquee::after{right:0;background:linear-gradient(to left,#000 10%,rgba(0,0,0,0))}.cj-root .cj-marquee-track{display:flex;gap:16px;width:max-content;animation:marquee 32s linear infinite}@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}@media (prefers-reduced-motion:reduce){.cj-root .cj-marquee-track{animation:none}}@media (hover:hover) and (pointer:fine){.cj-root .cj-marquee:hover .cj-marquee-track{animation-play-state:paused}}.cj-root .cj-logo-ph{flex:0 0 auto;width:190px;height:72px;border-radius:var(--r-md);background:rgba(252,252,252,.08);display:flex;align-items:center;justify-content:center;color:rgba(252,252,252,.4);font-size:12px;font-weight:700;letter-spacing:.06em}.cj-root .cj-bg-maroon{background:#000000}.cj-root .cj-bg-maroon .cj-sec-head h2{color:#FCFCFC}.cj-root .cj-bg-maroon .cj-sec-head .cj-lead{color:rgba(252,252,252,.82)}.cj-root .cj-cert-bento{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:24px;align-items:stretch}.cj-root .cj-cert-cell{display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-height:236px;padding:32px;background:#121212;border:1px solid #282828}.cj-root .cj-cert-a{grid-column:1;grid-row:1}.cj-root .cj-cert-b{grid-column:2;grid-row:1}.cj-root .cj-cert-c{grid-column:3;grid-row:1}.cj-root .cj-cert-a .cj-h3,.cj-root .cj-cert-b .cj-h3,.cj-root .cj-cert-c .cj-h3{font-size:var(--fs-md)}.cj-root .cj-cert-cell .cj-h3{color:#FCFCFC}.cj-root .cj-cert-icon{display:flex;align-items:center;min-height:88px}.cj-root .cj-cert-icon .cj-ic{display:block;width:auto}.cj-root .cj-ic-27001,.cj-root .cj-ic-27701{height:86px}.cj-root .cj-ic-soc2{height:73px}.cj-root .cj-ic-pci{height:55px}.cj-root .cj-cert-wide{grid-column:1 / 4;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;min-height:0}.cj-root .cj-cert-wide-left{display:flex;flex-direction:column;justify-content:space-between;gap:32px}.cj-root .cj-cert-benefits{font-family:var(--font-roboto)}.cj-root .cj-cert-benefits .cj-cb{padding:16px 0;display:flex;flex-direction:row;align-items:center;gap:14px}.cj-root .cj-cert-benefits .cj-cb-ic{width:36px;height:36px;flex:none;display:block}.cj-root .cj-cert-benefits .cj-cb-txt{display:flex;flex-direction:column;gap:4px;min-width:0}.cj-root .cj-cert-benefits .cj-cb + .cj-cb{border-top:1px solid rgba(252,252,252,.16)}.cj-root .cj-cert-benefits .cj-cb strong{color:#FCFCFC;font-weight:700}.cj-root .cj-cert-benefits .cj-cb span{color:rgba(252,252,252,.78)}@media (max-width:980px){.cj-root .cj-cert-bento{grid-template-columns:1fr}.cj-root .cj-cert-bento>*{grid-column:1!important;grid-row:auto!important}.cj-root .cj-cert-wide{grid-template-columns:1fr;gap:24px}}.cj-root .cj-form-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.cj-root .cj-form-copy{text-align:left}.cj-root .cj-form-copy .cj-lead{max-width:460px;margin-inline:0}.cj-root .cj-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cj-root .cj-field{display:flex;flex-direction:column;gap:8px}.cj-root .cj-field label{font-size:var(--fs-2xs);font-weight:700;color:var(--texto-primario)}.cj-root .cj-field .cj-ph-input{height:56px;border-radius:var(--r-md);background:var(--neutro-25);display:flex;align-items:center;padding:0 18px;color:var(--neutro-400);font-size:var(--fs-xs)}.cj-root .cj-full{grid-column:1 / -1}.cj-root .cj-form-embed{padding:8px;overflow:hidden}.cj-root .cj-form-embed iframe{display:block;width:100%;min-height:640px;border:0;border-radius:var(--r-base);background:#FCFCFC}@media (max-width:700px){.cj-root .cj-form-embed iframe{min-height:720px}}.cj-root .cj-nav{background:#FCFCFC;border-radius:var(--r-section)}.cj-root .cj-nav-inner{max-width:var(--max-content);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 32px}.cj-root .cj-brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--preto);font-size:var(--fs-md)}.cj-root .cj-brand-mark{width:30px;height:30px;border-radius:9px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;color:#FCFCFC;font-weight:700}.cj-root .cj-nav-links{display:flex;gap:28px;font-size:var(--fs-xs);color:var(--texto-secundario);font-weight:500}.cj-root .cj-nav-actions{display:flex;gap:12px;align-items:center}.cj-root .cj-hero{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;min-height:600px}.cj-root .cj-hero-copy{text-align:left}.cj-root .cj-hero-copy .cj-h1{font-weight:700}.cj-root .cj-hero .cj-lead{max-width:620px}.cj-root .cj-hero-actions{display:flex;flex-direction:row;align-items:center;gap:20px;flex-wrap:wrap}.cj-root .cj-rotator{display:flex;align-items:center;gap:14px}.cj-root .cj-rotator-line{position:relative;flex:0 0 auto;width:2px;height:24px;border-radius:2px;background:rgba(252,252,252,.25);overflow:hidden}.cj-root .cj-rotator-line-fill{position:absolute;top:0;left:0;right:0;height:0;background:#FCFCFC;animation:rotator-fill 3500ms linear infinite}@keyframes rotator-fill{from{height:0}to{height:100%}}.cj-root .cj-rotator-list{position:relative;flex:1 1 auto;display:grid;min-height:52px;overflow:hidden}.cj-root .cj-rotator-item{grid-area:1 / 1;margin:0;display:flex;align-items:center;font-size:clamp(18px,2.6vw,24px);line-height:1.3;font-weight:500;color:rgba(252,252,252,.9);opacity:0;transform:translateY(-16px);transition:opacity 420ms var(--ease-out),transform 520ms var(--ease-out)}.cj-root .cj-rotator-item strong{color:#FCFCFC;font-weight:700}.cj-root .cj-rotator-item.cj-is-active{opacity:1;transform:translateY(0)}.cj-root .cj-rotator-item.cj-is-exit{opacity:0;transform:translateY(16px);transition:opacity 240ms ease,transform 420ms var(--ease-out)}@media (prefers-reduced-motion:reduce){.cj-root .cj-rotator-item{transition:opacity 200ms ease;transform:none}.cj-root .cj-rotator-item.cj-is-active,.cj-root .cj-rotator-item.cj-is-exit{transform:none}}.cj-root .cj-js-reveal [data-reveal]{opacity:0;transform:translateY(14px);transition:opacity var(--dur-moderate2) var(--ease-expressive),transform var(--dur-moderate2) var(--ease-expressive)}.cj-root .cj-js-reveal [data-reveal].cj-is-in{opacity:1;transform:none}.cj-root .cj-js-reveal [data-reveal]:nth-child(2){transition-delay:60ms}.cj-root .cj-js-reveal [data-reveal]:nth-child(3){transition-delay:120ms}.cj-root .cj-js-reveal [data-reveal]:nth-child(4){transition-delay:180ms}.cj-root .cj-js-reveal [data-reveal]:nth-child(n+5){transition-delay:240ms}@media (prefers-reduced-motion:reduce){.cj-root .cj-js-reveal [data-reveal]{transform:none;transition:opacity var(--dur-moderate2) var(--ease-entrance)}}.cj-root .cj-footer{padding:48px clamp(24px,5vw,80px);color:var(--texto-terciario);font-size:var(--fs-2xs);text-align:center}@media (max-width:1024px){.cj-root{--pad-global:0px;--pad-section-y:48px;--card-pad:20px;--card-gap:12px;--r-section:16px;--r-card:16px}.cj-root section,.cj-root .cj-faq-sec,.cj-root .cj-demo-sec,.cj-root .cj-impact-claim{padding-left:20px;padding-right:20px}.cj-root .cj-bg-orange{background-image:none;background-color:var(--vermelho-caju);padding:28px}.cj-root .cj-hero{min-height:0;gap:0}.cj-root .cj-demo-stage{padding:12px 12px 0}.cj-root .cj-faq-sec{padding-top:48px;padding-bottom:48px}.cj-root .cj-impact-claim{padding-top:28px;padding-bottom:60px;margin-top:56px}.cj-root .cj-h1{font-size:32px}.cj-root .cj-h2,.cj-root .cj-h2-sm{font-size:24px}.cj-root .cj-h3,.cj-root .cj-compare-head,.cj-root .cj-caju-faq .cj-cat__title{font-size:20px}.cj-root .cj-lead,.cj-root .cj-ib-desc,.cj-root .cj-ic-txt,.cj-root .cj-ps-copy p,.cj-root .cj-compare-row,.cj-root .cj-feature-list li p,.cj-root .cj-impact-claim p,.cj-root .cj-caju-faq .cj-q__answer,.cj-root .cj-caju-faq .cj-q__text,.cj-root .cj-card p{font-size:16px}.cj-root .cj-grid-2,.cj-root .cj-grid-3,.cj-root .cj-grid-4,.cj-root .cj-compare,.cj-root .cj-impact-cards,.cj-root .cj-form-grid,.cj-root .cj-form-layout,.cj-root .cj-hero,.cj-root .cj-portes-split,.cj-root .cj-calc-card{grid-template-columns:1fr}.cj-root .cj-grid>*,.cj-root .cj-compare-col,.cj-root .cj-impact-card,.cj-root .cj-card,.cj-root .cj-ib-item,.cj-root .cj-ic-card{width:100%}.cj-root .cj-card-square,.cj-root .cj-portes-card,.cj-root .cj-ib-item,.cj-root .cj-ic-card,.cj-root .cj-calc-img{aspect-ratio:auto}.cj-root .cj-ib-item,.cj-root .cj-ic-card{min-height:0;row-gap:20px}.cj-root .cj-ib-num{font-size:48px}.cj-root .cj-ib-label{font-size:20px}.cj-root .cj-ic-num{font-size:32px}.cj-root .cj-ib-ic{width:40px;height:40px}.cj-root .cj-ic-ic{width:28px;height:28px}.cj-root .cj-ic-card .cj-ic-num{padding-top:20px}.cj-root .cj-ib-desc{margin-top:16px}.cj-root .cj-card-square{min-height:0;display:flex;flex-direction:column;gap:20px}.cj-root .cj-card-svc,.cj-root .cj-card-nr1{gap:20px}.cj-root .cj-chip-logo{max-height:28px;width:auto}.cj-root .cj-ps-media{aspect-ratio:16 / 10}.cj-root .cj-calc-img{min-height:200px}.cj-root .cj-card-list>.cj-h3,.cj-root .cj-compare-head,.cj-root .cj-impact-head{padding:20px;gap:10px}.cj-root .cj-card-list>.cj-h3 .cj-card-ic,.cj-root .cj-compare-head .cj-card-ic,.cj-root .cj-impact-head .cj-card-ic{width:24px;height:24px}.cj-root .cj-card-list .cj-feature-list li,.cj-root .cj-compare-row,.cj-root .cj-impact-card .cj-feature-list li{padding:18px 0}.cj-root .cj-compare-row{padding:18px 20px}.cj-root .cj-card-list>.cj-feature-list,.cj-root .cj-impact-body{padding:8px 20px 16px}.cj-root .cj-li-ic{width:32px;height:32px}.cj-root .cj-btn:not(.cj-btn-ghost){width:100%}.cj-root .cj-cta{width:100%}.cj-root .cj-ps-cta .cj-btn-ghost{width:auto}}@media (max-width:768px){.cj-root{--r-section:20px;--r-card:20px;--card-pad:32px;--pad-section-y:32px}.cj-root section,.cj-root .cj-faq-sec,.cj-root .cj-demo-sec{padding:32px 20px}.cj-root .cj-bg-orange{padding:32px 20px}.cj-root .cj-demo-sec{padding-bottom:0}.cj-root .cj-impact-claim{padding:32px 20px;margin-top:32px}.cj-root .cj-demo-stage{padding:12px 12px 0}.cj-root .cj-card,.cj-root .cj-ib-item,.cj-root .cj-ic-card,.cj-root .cj-ps-copy{padding:32px}.cj-root .cj-card-list>.cj-h3,.cj-root .cj-compare-head,.cj-root .cj-impact-head{padding:20px}.cj-root .cj-card-list>.cj-feature-list,.cj-root .cj-impact-body{padding:0 20px 20px}.cj-root .cj-compare-row{padding:20px}.cj-root .cj-card-list .cj-feature-list li,.cj-root .cj-impact-card .cj-feature-list li{padding:20px 0}.cj-root .cj-caju-faq .cj-cat>.cj-acc-head{padding:32px}.cj-root .cj-caju-faq .cj-cat__list{padding:0 32px 32px}.cj-root .cj-caju-faq .cj-q>.cj-acc-head{padding:24px}.cj-root .cj-caju-faq .cj-q__answer{padding:0 24px 24px}.cj-root .cj-card-list,.cj-root .cj-impact-card,.cj-root .cj-compare-col{padding:0}.cj-root section>.cj-sec-head + *,.cj-root section>.cj-sec-head + .cj-grid,.cj-root .cj-demo-sec>.cj-sec-head + *,.cj-root .cj-faq-sec>.cj-sec-head + *{margin-top:20px}.cj-root .cj-mt-80,.cj-root .cj-mt-56,.cj-root .cj-mt-40,.cj-root .cj-mt-32{margin-top:20px}.cj-root .cj-sec-head .cj-lead{margin-top:12px}.cj-root .cj-ic-card{min-height:0}.cj-root .cj-ic-num{font-size:28px}.cj-root .cj-ic-card .cj-ic-num{padding-top:16px}.cj-root .cj-ic-txt{margin-top:8px}.cj-root .cj-ib-num{font-size:40px}.cj-root .cj-bg-orange .cj-btn-primary{background:var(--preto);color:#FCFCFC}}.cj-root .cj-btn-ghost{align-self:flex-start;line-height:1.2;padding:0}@media (max-width:980px){.cj-root .cj-grid-3{grid-template-columns:repeat(2,1fr)}.cj-root .cj-compare,.cj-root .cj-grid-2,.cj-root .cj-grid-3,.cj-root .cj-form-grid{grid-template-columns:1fr}.cj-root .cj-form-layout{grid-template-columns:1fr;gap:40px}.cj-root .cj-hero{grid-template-columns:1fr;gap:0}.cj-root .cj-nav-links{display:none}}@media (max-width:700px){.cj-root .cj-ib-item,.cj-root .cj-ic-card{row-gap:20px}.cj-root .cj-ib-ic{width:40px;height:40px}.cj-root .cj-ic-ic{width:28px;height:28px}.cj-root .cj-card-list>.cj-h3 .cj-card-ic,.cj-root .cj-compare-head .cj-card-ic,.cj-root .cj-impact-head .cj-card-ic{width:24px;height:24px}.cj-root .cj-card-square,.cj-root .cj-portes-card,.cj-root .cj-ib-item,.cj-root .cj-ic-card{aspect-ratio:auto}.cj-root .cj-ib-item,.cj-root .cj-ic-card{min-height:0}.cj-root .cj-btn:not(.cj-btn-ghost){padding:16px 24px}.cj-root .cj-nav-inner{padding:16px 20px}.cj-root .cj-nav-actions .cj-btn-light{display:none}.cj-root .cj-calc-card .cj-calc-copy{padding:32px}.cj-root .cj-calc-copy .cj-h3,.cj-root .cj-calc-copy p{max-width:100%}.cj-root .cj-calc-img{min-height:200px}}.cj-root .cj-grid>*,.cj-root .cj-calc-card>*,.cj-root .cj-form-grid>*,.cj-root .cj-compare>*,.cj-root .cj-impact-cards>*,.cj-root .cj-impact-big>*{min-width:0}@media (max-width:560px){.cj-root .cj-h1{font-size:30px}}.cj-root .cj-faq-sec{background:var(--superficie);padding:120px clamp(24px,5vw,var(--pad-section-x))}.cj-root .cj-faq-sec .cj-faq-lead{max-width:none;white-space:nowrap}@media (max-width:1100px){.cj-root .cj-faq-sec .cj-faq-lead{white-space:normal;max-width:720px}}.cj-root .cj-caju-faq{--caju-red:var(--vermelho-caju);--card-bg:#F4F4F5;--card-bg-hover:#EFEFF1;--pill-bg:#FCFCFC;--pill-bg-hover:#F5F5F6;--pill-bg-open:#EBEBED;--title:#000000;--muted:#6E6E6E;--answer:#4D4D4D;--chevron:#5A5A62;--radius-card:var(--r-xl);--radius-pill:var(--r-base);--dur:260ms;--dur-chev:220ms;font-family:var(--font-roboto);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;gap:12px;width:100%;max-width:1080px;margin:80px auto 0}.cj-root .cj-caju-faq .cj-q__answer a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}.cj-root .cj-caju-faq .cj-acc-head{appearance:none;-webkit-appearance:none;border:0;background:transparent;margin:0;width:100%;text-align:left;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:14px}.cj-root .cj-caju-faq .cj-cat{background:var(--card-bg);border-radius:var(--radius-card);overflow:hidden;transition:background-color 160ms ease}.cj-root .cj-caju-faq .cj-cat>.cj-acc-head{padding:32px}.cj-root .cj-caju-faq .cj-cat__icon{flex:0 0 auto;width:38px;height:38px;border-radius:14px;background:var(--caju-red);display:flex;align-items:center;justify-content:center}.cj-root .cj-caju-faq .cj-cat__icon svg{width:20px;height:20px;display:block}.cj-root .cj-caju-faq .cj-cat__title{font-size:var(--fs-sm);font-weight:500;color:var(--title);line-height:1.2;margin:0;display:inline;text-wrap:balance}.cj-root .cj-caju-faq .cj-cat__count{font-size:var(--fs-xs);font-weight:400;color:var(--muted);line-height:1.4;margin-left:12px;white-space:nowrap}.cj-root .cj-caju-faq .cj-acc-head .cj-chev{margin-left:auto}.cj-root .cj-caju-faq .cj-chev{flex:0 0 auto;width:18px;height:18px;color:var(--chevron);transition:transform var(--dur-chev) var(--ease-out)}.cj-root .cj-caju-faq .cj-chev svg{width:100%;height:100%;display:block}.cj-root .cj-caju-faq .cj-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur) var(--ease-out)}.cj-root .cj-caju-faq .cj-acc-inner{overflow:hidden;min-height:0;opacity:0;transition:opacity var(--dur) var(--ease-out)}.cj-root .cj-caju-faq .cj-acc-item.cj-is-open>.cj-acc-panel{grid-template-rows:1fr}.cj-root .cj-caju-faq .cj-acc-item.cj-is-open>.cj-acc-panel>.cj-acc-inner{opacity:1}.cj-root .cj-caju-faq .cj-acc-item.cj-is-open>.cj-acc-head .cj-chev{transform:rotate(180deg)}.cj-root .cj-caju-faq .cj-cat.cj-is-open>.cj-acc-head{padding-bottom:0}.cj-root .cj-caju-faq .cj-cat__list{padding:32px;display:flex;flex-direction:column;gap:12px}.cj-root .cj-caju-faq .cj-q{background:var(--pill-bg);border-radius:var(--radius-pill);overflow:hidden;transition:background-color 160ms ease}.cj-root .cj-caju-faq .cj-q.cj-is-open{background:var(--pill-bg-open)}.cj-root .cj-caju-faq .cj-q>.cj-acc-head{padding:28px;gap:16px}.cj-root .cj-caju-faq .cj-q.cj-is-open>.cj-acc-head{padding-bottom:12px}.cj-root .cj-caju-faq .cj-q__text{font-size:var(--fs-xs);font-weight:500;color:var(--title);line-height:1.35;margin:0;text-wrap:pretty}.cj-root .cj-caju-faq .cj-q .cj-chev{width:16px;height:16px}.cj-root .cj-caju-faq .cj-q__answer{padding:0 28px 28px;font-size:var(--fs-xs);font-weight:400;line-height:1.6;color:var(--answer);text-wrap:pretty}@media (hover:hover) and (pointer:fine){.cj-root .cj-caju-faq .cj-cat:hover{background:var(--card-bg-hover)}.cj-root .cj-caju-faq .cj-q:not(.cj-is-open):hover{background:var(--pill-bg-hover)}}.cj-root .cj-caju-faq .cj-cat:active{background:var(--card-bg-hover)}.cj-root .cj-caju-faq .cj-acc-head:focus-visible{outline:2px solid var(--caju-red);outline-offset:-2px;border-radius:16px}@media (prefers-reduced-motion:reduce){.cj-root .cj-caju-faq .cj-acc-panel,.cj-root .cj-caju-faq .cj-acc-inner,.cj-root .cj-caju-faq .cj-chev,.cj-root .cj-caju-faq .cj-q,.cj-root .cj-caju-faq .cj-cat>.cj-acc-head{transition-duration:0ms}}@media (max-width:700px){.cj-root .cj-caju-faq .cj-cat__title{font-size:var(--fs-xs)}.cj-root .cj-caju-faq .cj-cat__count{display:block;margin-left:0;margin-top:2px}.cj-root .cj-caju-faq .cj-cat__textwrap{display:flex;flex-direction:column}}.cj-root .cj-video-embed{aspect-ratio:16 / 9;background:#000;border-radius:var(--r-card) var(--r-card) 0 0;overflow:hidden}.cj-root .cj-video-embed iframe{display:block;width:100%;height:100%;border:0}.cj-root .cj-nr1-bento{display:grid;gap:var(--card-gap);max-width:var(--max-content);margin-inline:auto}.cj-root .cj-nr1-group{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap);align-content:start;min-width:0}.cj-root .cj-nr1-head{display:flex;flex-direction:column;justify-content:space-between;gap:32px;padding:var(--card-pad) var(--card-pad) var(--card-pad) 0;min-width:0}.cj-root .cj-nr1-badge{width:56px;height:56px;flex:none;border-radius:var(--r-pill);display:inline-flex;align-items:center;justify-content:center;color:#FCFCFC}.cj-root .cj-nr1-badge svg{width:26px;height:26px;display:block}.cj-root .cj-is-risco .cj-nr1-badge{background:var(--pitanga-400)}.cj-root .cj-is-retorno .cj-nr1-badge{background:#407320}.cj-root .cj-nr1-eyebrow{display:block;font-size:var(--fs-2xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--texto-primario);margin-bottom:10px}.cj-root .cj-nr1-head-txt .cj-h3{text-wrap:balance;font-size:clamp(24px,2.4vw,32px);line-height:1.2}.cj-root .cj-nr1-head-txt br{display:none}.cj-root .cj-nr1-cell{border-radius:var(--r-card);padding:var(--card-pad);display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0;min-height:236px}.cj-root .cj-nr1-cell p{font-family:var(--font-roboto);line-height:1.6;text-wrap:pretty}.cj-root .cj-nr1-cell .cj-li-ic{width:40px;height:40px}.cj-root .cj-nr1-wide{grid-column:1 / -1;min-height:0}.cj-root .cj-is-risco .cj-nr1-cell{background:var(--vermelho-polpa);color:var(--vermelho-maduro)}.cj-root .cj-is-risco .cj-nr1-cell strong{color:var(--vermelho-maduro)}.cj-root .cj-is-retorno .cj-nr1-cell{background:var(--verde-caju);color:var(--verde-maduro)}.cj-root .cj-is-retorno .cj-nr1-cell strong{color:var(--verde-maduro)}.cj-root .cj-nr1-cell strong{font-weight:700}@media (min-width:1241px){.cj-root .cj-nr1-bento{grid-template-columns:1fr 1fr 32px 1fr 1fr}.cj-root .cj-nr1-group{display:contents}.cj-root .cj-nr1-risco-wide{grid-row:2;grid-column:1 / 3}.cj-root .cj-is-retorno .cj-nr1-head{grid-column:4;grid-row:1}.cj-root .cj-is-retorno .cj-nr1-cell:nth-child(2){grid-column:5;grid-row:1}.cj-root .cj-is-retorno .cj-nr1-cell:nth-child(3){grid-column:4;grid-row:2}.cj-root .cj-is-retorno .cj-nr1-cell:nth-child(4){grid-column:5;grid-row:2}}@media (max-width:1240px){.cj-root .cj-nr1-bento{grid-template-columns:1fr;gap:80px}}@media (max-width:700px){.cj-root .cj-nr1-bento{gap:48px}.cj-root .cj-nr1-group{grid-template-columns:1fr}.cj-root .cj-nr1-head{padding:8px 0}.cj-root .cj-nr1-cell{min-height:0;gap:16px}.cj-root .cj-nr1-wide{grid-column:auto}}.cj-root .cj-nr1card-media{position:relative;z-index:1;border-radius:var(--r-card);overflow:hidden;min-height:0}.cj-root .cj-nr1card-media img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.cj-root .cj-nr1-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--card-gap);align-items:stretch}.cj-root .cj-nr1-row>.cj-card-nr1{margin-top:0;height:100%;gap:20px}@media (min-width:1025px){.cj-root .cj-nr1card-media{aspect-ratio:19 / 13}}@media (max-width:1024px){.cj-root .cj-nr1-row{grid-template-columns:1fr}.cj-root .cj-nr1card-media{aspect-ratio:4 / 3}}
+
+</style>
+
+
+<!-- ==========================================================================
+     PARTE 2 — Sprite de ícones (SVG)
+     ONDE COLAR: HTML Embed no corpo da página, ANTES do embed da PARTE 3
+     ========================================================================== -->
+
+<!-- Fica invisível (display:none). Os <use href="#cjXX"> da PARTE 3
+     dependem dele: sem este bloco, os ícones somem. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="cj2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19"/><circle cx="10" cy="7.5" r="3.5"/><path d="M20 19v-1.5a3.5 3.5 0 0 0-2.6-3.4"/><path d="M15.5 4.2a3.5 3.5 0 0 1 0 6.6"/></symbol><symbol id="cj3" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="28" fill="#5CA630"/><path fill-rule="evenodd" clip-rule="evenodd" d="M33.459 24.8828C33.9026 25.3428 33.8892 26.0752 33.4293 26.5188L27.4299 32.3039C26.9817 32.7361 26.2718 32.7361 25.8236 32.3039L23.7238 30.2791C23.2638 29.8356 23.2505 29.1031 23.6941 28.6431C24.1376 28.1831 24.8701 28.1698 25.3301 28.6134L26.6267 29.8637L31.823 24.853C32.283 24.4095 33.0154 24.4228 33.459 24.8828Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M27.998 18.7437C22.8859 18.7437 18.7418 22.8879 18.7418 28C18.7418 33.112 22.8859 37.2562 27.998 37.2562C33.1101 37.2562 37.2542 33.112 37.2542 28C37.2542 22.8879 33.1101 18.7437 27.998 18.7437ZM16.4277 28C16.4277 21.6099 21.6079 16.4297 27.998 16.4297C34.3881 16.4297 39.5683 21.6099 39.5683 28C39.5683 34.3901 34.3881 39.5702 27.998 39.5702C21.6079 39.5702 16.4277 34.3901 16.4277 28Z" fill="#FCFCFC"/></symbol><symbol id="cj4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 19v-1.5a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4V19"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="cj5" viewBox="0 0 24 24" fill="none"><path d="M12.2929 18.2929C11.9024 18.6834 11.9024 19.3166 12.2929 19.7071C12.6834 20.0976 13.3166 20.0976 13.7071 19.7071L20.7071 12.7071C21.0976 12.3166 21.0976 11.6834 20.7071 11.2929L13.7071 4.29289C13.3166 3.90237 12.6834 3.90237 12.2929 4.29289C11.9024 4.68342 11.9024 5.31658 12.2929 5.70711L17.5858 11H4C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13H17.5858L12.2929 18.2929Z" fill="currentColor"/></symbol><symbol id="cj8" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="16" fill="#E80537"/><path d="M16.6633 15.5223C16.6633 15.1541 16.3649 14.8557 15.9967 14.8557C15.6285 14.8557 15.33 15.1541 15.33 15.5223V17.0411H13.9894C13.6212 17.0411 13.3228 17.3395 13.3228 17.7077C13.3228 18.0759 13.6212 18.3744 13.9894 18.3744H15.33V19.8154C15.33 20.1836 15.6285 20.4821 15.9967 20.4821C16.3649 20.4821 16.6633 20.1836 16.6633 19.8154V18.3744H18.004C18.3722 18.3744 18.6707 18.0759 18.6707 17.7077C18.6707 17.3395 18.3722 17.0411 18.004 17.0411H16.6633V15.5223Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3947 9.33398C13.9219 9.33398 12.728 10.5279 12.728 12.0007V12.9035H11.2566C10.9216 12.9035 10.6386 13.1522 10.5955 13.4844L9.50164 21.9149C9.47696 22.105 9.53537 22.2966 9.66195 22.4407C9.78852 22.5847 9.971 22.6673 10.1628 22.6673H21.8307C22.0224 22.6673 22.2049 22.5847 22.3315 22.4407C22.458 22.2966 22.5165 22.105 22.4918 21.9149L21.3979 13.4844C21.3548 13.1522 21.0718 12.9035 20.7368 12.9035H19.239V12.0007C19.239 10.5279 18.0451 9.33398 16.5723 9.33398H15.3947ZM17.9057 12.9035V12.0007C17.9057 11.2643 17.3087 10.6673 16.5723 10.6673H15.3947C14.6583 10.6673 14.0614 11.2643 14.0614 12.0007V12.9035H17.9057ZM11.8424 14.2369L10.9215 21.334H21.0719L20.151 14.2369H11.8424Z" fill="#FCFCFC"/></symbol><symbol id="cj9" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="16" fill="#E80537"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.1453 14.2046C19.4008 14.4696 19.3932 14.8916 19.1281 15.1472L15.6713 18.4805C15.4131 18.7296 15.0041 18.7296 14.7458 18.4805L13.5359 17.3139C13.2709 17.0583 13.2632 16.6363 13.5188 16.3712C13.7744 16.1062 14.1964 16.0985 14.4615 16.3541L15.2086 17.0745L18.2026 14.1874C18.4676 13.9318 18.8897 13.9395 19.1453 14.2046Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.9987 10.6673C13.0532 10.6673 10.6654 13.0551 10.6654 16.0007C10.6654 18.9462 13.0532 21.334 15.9987 21.334C18.9442 21.334 21.332 18.9462 21.332 16.0007C21.332 13.0551 18.9442 10.6673 15.9987 10.6673ZM9.33203 16.0007C9.33203 12.3188 12.3168 9.33398 15.9987 9.33398C19.6806 9.33398 22.6654 12.3188 22.6654 16.0007C22.6654 19.6825 19.6806 22.6673 15.9987 22.6673C12.3168 22.6673 9.33203 19.6825 9.33203 16.0007Z" fill="#FCFCFC"/></symbol><symbol id="cj11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M15 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol><symbol id="cj12" viewBox="0 0 56 56" fill="none"><rect width="56" height="56" rx="28" fill="#FEABB0"/><path d="M36.9159 20.7193C37.3677 20.2675 37.3677 19.5349 36.9159 19.083C36.464 18.6312 35.7314 18.6312 35.2796 19.083L27.9985 26.3641L20.7174 19.083C20.2655 18.6312 19.5329 18.6312 19.0811 19.083C18.6292 19.5349 18.6292 20.2675 19.0811 20.7193L26.3622 28.0004L19.0812 35.2814C18.6293 35.7333 18.6293 36.4659 19.0812 36.9177C19.533 37.3695 20.2656 37.3695 20.7175 36.9177L27.9985 29.6367L35.2795 36.9177C35.7313 37.3695 36.4639 37.3696 36.9157 36.9177C37.3676 36.4659 37.3676 35.7333 36.9157 35.2814L29.6347 28.0004L36.9159 20.7193Z" fill="#BF0517"/></symbol><symbol id="cj13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.4 5.6a5 5 0 0 0-7.1 0l-1.3 1.3-1.3-1.3a5 5 0 0 0-7.1 7.1l8.4 8.4 8.4-8.4a5 5 0 0 0 0-7.1z"/></symbol><symbol id="cj14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="cj15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="cj16" viewBox="0 0 24 24" fill="none"><path fill="#FF7327" fill-rule="evenodd" clip-rule="evenodd" d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 5.99998C12.5523 5.99998 13 6.44769 13 6.99998V7.21207H13.875C14.4273 7.21207 14.875 7.65979 14.875 8.21207C14.875 8.76436 14.4273 9.21207 13.875 9.21207H11.1271C10.579 9.21207 10.1875 9.63524 10.1875 10.0929C10.1875 10.5507 10.579 10.9738 11.1271 10.9738H12.3771C13.9 10.9738 15.1875 12.1787 15.1875 13.7293C15.1875 15.0628 14.2353 16.1407 13 16.4163V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V16.4848H9.49999C8.9477 16.4848 8.49999 16.0371 8.49999 15.4848C8.49999 14.9325 8.9477 14.4848 9.49999 14.4848H12.3771C12.8539 14.4848 13.1875 14.1178 13.1875 13.7293C13.1875 13.3408 12.8539 12.9738 12.3771 12.9738H11.1271C9.53285 12.9738 8.18749 11.7128 8.18749 10.0929C8.18749 8.51635 9.46197 7.27967 11 7.21475V6.99998C11 6.44769 11.4477 5.99998 12 5.99998Z" fill="#747474"/></symbol><symbol id="cj17" viewBox="0 0 24 24" fill="none"><path d="M12.2929 18.2929C11.9024 18.6834 11.9024 19.3166 12.2929 19.7071C12.6834 20.0976 13.3166 20.0976 13.7071 19.7071L20.7071 12.7071C21.0976 12.3166 21.0976 11.6834 20.7071 11.2929L13.7071 4.29289C13.3166 3.90237 12.6834 3.90237 12.2929 4.29289C11.9024 4.68342 11.9024 5.31658 12.2929 5.70711L17.5858 11H4C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13H17.5858L12.2929 18.2929Z" fill="currentColor"/></symbol><symbol id="cj18" viewBox="0 0 32 32" fill="none"><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" fill="#121212"/><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#4D4D4D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.9987 14C19.9987 16.2091 18.2078 18 15.9987 18C13.7896 18 11.9987 16.2091 11.9987 14C11.9987 11.7909 13.7896 10 15.9987 10C18.2078 10 19.9987 11.7909 19.9987 14ZM18.6654 14C18.6654 15.4728 17.4715 16.6667 15.9987 16.6667C14.5259 16.6667 13.332 15.4728 13.332 14C13.332 12.5272 14.5259 11.3333 15.9987 11.3333C17.4715 11.3333 18.6654 12.5272 18.6654 14Z" fill="#4D4D4D"/><path d="M12.0896 20.8071C12.5916 20.2911 13.2809 20 14.0008 20H17.9966C18.7165 20 19.4058 20.2911 19.9078 20.8071L21.5209 22.4649C21.7776 22.7288 22.1997 22.7346 22.4636 22.4778C22.7275 22.2211 22.7333 21.799 22.4765 21.5351L20.8635 19.8772C20.1104 19.1033 19.0764 18.6667 17.9966 18.6667H14.0008C12.921 18.6667 11.887 19.1033 11.1339 19.8772L9.52088 21.5351C9.26412 21.799 9.2699 22.2211 9.53379 22.4778C9.79769 22.7346 10.2198 22.7288 10.4765 22.4649L12.0896 20.8071Z" fill="#4D4D4D"/></symbol><symbol id="cj19" viewBox="0 0 24 24" fill="none"><path d="M20.4 5.6a5 5 0 0 0-7.1 0L12 6.9l-1.3-1.3a5 5 0 0 0-7.1 7.1l8.4 8.4 8.4-8.4a5 5 0 0 0 0-7.1z" stroke="#FCFCFC" stroke-width="1.6" stroke-linejoin="round"/></symbol><symbol id="cj20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="cj21" viewBox="0 0 24 24" fill="none"><path d="M16 19.5v-1.3a3.4 3.4 0 0 0-3.4-3.4H7.4A3.4 3.4 0 0 0 4 18.2v1.3" stroke="#FCFCFC" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="8" r="3.4" stroke="#FCFCFC" stroke-width="1.6"/><path d="M20 19.5v-1.3a3.4 3.4 0 0 0-2.6-3.3M15.6 4.9a3.4 3.4 0 0 1 0 6.3" stroke="#FCFCFC" stroke-width="1.6" stroke-linecap="round"/></symbol><symbol id="cj22" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-3.8 7-9V5.4L12 3 5 5.4V12c0 5.2 7 9 7 9z" stroke="#FCFCFC" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="#FCFCFC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="cj100" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="16" fill="#E80537"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.1972 19.3327C13.8372 19.3327 13.4926 19.4782 13.2415 19.7362L11.8125 21.205C11.5557 21.4689 11.1336 21.4747 10.8697 21.2179C10.6058 20.9611 10.6001 20.5391 10.8568 20.2752L12.2859 18.8064C12.7879 18.2904 13.4773 17.9993 14.1972 17.9993H17.8054C18.5253 17.9993 19.2147 18.2904 19.7167 18.8064L21.1458 20.2752C21.4025 20.5391 21.3968 20.9611 21.1329 21.2179C20.869 21.4747 20.4469 21.4689 20.1902 21.205L18.7611 19.7362C18.51 19.4782 18.1654 19.3327 17.8054 19.3327H14.1972Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M20.0013 17.9993C20.0013 17.6312 20.2998 17.3327 20.668 17.3327C21.2639 17.3327 21.834 17.5757 22.2468 18.0055L23.1489 18.945C23.4039 19.2106 23.3953 19.6326 23.1297 19.8876C22.8641 20.1426 22.4421 20.1341 22.1871 19.8685L21.285 18.929C21.1237 18.761 20.9009 18.666 20.668 18.666C20.2998 18.666 20.0013 18.3675 20.0013 17.9993Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.0013 15.5549C16.9831 15.5549 17.7791 14.759 17.7791 13.7771C17.7791 12.7953 16.9831 11.9993 16.0013 11.9993C15.0195 11.9993 14.2235 12.7953 14.2235 13.7771C14.2235 14.759 15.0195 15.5549 16.0013 15.5549ZM16.0013 16.8882C17.7195 16.8882 19.1124 15.4953 19.1124 13.7771C19.1124 12.0589 17.7195 10.666 16.0013 10.666C14.2831 10.666 12.8902 12.0589 12.8902 13.7771C12.8902 15.4953 14.2831 16.8882 16.0013 16.8882Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.0909 11.9331C19.2753 11.6144 19.6831 11.5055 20.0018 11.6898C20.7971 12.1499 21.3346 13.0115 21.3346 13.9993C21.3346 14.9872 20.7971 15.8488 20.0018 16.3089C19.6831 16.4932 19.2753 16.3843 19.0909 16.0656C18.9065 15.7469 19.0154 15.3391 19.3342 15.1547C19.7344 14.9232 20.0013 14.492 20.0013 13.9993C20.0013 13.5067 19.7344 13.0755 19.3342 12.844C19.0154 12.6596 18.9065 12.2518 19.0909 11.9331Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0013 17.6577C12.0013 17.2895 11.7028 16.991 11.3346 16.991C10.7387 16.991 10.1686 17.234 9.75585 17.6639L8.85375 18.6034C8.59875 18.869 8.60732 19.291 8.87291 19.546C9.13849 19.801 9.56051 19.7924 9.81552 19.5269L10.7176 18.5873C10.8789 18.4193 11.1017 18.3244 11.3346 18.3244C11.7028 18.3244 12.0013 18.0259 12.0013 17.6577Z" fill="#FCFCFC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.9117 11.6655C12.7273 11.3468 12.3195 11.2379 12.0008 11.4223C11.2055 11.8824 10.668 12.7439 10.668 13.7318C10.668 14.7197 11.2055 15.5812 12.0008 16.0413C12.3195 16.2257 12.7273 16.1167 12.9117 15.798C13.0961 15.4793 12.9872 15.0715 12.6685 14.8871C12.2682 14.6556 12.0013 14.2245 12.0013 13.7318C12.0013 13.2391 12.2682 12.808 12.6685 12.5764C12.9872 12.3921 13.0961 11.9842 12.9117 11.6655Z" fill="#FCFCFC"/></symbol><symbol id="cj101" viewBox="0 0 32 32" fill="none"><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" fill="#121212"/><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#4D4D4D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.0013 13.3326C15.294 13.3326 14.6157 13.6136 14.1156 14.1137C13.6155 14.6138 13.3346 15.2921 13.3346 15.9993C13.3346 16.7066 13.6155 17.3848 14.1156 17.8849C14.6157 18.385 15.294 18.666 16.0013 18.666C16.7085 18.666 17.3868 18.385 17.8869 17.8849C18.387 17.3848 18.6679 16.7066 18.6679 15.9993C18.6679 15.2921 18.387 14.6138 17.8869 14.1137C17.3868 13.6136 16.7085 13.3326 16.0013 13.3326ZM15.0585 15.0565C15.3085 14.8065 15.6476 14.666 16.0013 14.666C16.3549 14.666 16.694 14.8065 16.9441 15.0565C17.1941 15.3065 17.3346 15.6457 17.3346 15.9993C17.3346 16.3529 17.1941 16.6921 16.9441 16.9421C16.694 17.1922 16.3549 17.3326 16.0013 17.3326C15.6476 17.3326 15.3085 17.1922 15.0585 16.9421C14.8084 16.6921 14.6679 16.3529 14.6679 15.9993C14.6679 15.6457 14.8084 15.3065 15.0585 15.0565Z" fill="#4D4D4D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M17.1675 10.2084C16.5195 9.57376 15.483 9.57376 14.8351 10.2084L14.0541 10.9734C13.9926 11.0335 13.9103 11.0677 13.8243 11.0685L12.7311 11.0799C11.8242 11.0893 11.0913 11.8222 11.0818 12.7292L11.0705 13.8223C11.0696 13.9083 11.0355 13.9907 10.9753 14.0521L10.2104 14.8331C9.57571 15.4811 9.57571 16.5176 10.2104 17.1655L10.9753 17.9465C11.0355 18.008 11.0696 18.0903 11.0705 18.1763L11.0818 19.2695C11.0913 20.1764 11.8242 20.9094 12.7311 20.9188L13.8243 20.9301C13.9103 20.931 13.9926 20.9651 14.0541 21.0253L14.8351 21.7902C15.483 22.4249 16.5195 22.4249 17.1675 21.7902L17.9485 21.0253C18.0099 20.9651 18.0923 20.931 18.1783 20.9301L19.2714 20.9188C20.1784 20.9094 20.9113 20.1764 20.9207 19.2695L20.9321 18.1763C20.933 18.0903 20.9671 18.008 21.0272 17.9465L21.7922 17.1655C22.4268 16.5176 22.4268 15.4811 21.7922 14.8331L21.0272 14.0521C20.9671 13.9907 20.933 13.9083 20.9321 13.8223L20.9207 12.7292C20.9113 11.8222 20.1784 11.0893 19.2714 11.0799L18.1783 11.0685C18.0923 11.0677 18.0099 11.0335 17.9485 10.9734L17.1675 10.2084ZM15.768 11.161C15.8976 11.034 16.1049 11.034 16.2345 11.161L17.0155 11.9259C17.3228 12.2268 17.7344 12.3973 18.1644 12.4018L19.2576 12.4132C19.439 12.415 19.5856 12.5616 19.5875 12.743L19.5988 13.8362C19.6033 14.2662 19.7738 14.6779 20.0747 14.9851L20.8397 15.7661C20.9666 15.8957 20.9666 16.103 20.8397 16.2326L20.0747 17.0136C19.7738 17.3208 19.6033 17.7325 19.5988 18.1625L19.5875 19.2556C19.5856 19.437 19.439 19.5836 19.2576 19.5855L18.1644 19.5968C17.7344 19.6013 17.3228 19.7718 17.0155 20.0727L16.2345 20.8377C16.1049 20.9646 15.8976 20.9646 15.768 20.8377L14.987 20.0727C14.6798 19.7718 14.2681 19.6013 13.8381 19.5968L12.745 19.5855C12.5636 19.5836 12.417 19.437 12.4151 19.2556L12.4038 18.1625C12.3993 17.7325 12.2288 17.3208 11.9279 17.0136L11.1629 16.2326C11.036 16.103 11.036 15.8957 11.1629 15.7661L11.9279 14.9851C12.2288 14.6779 12.3993 14.2662 12.4038 13.8362L12.4151 12.743C12.417 12.5616 12.5636 12.415 12.745 12.4132L13.8381 12.4018C14.2681 12.3973 14.6798 12.2268 14.987 11.9259L15.768 11.161Z" fill="#4D4D4D"/></symbol><symbol id="cj102" viewBox="0 0 32 32" fill="none"><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" fill="#121212"/><rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#4D4D4D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.668 16.6673C12.668 16.2991 12.9664 16.0007 13.3346 16.0007H18.0013C18.3695 16.0007 18.668 16.2991 18.668 16.6673C18.668 17.0355 18.3695 17.334 18.0013 17.334H13.3346C12.9664 17.334 12.668 17.0355 12.668 16.6673Z" fill="#4D4D4D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.0013 10.6673C12.449 10.6673 12.0013 11.115 12.0013 11.6673V20.334C12.0013 20.8863 12.449 21.334 13.0013 21.334H17.3346C17.7028 21.334 18.0013 21.6325 18.0013 22.0007C18.0013 22.3688 17.7028 22.6673 17.3346 22.6673H13.0013C11.7126 22.6673 10.668 21.6226 10.668 20.334V11.6673C10.668 10.3787 11.7126 9.33398 13.0013 9.33398H16.3109C16.9298 9.33398 17.5233 9.57982 17.9609 10.0174L20.6512 12.7078C21.0888 13.1453 21.3346 13.7388 21.3346 14.3577V17.0007C21.3346 17.3688 21.0362 17.6673 20.668 17.6673C20.2998 17.6673 20.0013 17.3688 20.0013 17.0007V14.3577C20.0013 14.3498 20.0012 14.3419 20.001 14.334H17.3346C16.5983 14.334 16.0013 13.737 16.0013 13.0007V10.6673H13.0013ZM17.3346 11.2768V13.0007H19.0585L17.3346 11.2768Z" fill="#4D4D4D"/><path d="M13.3346 13.334C12.9664 13.334 12.668 13.6325 12.668 14.0007C12.668 14.3688 12.9664 14.6673 13.3346 14.6673H14.668C15.0362 14.6673 15.3346 14.3688 15.3346 14.0007C15.3346 13.6325 15.0362 13.334 14.668 13.334H13.3346Z" fill="#4D4D4D"/><path d="M22.806 19.1387L20.1394 21.8054C19.879 22.0657 19.4569 22.0657 19.1966 21.8054L17.5299 20.1387C17.2695 19.8784 17.2695 19.4563 17.5299 19.1959C17.7902 18.9356 18.2124 18.9356 18.4727 19.1959L19.668 20.3912L21.8632 18.1959C22.1236 17.9356 22.5457 17.9356 22.806 18.1959C23.0664 18.4563 23.0664 18.8784 22.806 19.1387Z" fill="#4D4D4D"/><path d="M12.668 19.334C12.668 18.9658 12.9664 18.6673 13.3346 18.6673H16.0013C16.3695 18.6673 16.668 18.9658 16.668 19.334C16.668 19.7022 16.3695 20.0007 16.0013 20.0007H13.3346C12.9664 20.0007 12.668 19.7022 12.668 19.334Z" fill="#4D4D4D"/></symbol></svg>
+
+
+<!-- ==========================================================================
+     PARTE 3 — Conteúdo da página
+     ONDE COLAR: HTML Embed no corpo, logo depois do embed da PARTE 2
+     ========================================================================== -->
+
+<div class="cj-root">
+<div class="cj-stack">
+<section class="cj-bg-orange">
+<div class="cj-hero">
+<div class="cj-hero-copy">
+<h1 class="cj-h1">Saúde e bem-estar corporativo de verdade, integrados à plataforma <span class="cj-nowrap-d">que seu RH já usa.</span></h1>
+<p class="cj-lead cj-mt-24">Wellhub, Conexa e ferramentas para a <span style="white-space:nowrap">NR-1</span>, integrados automaticamente à Caju. Menos trabalho operacional pro RH, mais qualidade de vida para o time.</p>
+<div class="cj-rotator cj-mt-40" data-rotator>
+<div class="cj-rotator-line"><span class="cj-rotator-line-fill"></span></div>
+<div class="cj-rotator-list">
+<p class="cj-rotator-item cj-is-active"><span><strong>Maior NPS</strong> da categoria (Opinion Box 2026)</span></p>
+<p class="cj-rotator-item"><span><strong>4,9</strong> na App Store (140 mil avaliações)</span></p>
+<p class="cj-rotator-item"><span><strong>+70 mil</strong> empresas confiam na Caju</span></p>
+</div>
+</div>
+<div class="cj-hero-actions cj-mt-40">
+<a class="cj-btn cj-btn-primary" href="#contato" data-tag-cta data-tag-label="hero-quero-contratar">Quero contratar</a>
+<span class="cj-reassurance">Sem custo de ativação. Sem multa ou carência.</span>
+</div>
+</div>
+<div class="cj-hero-media" aria-hidden="true"></div>
+</div>
+</section>
+<section class="cj-bg-transparent">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Com a Caju, Saúde e Bem-estar incluem academia, terapia e telemedicina integrados na mesma plataforma de benefícios corporativos.</h2>
+<p class="cj-lead cj-mt-24" style="max-width:830px;">Conectamos seus colaboradores aos maiores nomes de saúde e bem-estar do mercado, com integração automática e resultados acompanhados em tempo real. Tudo dentro da plataforma que seu RH já usa.</p>
+</div>
+<div class="cj-grid cj-grid-3 cj-mt-56">
+<div class="cj-card cj-card-svc cj-card-square cj-pcard-wellhub" data-reveal>
+<span class="cj-chip"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21f3ade753748369bf_logo-branco-Wellhub.png" class="cj-chip-logo" aria-label="Wellhub" role="img" alt="Wellhub" width="169" height="31" loading="lazy" decoding="async"></span>
+<div class="cj-card-body">
+<span class="cj-subtag">Atividade física</span>
+<h3 class="cj-h3 cj-mt-16">A rede de academias na palma da mão</h3>
+<p class="cj-mt-16">+100 mil academias e estúdios presenciais em todo mundo, aulas online, +95 apps premium de bem-estar, yoga e pilates, direto no app.</p>
+</div>
+</div>
+<div class="cj-card cj-card-svc cj-card-square cj-pcard-conexa" data-reveal>
+<span class="cj-chip"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c2127ee1c85405fac6d_logo-branco-Conexa.png" class="cj-chip-logo" aria-label="Conexa" role="img" alt="Conexa" width="150" height="34" loading="lazy" decoding="async"></span>
+<div class="cj-card-body">
+<span class="cj-subtag">Telemedicina e saúde mental</span>
+<h3 class="cj-h3 cj-mt-16">Consultas sem sair<br>de casa</h3>
+<p class="cj-mt-16">Mais de 33 especialidades médicas, psicólogos, nutricionistas e muito mais, sem precisar sair de casa.</p>
+</div>
+</div>
+<div class="cj-card cj-card-svc cj-card-square cj-pcard-optum" data-reveal>
+<span class="cj-chip"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c20a66118e9f5b2c274_logo-branco-optum.png" class="cj-chip-logo" aria-label="Optum" role="img" alt="Optum" width="116" height="34" loading="lazy" decoding="async"></span>
+<div class="cj-card-body">
+<span class="cj-subtag">Apoio 360º ao colaborador</span>
+<h3 class="cj-h3 cj-mt-16">Apoio que vai além <br class="cj-brk-d">da consulta</h3>
+<p class="cj-mt-16">Suporte integral que abrange apoio psicológico, social, financeiro e jurídico quando seu colaborador precisar.</p>
+</div>
+</div>
+</div>
+<div class="cj-nr1-row cj-mt-32" data-reveal>
+<div class="cj-card cj-card-svc cj-card-nr1 cj-pcard-zenklub">
+<span class="cj-chip"><span class="cj-chip-logos"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21f3ade753748369bf_logo-branco-Wellhub.png" class="cj-chip-logo" aria-label="Wellhub" role="img" alt="Wellhub" width="169" height="31" loading="lazy" decoding="async"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21ecbe102d9326c55c_logo-branco-Zenklub.png" class="cj-chip-logo" aria-label="Zenklub" role="img" alt="Zenklub" width="146" height="37" loading="lazy" decoding="async"></span></span>
+<div class="cj-card-body">
+<span class="cj-subtag">NR-1</span>
+<h3 class="cj-h3 cj-mt-16">Diagnóstico e mapeamento de riscos psicossociais</h3>
+<p class="cj-mt-16 cj-measure">Ferramentas de diagnóstico e mapeamento de riscos psicossociais, <br class="cj-brk-nr1">com direcionamentos e planos de ação ao RH.</p>
+</div>
+</div>
+<div class="cj-nr1card-media"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a57d94596f91b295786357b_placeholder-2.png" alt="" aria-hidden="true" width="824" height="643" loading="lazy" decoding="async"></div>
+</div>
+<div class="cj-cta cj-mt-56"><a class="cj-btn cj-btn-dark" href="#contato" data-tag-cta data-tag-label="parceiros-quero-testar">Quero testar</a></div>
+</section>
+<section class="cj-demo-sec cj-on-dark">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Veja a gestão da Caju na prática: <br class="cj-brk-d">menos operacional, mais estratégico</h2>
+<p class="cj-lead cj-mt-24" style="max-width:760px;">Depois que o benefício está no ar, o RH não perde o controle: acompanha em tempo real a taxa de adesão e o custo por colaborador ativo, direto na plataforma, sem precisar abrir outra ferramenta.</p>
+<div class="cj-cta cj-mt-32"><a class="cj-btn cj-btn-light" href="#contato" data-tag-cta data-tag-label="video-agendar-demonstracao">Agendar demonstração ao vivo</a></div>
+</div>
+<p class="cj-reassurance cj-mt-40" style="text-align:center;">Do cadastro do colaborador à liberação de acesso a Wellhub, Optum e Conexa: sem planilha, sem múltiplos logins.</p>
+<div class="cj-demo-stage cj-mt-56">
+<div class="cj-video-embed"><iframe id="player-sbe" data-tag-label="gestao-caju-na-pratica" src="https://www.youtube.com/embed/JPdQ8mZ7NJE?enablejsapi=1" title="Conheça nosso módulo de Saúde e Bem estar!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+</div>
+</section>
+<section class="cj-bg-white">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Com o programa de saúde e bem-estar corporativo da Caju, a experiência do RH muda e o time ganha mais qualidade de vida.</h2>
+</div>
+<div class="cj-grid cj-grid-2 cj-mt-56">
+<div class="cj-card cj-card-list cj-card-rh">
+<h3 class="cj-h3"><svg class="cj-card-ic" aria-hidden="true"><use href="#cj2"/></svg>Para o RH</h3>
+<ul class="cj-feature-list cj-mt-16">
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p><strong>Retenção de talentos:</strong> 87% dos trabalhadores sairiam de uma empresa que não prioriza bem-estar.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Soluções que apoiam na conformidade da NR-1, com planos para seus colaboradores cuidarem da saúde de forma preventiva.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Redução do trabalho operacional e de horas semanais com automatização de processos.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Dado próprio de adesão e uso do benefício, em um só painel, para embasar decisões.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Ativação em poucos dias, sem novo fornecedor ou contrato separado.</p></li>
+</ul>
+</div>
+<div class="cj-card cj-card-list cj-card-colab">
+<h3 class="cj-h3"><svg class="cj-card-ic" aria-hidden="true"><use href="#cj4"/></svg>Para o colaborador</h3>
+<ul class="cj-feature-list cj-mt-16">
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Acesso a mais de 10 mil academias, terapia e telemedicina, sem fila de espera.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p><strong>Suporte psicológico contínuo:</strong> 63% das consultas de saúde na base Caju são de Psicologia.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Autonomia pra usar o benefício quando precisar, sem depender de aprovação.</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Cuidado que acompanha a rotina: média de 8,3 check-ins presenciais em academias por mês (2x por semana).</p></li>
+<li><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>Prevenção antes do problema aparecer, não só remédio depois que ele já apareceu.</p></li>
+</ul>
+</div>
+</div>
+<div class="cj-cta cj-mt-56"><a class="cj-btn cj-btn-dark" href="#contato" data-tag-cta data-tag-label="programa-simular-empresa">Simular para minha empresa</a></div>
+</section>
+<section class="cj-portes-sec">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Bem-estar corporativo que acompanha <br class="cj-brk-d">o tamanho da sua empresa</h2>
+</div>
+<div class="cj-portes-split cj-mt-80">
+<div class="cj-ps-copy">
+<div class="cj-portes-head"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21cdde57a4dd804111_icon-pequenas%20empresas.png" class="cj-portes-ic" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async"><span class="cj-portes-label">Pequenas</span></div>
+<h3 class="cj-h3 cj-mt-16">Benefício de empresa grande, no orçamento que cabe</h3>
+<p class="cj-mt-16">Contrate benefícios de empresas grandes, por um preço que cabe no seu bolso, de forma automatizada e rápida.</p>
+<div class="cj-ps-cta"><a class="cj-btn cj-btn-ghost" href="#contato" data-tag-cta data-tag-label="portes-pequenas-fale-especialista">Fale com um especialista <svg class="cj-btn-ic" aria-hidden="true"><use href="#cj5"/></svg></a></div>
+</div>
+<div class="cj-ps-media" style="background-image:url('https://cdn.prod.website-files.com/68b6fa277e5c017395008330/68d477d7cd9122d0a074fbdf_empresa-pequena.webp')"></div>
+</div>
+<div class="cj-portes-split cj-is-reverse cj-mt-80">
+<div class="cj-ps-copy">
+<div class="cj-portes-head"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c2154034e00ad3b513a_icon-medias-grandes-empresas.png" class="cj-portes-ic" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async"><span class="cj-portes-label">Médias e grandes</span></div>
+<h3 class="cj-h3 cj-mt-16">Ativação integrada, com dados para decidir</h3>
+<p class="cj-mt-16">Ativação de benefícios de forma automatizada e integrada, com acompanhamento de dados e insights de engajamento por parceiro, para tomar decisões estratégicas.</p>
+<div class="cj-ps-cta"><a class="cj-btn cj-btn-ghost" href="#contato" data-tag-cta data-tag-label="portes-medias-grandes-fale-especialista">Fale com um especialista <svg class="cj-btn-ic" aria-hidden="true"><use href="#cj5"/></svg></a></div>
+</div>
+<div class="cj-ps-media" style="background-image:url('https://cdn.prod.website-files.com/68b6fa277e5c017395008330/68d477d7cc9ed808b6402e38_empresa-grande.webp')"></div>
+</div>
+</section>
+<section class="cj-bg-branco cj-has-claim">
+<div class="cj-sec-head" style="max-width:1180px;">
+<h2 class="cj-h2 cj-h2-sm">O impacto por trás do cuidado: o bem-estar corporativo <br class="cj-brk-d">muda o dia a dia do RH e do colaborador.</h2>
+<p class="cj-lead cj-mt-24 cj-impact-sub">Essas informações são proprietárias do estudo Caju de Panorama RH e demonstram como o bem-estar corporativo gera resultados através da Caju.</p>
+</div>
+<div class="cj-impact-big cj-mt-56">
+<div class="cj-ib-item" data-reveal>
+<img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c20e911850ed5aef021_icon-reduc%CC%A7a%CC%83o%20de%20custos.png" class="cj-ib-ic" alt="" aria-hidden="true" width="48" height="48" loading="lazy" decoding="async">
+<div class="cj-ib-txt">
+<div class="cj-ib-num">73%</div>
+<div class="cj-ib-label">de redução de custos na saúde.</div>
+<p class="cj-ib-desc">Em empresas que oferecem plataformas de bem-estar, segundo a pesquisa global ROI do Bem-Estar 2026 (Wellhub).</p>
+</div>
+</div>
+<div class="cj-ib-item" data-reveal>
+<img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c2058e7c2481f79a712_icon-up.png" class="cj-ib-ic" alt="" aria-hidden="true" width="48" height="48" loading="lazy" decoding="async">
+<div class="cj-ib-txt">
+<div class="cj-ib-num">95%</div>
+<div class="cj-ib-label">de ganho de produtividade.</div>
+<p class="cj-ib-desc">Contra 45% e 88%, respectivamente, entre as empresas <br class="cj-brk-d">que não oferecem.</p>
+</div>
+</div>
+</div>
+<p class="cj-lead cj-impact-lead cj-impact-bridge">E é exatamente esse retorno que os dados proprietários do Panorama RH Caju 2026 confirmam na prática:</p>
+<div class="cj-impact-cards cj-mt-40">
+<div class="cj-ic-card" data-reveal><svg class="cj-ic-ic" aria-hidden="true"><use href="#cj100"/></svg><div class="cj-ic-num">106%</div><div class="cj-ic-txt">mais empresas contrataram saúde e bem-estar em 2025.</div></div>
+<div class="cj-ic-card" data-reveal><svg class="cj-ic-ic" aria-hidden="true"><use href="#cj8"/></svg><div class="cj-ic-num">90%</div><div class="cj-ic-txt">dos assinantes ficaram ativos o ano inteiro, sem intermitência.</div></div>
+<div class="cj-ic-card" data-reveal><svg class="cj-ic-ic" aria-hidden="true"><use href="#cj9"/></svg><div class="cj-ic-num">8,3</div><div class="cj-ic-txt">Em média de 8,3 check-ins presenciais por colaborador.</div></div>
+<div class="cj-ic-card" data-reveal><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c20663dc57648488529_icon-heart-app.png" class="cj-ic-ic" alt="" aria-hidden="true" width="32" height="32" loading="lazy" decoding="async"><div class="cj-ic-num">2 milhões</div><div class="cj-ic-txt">de acessos a aplicativos de saúde mental.</div></div>
+</div>
+<div class="cj-impact-claim">
+<p>Enquanto o mercado discute como fechar a distância entre intenção e prática, <br class="cj-brk-d">a Caju já entrega essa solução todos os dias, com dados que comprovam.</p>
+</div>
+</section>
+<template data-rascunho="carrossel-logos">
+<section class="cj-bg-black cj-on-dark">
+<div class="cj-logos-wrap">
+<p class="cj-lead" style="color:#FCFCFC;font-weight:700;font-size:24px;line-height:1.3;">+70 mil empresas de todos os tamanhos · +1,3 milhão de colaboradores</p>
+<div class="cj-marquee cj-mt-24">
+<div class="cj-marquee-track">
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+<div class="cj-logo-ph" aria-hidden="true">Logo</div>
+</div>
+</div>
+</div>
+</section>
+</template>
+<section class="cj-bg-gray">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Não é plano de saúde. É o que o plano <br class="cj-brk-d">não cobre: o cuidado preventivo.</h2>
+<p class="cj-lead cj-mt-24" style="max-width:560px;">Academia, terapia e telemedicina entram onde o plano tradicional para.</p>
+</div>
+<div class="cj-compare cj-mt-56">
+<div class="cj-compare-col cj-neg">
+<div class="cj-compare-head"><svg class="cj-card-ic" aria-hidden="true"><use href="#cj11"/></svg>Plano de saúde tradicional</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg>Cobre consulta e procedimento depois que o problema já apareceu.</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg>Contratação separada, reajuste anual fora do controle do RH.</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg>Não conta pra conformidade com a NR-1.</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg>Fica invisível no dia a dia, só aparece quando alguém adoece.</div>
+</div>
+<div class="cj-compare-col cj-pos">
+<div class="cj-compare-head"><svg class="cj-card-ic" aria-hidden="true"><use href="#cj13"/></svg>Saúde e bem-estar Caju</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg>Atua na prevenção da saúde física e mental, com acompanhamento contínuo.</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg>Ativado no mesmo cartão que sua empresa já usa, sem contrato novo.</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg>100% alinhado à CLT, ao PAT e facilita a conformidade com a NR-1 (em vigor desde 26/05/2026).</div>
+<div class="cj-compare-row"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg>Uso recorrente: o colaborador vê o benefício diariamente e o incorpora à rotina, não só na emergência.</div>
+</div>
+</div>
+<div class="cj-cta cj-mt-56"><a class="cj-btn cj-btn-primary" href="#contato" data-tag-cta data-tag-label="comparativo-simular-empresa">Simular para minha empresa</a></div>
+</section>
+<section class="cj-bg-branco">
+<div class="cj-sec-head" style="max-width:1120px;">
+<h2 class="cj-h2">A NR-1 já exige gestão de riscos psicossociais. <br class="cj-brk-d">Sua empresa está em conformidade?</h2>
+<p class="cj-lead cj-mt-24" style="max-width:1080px;">Desde a atualização da NR-1, a inclusão dos riscos psicossociais — estresse, sobrecarga, assédio, burnout — no Programa de Gerenciamento <br class="cj-brk-d">de Riscos (PGR) deixou de ser recomendação e virou obrigação legal para toda empresa com colaboradores em regime CLT.</p>
+</div>
+<div class="cj-nr1-bento cj-mt-56">
+<div class="cj-nr1-group cj-is-risco" data-reveal>
+<div class="cj-nr1-head">
+<span class="cj-nr1-badge"><svg aria-hidden="true"><use href="#cj14"/></svg></span>
+<div class="cj-nr1-head-txt"><span class="cj-nr1-eyebrow">Se não se adequar</span><h3 class="cj-h3">O que está em jogo <br class="cj-brk-d">para a sua empresa</h3></div>
+</div>
+<div class="cj-nr1-cell"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg><p>Risco de interdição de atividades e responsabilização judicial em ações trabalhistas.</p></div>
+<div class="cj-nr1-cell cj-nr1-wide cj-nr1-risco-wide"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj12"/></svg><p>Denúncias podem vir de auditor fiscal do trabalho ou diretamente dos colaboradores, indo parar no Ministério Público do Trabalho.</p></div>
+</div>
+<div class="cj-nr1-group cj-is-retorno" data-reveal>
+<div class="cj-nr1-head">
+<span class="cj-nr1-badge"><svg aria-hidden="true"><use href="#cj15"/></svg></span>
+<div class="cj-nr1-head-txt"><span class="cj-nr1-eyebrow">Ao se adequar</span><h3 class="cj-h3">Comprovações que sustentam o investimento</h3></div>
+</div>
+<div class="cj-nr1-cell"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p><strong>96%</strong> dos profissionais buscam empresas que cuidem da saúde dos colaboradores.</p></div>
+<div class="cj-nr1-cell"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p><strong>87%</strong> dos trabalhadores dizem que sairiam de uma empresa que não prioriza bem-estar.</p></div>
+<div class="cj-nr1-cell"><svg class="cj-li-ic" aria-hidden="true"><use href="#cj3"/></svg><p>O burnout já é reconhecido como doença ocupacional pela CID-11 (OMS) — a Lei nº 14.831 criou o Certificado Empresa Promotora da Saúde Mental.</p></div>
+</div>
+</div>
+<div class="cj-card cj-calc-card" style="margin-top:120px;">
+<div class="cj-calc-copy">
+<svg class="cj-calc-ic" aria-hidden="true"><use href="#cj16"/></svg>
+<h3 class="cj-h3">Calcule o impacto do estresse e burnout na sua empresa</h3>
+<p>Ferramenta interativa proprietária: Calculadora de Impacto de Saúde Mental no Trabalho.</p>
+<div class="cj-calc-btn"><a class="cj-btn cj-btn-ghost" href="#contato" data-tag-cta data-tag-label="calculadora-adequar-nr1">Adequar minha empresa à NR-1 <svg class="cj-btn-ic" aria-hidden="true"><use href="#cj17"/></svg></a></div>
+</div>
+<div class="cj-calc-img"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a7f71bf0854c4e252102a9b_img-calculadora.png" alt="Calculadora de impacto" loading="lazy" /></div>
+</div>
+</section>
+<section class="cj-bg-maroon">
+<div class="cj-sec-head">
+<h2 class="cj-h2">A única plataforma de benefícios com as 4 principais certificações internacionais</h2>
+<p class="cj-lead cj-mt-24" style="max-width:none;">Segurança que protege os dados dos seus colaboradores, dá tranquilidade pro RH e é aprovada pelo jurídico.</p>
+</div>
+<div class="cj-cert-bento cj-mt-56">
+<div class="cj-card cj-cert-cell cj-cert-a" data-reveal>
+<div class="cj-cert-icon"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c218c6daf41c6e00d92_selo-27001.png" class="cj-ic cj-ic-27001" aria-label="ISO 27001" role="img" alt="ISO 27001" width="400" height="540" loading="lazy" decoding="async"></div>
+<div class="cj-cert-txt">
+<h3 class="cj-h3 cj-mt-16">Gestão de Segurança da Informação</h3>
+</div>
+</div>
+<div class="cj-card cj-cert-cell cj-cert-b" data-reveal>
+<div class="cj-cert-icon"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c2176ad6cf7c8638584_selo-22701.png" class="cj-ic cj-ic-27701" aria-label="ISO 27701" role="img" alt="ISO 27701" width="400" height="540" loading="lazy" decoding="async">
+</div>
+<div class="cj-cert-txt">
+<h3 class="cj-h3 cj-mt-16">Privacidade e Proteção de Dados</h3>
+</div>
+</div>
+<div class="cj-card cj-cert-cell cj-cert-c" data-reveal>
+<div class="cj-cert-icon"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21a4e3ff084eee85b9_selo-soc2.png" class="cj-ic cj-ic-soc2" aria-label="SOC 2 Tipo 2" role="img" alt="SOC 2 Tipo 2" width="90" height="97" loading="lazy" decoding="async"></div>
+<div class="cj-cert-txt">
+<h3 class="cj-h3 cj-mt-16">Auditoria independente de controles</h3>
+</div>
+</div>
+<div class="cj-card cj-cert-cell cj-cert-wide">
+<div class="cj-cert-wide-left">
+<div class="cj-cert-icon"><img src="https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a844c21a4e3ff084eee85a8_selo-pci.png" class="cj-ic cj-ic-pci" aria-label="PCI DSS" role="img" alt="PCI DSS" width="145" height="87" loading="lazy" decoding="async"></div>
+<div class="cj-cert-txt">
+<h3 class="cj-h3 cj-mt-16">Conformidade no processamento de cartões</h3>
+</div>
+</div>
+<div class="cj-cert-benefits">
+<div class="cj-cb"><svg class="cj-cb-ic" aria-hidden="true"><use href="#cj18"/></svg><div class="cj-cb-txt"><strong>Para o colaborador</strong><span>Dados protegidos em todas as transações.</span></div></div>
+<div class="cj-cb"><svg class="cj-cb-ic" aria-hidden="true"><use href="#cj101"/></svg><div class="cj-cb-txt"><strong>Para o RH</strong><span>Gestão sem risco de vazamento ou falha.</span></div></div>
+<div class="cj-cb"><svg class="cj-cb-ic" aria-hidden="true"><use href="#cj102"/></svg><div class="cj-cb-txt"><strong>Para o Jurídico</strong><span>100% alinhado à CLT, PAT e NR-1 — zero objeção.</span></div></div>
+</div>
+</div>
+</div>
+</section>
+<section class="cj-bg-dark cj-on-dark" id="contato">
+<div class="cj-form-layout">
+<div class="cj-form-copy">
+<h2 class="cj-h2">Monte o plano de <br class="cj-brk-d">saúde e bem-estar ideal <br class="cj-brk-d">pra sua empresa</h2>
+<p class="cj-lead cj-mt-24" style="max-width:500px;">Preencha os dados e um especialista da Caju monta a proposta ideal para o tamanho e o momento da sua empresa.</p>
+</div>
+<div class="cj-card cj-card-white cj-form-embed">
+<iframe
+src="https://forms.caju.com.br/t/1z1XwnnCiius"
+title="Formulário de contato — Saúde e bem-estar Caju"
+loading="lazy"
+allow="clipboard-write"></iframe>
+</div>
+</div>
+</section>
+<section class="cj-faq-sec" id="faq">
+<div class="cj-sec-head">
+<h2 class="cj-h2">Perguntas frequentes sobre saúde <br class="cj-brk-d">e bem-estar corporativo</h2>
+<p class="cj-lead cj-mt-24 cj-faq-lead">Tire dúvidas sobre o benefício de saúde e bem-estar, os parceiros integrados e a conformidade com a NR-1.</p>
+</div>
+<div class="cj-caju-faq">
+<div class="cj-cat cj-acc-item cj-is-open" data-acc-item>
+<button class="cj-acc-head" data-acc-head type="button" aria-expanded="true">
+<span class="cj-cat__icon"><svg ><use href="#cj19"/></svg></span>
+<span class="cj-cat__textwrap">
+<h3 class="cj-cat__title">Sobre o benefício</h3>
+<span class="cj-cat__count">3 perguntas</span>
+</span>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-cat__list">
+<div class="cj-q cj-acc-item cj-is-open" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="o-que-e-beneficio-saude-bem-estar" type="button" aria-expanded="true">
+<h4 class="cj-q__text">O que é o benefício de saúde e bem-estar para empresas?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">É a solução da Caju que reúne atividade física, saúde mental, telemedicina e apoio 360º ao colaborador em um único lugar, ativada dentro da mesma plataforma de benefícios que o RH já usa. Por meio dos parceiros Wellhub, Conexa e Optum a empresa oferece esse cuidado completo sem precisar contratar, integrar ou gerenciar cada fornecedor separadamente.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="diferenca-beneficio-vs-categoria-saude" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Qual a diferença entre o benefício de Saúde e Bem-estar e a categoria de saúde do cartão Caju?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">A categoria Saúde do cartão é saldo financeiro usado em farmácias e serviços médicos. Já a solução de Saúde e Bem-estar é um ecossistema de serviços prontos (academia, psicologia, telemedicina) com acesso direto via parceiros integrados, sem depender de saldo em dinheiro.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="diferenca-vs-plano-de-saude" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Qual a diferença entre saúde e bem-estar e plano de saúde?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">O plano de saúde cobre consultas e procedimentos depois que um problema já apareceu. A solução de Saúde e Bem-estar atua na prevenção — atividade física, terapia e acompanhamento contínuo — e ainda ajuda a empresa a comprovar ações concretas de conformidade com a NR-1. São soluções complementares, não substitutas.</div></div></div>
+</div>
+</div></div></div>
+</div>
+<div class="cj-cat cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head type="button" aria-expanded="false">
+<span class="cj-cat__icon"><svg ><use href="#cj21"/></svg></span>
+<span class="cj-cat__textwrap">
+<h3 class="cj-cat__title">Parceiros e funcionamento</h3>
+<span class="cj-cat__count">2 perguntas</span>
+</span>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-cat__list">
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="wellhub-dentro-do-beneficio" type="button" aria-expanded="false">
+<h4 class="cj-q__text">A Caju oferece Wellhub dentro do benefício de bem-estar?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">Sim. A Caju conta com a Wellhub, maior plataforma de bem-estar corporativo. Ela conecta colaboradores a uma rede de academias, estúdios, apps de corrida, nutrição, qualidade do sono e muito mais, de forma global. É possível contratar através da Caju, em um contrato único.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="combinar-com-outros-modulos" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Dá para combinar saúde e bem-estar com outros módulos da Caju (Premiação, Despesas)?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">Sim. Saúde e Bem-estar faz parte do mesmo ecossistema que inclui Benefícios, Despesas e Premiações — tudo no mesmo painel e no mesmo cartão, sem integrar sistemas diferentes.</div></div></div>
+</div>
+</div></div></div>
+</div>
+<div class="cj-cat cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head type="button" aria-expanded="false">
+<span class="cj-cat__icon"><svg ><use href="#cj22"/></svg></span>
+<span class="cj-cat__textwrap">
+<h3 class="cj-cat__title">Conformidade e contratação</h3>
+<span class="cj-cat__count">6 perguntas</span>
+</span>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-cat__list">
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="conformidade-nr1" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Esse benefício facilita a conformidade com a NR-1?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">Sim. A solução de Saúde e Bem-estar apoia na implementação do PGR: atividade física, apoio psicológico e telemedicina podem contar como ações dentro do PGR da empresa.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="quanto-custa" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Quanto custa oferecer saúde e bem-estar aos colaboradores pela Caju?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">A ativação do módulo tem custo de adesão. O custo é fixo por colaborador, dependendo do pacote que é contratado. Dentro da página de saúde e bem-estar os clientes podem contratar automaticamente ou falar com um especialista para checar o valor. Fale com um especialista para simular o investimento de acordo com o número de colaboradores e as categorias escolhidas.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="o-que-e-gro-e-pgr" type="button" aria-expanded="false">
+<h4 class="cj-q__text">O que é o GRO e o PGR, e minha empresa é obrigada a ter?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">GRO (Gerenciamento de Riscos Ocupacionais) é a exigência da NR-1 de identificar, avaliar e controlar riscos no trabalho, incluindo os psicossociais. O PGR é o documento formal que estrutura essas ações. Toda empresa com colaboradores em regime CLT é obrigada a ter um PGR atualizado. As principais exceções são empregadores domésticos e MEIs sem empregados.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="multa-nao-adequacao-nr1" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Quanto minha empresa pode ser multada por não se adequar à NR-1?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">As multas são calculadas por trabalhador exposto, conforme a gravidade da infração e o porte da empresa — podendo superar R$ 1 milhão em empresas de médio e grande porte. Em caso de reincidência, o valor dobra; havendo risco grave e iminente, pode ser acrescido em até 100%, além do risco de interdição de atividades e responsabilização judicial em ações trabalhistas.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="lei-14831-certificado" type="button" aria-expanded="false">
+<h4 class="cj-q__text">O que é a Lei 14.831 e o Certificado Empresa Promotora da Saúde Mental?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">A Lei nº 14.831 criou o Certificado Empresa Promotora da Saúde Mental, reconhecimento oficial para empresas que comprovam ações estruturadas de cuidado com a saúde mental — hoje ainda mais relevante porque o burnout já tem código próprio na CID-11 da OMS (QD85) e é tratado juridicamente no Brasil como doença ocupacional, com direito a afastamento pelo INSS.</div></div></div>
+</div>
+<div class="cj-q cj-acc-item" data-acc-item>
+<button class="cj-acc-head" data-acc-head data-tag-faq data-tag-label="custo-estresse-burnout" type="button" aria-expanded="false">
+<h4 class="cj-q__text">Como calcular o quanto o estresse e o burnout custam pra minha empresa?</h4>
+<span class="cj-chev" aria-hidden="true"><svg ><use href="#cj20"/></svg></span>
+</button>
+<div class="cj-acc-panel"><div class="cj-acc-inner"><div class="cj-q__answer">Use a <a href="https://calculadora-saude-mental-caju.vercel.app/" target="_blank" rel="noopener">Calculadora de Impacto de Saúde Mental no Trabalho</a>, ferramenta proprietária da Caju que estima quanto sua empresa perde com desligamentos por estresse e burnout — em poucos minutos, a partir de dados básicos da sua equipe.</div></div></div>
+</div>
+</div></div></div>
+</div>
+</div>
+</section>
+</div>
+</div>
+
+
+<!-- ==========================================================================
+     PARTE 4 — Scripts
+     ONDE COLAR: Configurações da página → Código personalizado → Antes da tag </body>
+     ========================================================================== -->
+
+<!-- 4.1 · Script legado, sem o prefixo cj-. Mantido como está no ar,
+     mas hoje é inerte: mira .rotator-item e .caju-faq, que não existem
+     mais nesta página (tudo virou cj-). Pode ser removido com segurança. -->
+<script>
+if ('IntersectionObserver' in window) document.documentElement.classList.add('js-reveal');
+(function () {
+var els = document.querySelectorAll('[data-reveal]');
+if (!els.length || !('IntersectionObserver' in window)) return;
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (e) {
+if (!e.isIntersecting) return;
+e.target.classList.add('is-in');
+io.unobserve(e.target);
+});
+}, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+els.forEach(function (el) { io.observe(el); });
+})();
+(function () {
+var root = document.querySelector('[data-rotator]');
+if (!root) return;
+var items = Array.prototype.slice.call(root.querySelectorAll('.rotator-item'));
+var fill  = root.querySelector('.rotator-line-fill');
+if (!fill || items.length < 2) return;
+var i = 0;
+var exitTimer = null;
+function advance() {
+var outgoing = items[i];
+i = (i + 1) % items.length;
+outgoing.classList.remove('is-active');
+outgoing.classList.add('is-exit');            // desce e some (saída rápida: 240ms)
+items[i].classList.remove('is-exit');
+items[i].classList.add('is-active');          // entra de cima e assenta
+clearTimeout(exitTimer);
+exitTimer = setTimeout(function () { outgoing.classList.remove('is-exit'); }, 480);
+}
+fill.addEventListener('animationiteration', advance);
+document.addEventListener('visibilitychange', function () {
+fill.style.animationPlayState = document.hidden ? 'paused' : 'running';
+});
+})();
+(function () {
+document.querySelectorAll('.caju-faq').forEach(function (faq) {
+faq.addEventListener('click', function (e) {
+var head = e.target.closest('[data-acc-head]');
+if (!head || !faq.contains(head)) return;
+var item = head.parentElement;
+var group = item.parentElement;
+var willOpen = !item.classList.contains('is-open');
+group.querySelectorAll(':scope > [data-acc-item].is-open').forEach(function (sib) {
+if (sib !== item) {
+sib.classList.remove('is-open');
+var h = sib.querySelector(':scope > [data-acc-head]');
+if (h) h.setAttribute('aria-expanded', 'false');
+}
+});
+item.classList.toggle('is-open', willOpen);
+head.setAttribute('aria-expanded', String(willOpen));
+});
+});
+})();
+</script>
+
+<!-- 4.2 · Comportamento da página: reveal no scroll, rotator do hero,
+     acordeão da FAQ e rolagem suave das âncoras. -->
+<script>
+(function () {
+  var root = document.querySelector('.cj-root');
+  if (!root) return;
+
+  /* ---- reveal on scroll ---- */
+  if ('IntersectionObserver' in window) {
+    root.classList.add('cj-js-reveal');
+    var els = root.querySelectorAll('[data-reveal]');
+    if (els.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('cj-is-in');
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+      els.forEach(function (el) { io.observe(el); });
+    }
+  }
+
+  /* ---- rotator do hero ---- */
+  (function () {
+    var r = root.querySelector('[data-rotator]');
+    if (!r) return;
+    var items = Array.prototype.slice.call(r.querySelectorAll('.cj-rotator-item'));
+    var fill = r.querySelector('.cj-rotator-line-fill');
+    if (!fill || items.length < 2) return;
+    var i = 0, t = null;
+    fill.addEventListener('animationiteration', function () {
+      var out = items[i];
+      i = (i + 1) % items.length;
+      out.classList.remove('cj-is-active');
+      out.classList.add('cj-is-exit');
+      items[i].classList.remove('cj-is-exit');
+      items[i].classList.add('cj-is-active');
+      clearTimeout(t);
+      t = setTimeout(function () { out.classList.remove('cj-is-exit'); }, 480);
+    });
+    document.addEventListener('visibilitychange', function () {
+      fill.style.animationPlayState = document.hidden ? 'paused' : 'running';
+    });
+  })();
+
+  /* ---- FAQ ---- */
+  root.querySelectorAll('.cj-caju-faq').forEach(function (faq) {
+    faq.addEventListener('click', function (e) {
+      var head = e.target.closest('[data-acc-head]');
+      if (!head || !faq.contains(head)) return;
+      var item = head.parentElement, group = item.parentElement;
+      var willOpen = !item.classList.contains('cj-is-open');
+      group.querySelectorAll(':scope > [data-acc-item].cj-is-open').forEach(function (sib) {
+        if (sib === item) return;
+        sib.classList.remove('cj-is-open');
+        var h = sib.querySelector(':scope > [data-acc-head]');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      });
+      item.classList.toggle('cj-is-open', willOpen);
+      head.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  /* ---- rolagem das âncoras: 620ms fixos, em vez do smooth nativo ---- */
+  var DUR = 620;          /* duração, em ms */
+  var EXTRA = 16;         /* folga abaixo do header */
+
+  function headerOffset() {
+    /* soma a altura do que estiver fixo/sticky no topo (banner, nav) */
+    var top = 0;
+    document.querySelectorAll('body *').forEach(function (el) {
+      if (el.closest('.cj-root')) return;
+      var cs = getComputedStyle(el);
+      if (cs.position !== 'fixed' && cs.position !== 'sticky') return;
+      var r = el.getBoundingClientRect();
+      if (r.height && r.top <= 120 && r.bottom > top) top = r.bottom;
+    });
+    return top + EXTRA;
+  }
+
+  function animate(target) {
+    var start = window.pageYOffset;
+    var end = Math.max(0, Math.min(
+      target.getBoundingClientRect().top + start - headerOffset(),
+      document.documentElement.scrollHeight - window.innerHeight));
+    var dist = end - start;
+    if (Math.abs(dist) < 2) return;
+    var t0 = null;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / DUR);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;  /* easeInOutCubic */
+      window.scrollTo(0, start + dist * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* se a página abrir já com #ancora, corrige a posição por baixo do header */
+  if (location.hash.length > 1) {
+    var initial = document.getElementById(location.hash.slice(1));
+    if (initial && root.contains(initial)) {
+      window.addEventListener('load', function () {
+        window.scrollTo(0, initial.getBoundingClientRect().top + window.pageYOffset - headerOffset());
+      });
+    }
+  }
+
+  root.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a || !root.contains(a)) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo(0, target.getBoundingClientRect().top + window.pageYOffset - headerOffset());
+    } else {
+      animate(target);
+    }
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+})();
+</script>
+
+<!-- 4.3 · Tagueamento (fluxo 114). É AQUI que está a correção:
+     o Evento 5 agora escuta type: "form_submit" e lê data.questions. -->
+<script>
+/* ============================================================
+   Tagueamento — /plataforma/saude-e-bem-estar
+   Spec: req_saude_bem_estar_001 · fluxo 114 · 6 eventos
+   Regras: hash na chave `event`; parâmetro custom SEMPRE dentro
+   de `parameters`; label vem de data-tag-label, nunca de innerText.
+   ============================================================ */
+(function () {
+  window.dataLayer = window.dataLayer || [];
+
+  /* ---- Evento 1 · visita à página (disparo único) ---- */
+  if (!window.__sbeViewFired) {
+    window.__sbeViewFired = true;
+    window.dataLayer.push({ event: 'e_001_123_001_000_000_002' });
+  }
+
+  /* ---- Evento 2 · clique em CTA para o formulário ----
+     Delegado no document; capture para não depender da ordem
+     dos outros listeners da página. */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-tag-cta]');
+    if (!el) return;
+    window.dataLayer.push({
+      event: 'e_001_123_075_023_056_001',
+      parameters: { label: el.getAttribute('data-tag-label') || 'sem-label' }
+    });
+  }, true);
+
+  /* ---- Evento 3 · troca de aba RH / colaborador ----
+     NÃO IMPLEMENTADO: esta página não tem o componente de abas.
+     O comparativo é de duas colunas estáticas (plano de saúde vs
+     Caju), sem interação de troca. Hash e_001_123_075_037_986_001
+     reservada; avisado na entrega. Se a aba entrar na página,
+     marcar os botões com data-tag-tab + data-tag-label="rh"|"colaborador"
+     e replicar o listener do evento 2 trocando a hash. */
+
+  /* ---- Evento 6 · abertura de pergunta da FAQ ----
+     Capture = lê aria-expanded ANTES do toggle do acordeão
+     (que roda no bubble). Clique que fecha não conta. */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-tag-faq]');
+    if (!el) return;
+    if (el.getAttribute('aria-expanded') === 'true') return; /* já aberto: é fechamento */
+    window.dataLayer.push({
+      event: 'e_001_123_194_024_048_001',
+      parameters: { label: el.getAttribute('data-tag-label') }
+    });
+  }, true);
+
+  /* ---- Evento 4 · primeiro play no vídeo (YouTube IFrame API) ---- */
+  (function () {
+    var frame = document.getElementById('player-sbe');
+    if (!frame) return;
+    var fired = false;
+    function hook() {
+      new YT.Player(frame, {
+        events: {
+          onStateChange: function (ev) {
+            if (ev.data === YT.PlayerState.PLAYING && !fired) {
+              fired = true; /* só o primeiro play, não cada retomada */
+              window.dataLayer.push({
+                event: 'e_001_123_075_124_871_001',
+                parameters: { label: frame.getAttribute('data-tag-label') || 'video' }
+              });
+            }
+          }
+        }
+      });
+    }
+    if (window.YT && window.YT.Player) { hook(); return; }
+    /* não carregar a API duas vezes nem sobrescrever o callback global */
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      var s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(s);
+    }
+    var prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof prev === 'function') prev();
+      hook();
+    };
+  })();
+
+  /* ---- Evento 5 · envio do formulário Fillout (conversão) ----
+     Mesma implementação já validada em produção na LP do CONARH 2026.
+     Usa o postMessage `type: "form_submit"` (é o único que traz os campos
+     preenchidos, em `data.questions`). NÃO usar `event: "fillout_submitted"`,
+     que chega depois e sem os dados.
+     Sem checagem de e.origin: o embed roda em domínio próprio
+     (forms.caju.com.br) e a validação por `type` já basta — era justamente
+     o filtro de origem + o formato `data.answers` que impediam o disparo. */
+  window.addEventListener('message', function (e) {
+    var data = e.data;
+    if (!data || data.type !== 'form_submit') return;
+
+    if (window.__sbeFormSent) return; /* trava contra push duplicado */
+    window.__sbeFormSent = true;
+
+    var questions = data.questions || [];
+    /* aceita mais de um rótulo porque este formulário (1z1XwnnCiius) pode
+       nomear os campos de forma levemente diferente do form do CONARH.
+       >>> Conferir no Fillout os nomes exatos antes de publicar. <<< */
+    function getField(names) {
+      for (var i = 0; i < names.length; i++) {
+        for (var j = 0; j < questions.length; j++) {
+          if (questions[j].name === names[i]) return questions[j].value;
+        }
+      }
+      return '';
+    }
+
+    var email = getField(['E-mail', 'Email', 'E-mail corporativo']);
+    var dominio = String(email).split('@')[1] || '';
+    var genericos = [
+      'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.br',
+      'live.com', 'icloud.com', 'bol.com.br', 'uol.com.br', 'terra.com.br'
+    ];
+
+    /* Faixa de colaboradores (mesma escada do formulário de porque-caju). */
+    function faixaColaboradores(n) {
+      if (n <= 19)   return '1_a_19_colaboradores';
+      if (n <= 50)   return '20_a_50_colaboradores';
+      if (n <= 99)   return '51_a_99_colaboradores';
+      if (n <= 250)  return '100_a_250_colaboradores';
+      if (n <= 499)  return '251_a_499_colaboradores';
+      if (n <= 1000) return '500_a_1000_colaboradores';
+      if (n <= 1500) return '1001_a_1500_colaboradores';
+      if (n <= 3000) return '1501_a_3000_colaboradores';
+      return 'acima_de_3001_colaboradores';
+    }
+
+    var opcao = getField(['Solução de interesse', 'Opção', 'Interesse']);
+    var parameters = {
+      email_domain: genericos.indexOf(dominio.toLowerCase()) === -1 ? 'corp' : 'personal',
+      role:         getField(['Cargo']),
+      option:       Array.isArray(opcao) ? opcao.join(',') : (opcao || '')
+    };
+
+    /* employee_count é a faixa (string). Quando o campo já vem como faixa
+       (select), vai o próprio valor; quando vem número, converte. Sem valor,
+       a chave não entra no push. */
+    var colaboradores = getField(['Número de colaboradores', 'Quantidade de colaboradores']);
+    var exato = parseInt(colaboradores, 10);
+    if (!isNaN(exato)) {
+      parameters.employee_count = faixaColaboradores(exato);
+    } else if (colaboradores) {
+      parameters.employee_count = colaboradores;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'e_001_123_075_059_059_003',
+      parameters: parameters
+    });
+  });
+})();
+</script>
+
+
