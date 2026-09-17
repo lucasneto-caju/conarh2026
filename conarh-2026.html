@@ -815,4 +815,437 @@
     });
   })();
   </script>
+
+  <!-- ==================================================================================================
+       POP-UPS (01 · scroll 50% | 02 · exit-intent)
+       --------------------------------------------------------------------------------------------------
+       - A marcação vive aqui dentro do bloco, mas o JS move o #cj-popups para o <body> no load. Isso
+         garante que o `position:fixed` funcione mesmo se algum wrapper do Webflow tiver transform/filter
+         (que quebraria o fixed se o modal ficasse aninhado).
+       - Por isso o CSS abaixo NÃO é escopado em #conarh-lp, e sim em #cj-popups — continua sem vazar
+         estilo para o resto do site.
+       - O destino e as regras de disparo ficam no objeto CFG do script (fácil de ajustar sem mexer no resto).
+  ================================================================================================== -->
+  <style>
+    #cj-popups{
+      --cjp-red:#DC0320;
+      --cjp-red-600:#C2031C;
+      --cjp-cream:#FBEFE2;
+      --cjp-ink:#1B1614;
+      --cjp-muted:#5D564F;
+      font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    }
+    #cj-popups *,#cj-popups *::before,#cj-popups *::after{box-sizing:border-box;}
+
+    #cj-popups .cj-pop{
+      position:fixed;inset:0;z-index:99999;
+      display:none;align-items:center;justify-content:center;
+      padding:20px;
+    }
+    #cj-popups .cj-pop.is-open{display:flex;}
+
+    #cj-popups .cj-pop-overlay{
+      position:absolute;inset:0;
+      background:rgba(15,10,10,.68);
+      backdrop-filter:blur(3px);
+      animation:cjPopFade .22s ease both;
+    }
+
+    #cj-popups .cj-pop-card{
+      position:relative;z-index:1;
+      width:100%;border-radius:32px;overflow:hidden;
+      box-shadow:0 40px 90px -30px rgba(0,0,0,.65);
+      max-height:92vh;overflow-y:auto;
+      animation:cjPopIn .28s cubic-bezier(.2,.8,.3,1) both;
+    }
+    #cj-popups .cj-pop-card:focus{outline:none;}
+
+    /* Botão de fechar */
+    #cj-popups .cj-pop-x{
+      position:absolute;top:14px;right:14px;z-index:3;
+      width:38px;height:38px;border-radius:50%;
+      border:0;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;line-height:1;font-family:inherit;
+      background:rgba(27,22,20,.10);color:var(--cjp-ink);
+      transition:background .18s ease,transform .18s ease;
+    }
+    #cj-popups .cj-pop-x:hover{background:rgba(27,22,20,.20);transform:scale(1.06);}
+    #cj-popups .cj-pop-x:focus-visible{outline:3px solid var(--cjp-red);outline-offset:2px;}
+
+    /* CTA */
+    #cj-popups .cj-pop-cta{
+      display:flex;align-items:center;justify-content:center;
+      width:100%;text-align:center;text-decoration:none;
+      font-family:inherit;font-size:17px;font-weight:600;
+      padding:17px 28px;border-radius:999px;
+      background:var(--cjp-red);color:#fff;
+      box-shadow:0 16px 34px -14px rgba(220,3,32,.75);
+      transition:background .18s ease,transform .18s ease;
+    }
+    #cj-popups .cj-pop-cta:hover{background:var(--cjp-red-600);transform:translateY(-2px);color:#fff;}
+    #cj-popups .cj-pop-cta:focus-visible{outline:3px solid var(--cjp-ink);outline-offset:3px;}
+    #cj-popups #cj-pop-02 .cj-pop-cta:focus-visible{outline-color:#fff;}
+
+    #cj-popups .cj-pop-dismiss{
+      display:block;width:100%;margin-top:14px;
+      background:none;border:0;cursor:pointer;
+      font-family:inherit;font-size:14px;font-weight:500;
+      color:var(--cjp-muted);text-decoration:underline;
+    }
+    #cj-popups .cj-pop-dismiss:hover{color:var(--cjp-ink);}
+
+    /* ---------- POP-01 (scroll 50%) — card creme ---------- */
+    #cj-popups #cj-pop-01 .cj-pop-card{max-width:470px;background:var(--cjp-cream);padding:44px 36px 36px;text-align:center;}
+    #cj-popups #cj-pop-01 .cj-pop-eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--cjp-red);margin-bottom:18px;
+    }
+    #cj-popups #cj-pop-01 .cj-pop-eyebrow i{width:22px;height:2px;background:var(--cjp-red);border-radius:2px;display:block;}
+    #cj-popups #cj-pop-01 h3{
+      margin:0;font-size:clamp(30px,6.4vw,40px);font-weight:800;line-height:1.05;
+      letter-spacing:-.02em;color:var(--cjp-red);
+    }
+    #cj-popups #cj-pop-01 p{
+      margin:16px 0 0;font-size:17px;line-height:1.45;font-weight:500;color:var(--cjp-ink);
+    }
+    #cj-popups #cj-pop-01 .cj-pop-cta{margin-top:28px;}
+
+    /* ---------- POP-02 (exit-intent) — foto + painel escuro ---------- */
+    #cj-popups #cj-pop-02 .cj-pop-card{
+      max-width:520px;background:#1B1614;
+      /* IMAGEM DE FUNDO: mesma foto da campanha já usada no hero. Trocar a URL aqui se quiser outra. */
+      background-image:linear-gradient(180deg,rgba(27,22,20,.15) 0%,rgba(27,22,20,.55) 55%,rgba(27,22,20,.92) 100%),
+                       url('https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a845ec4579a72a086fb70bb_2141532.avif');
+      background-size:cover;background-position:center;
+      min-height:440px;display:flex;align-items:flex-end;
+      padding:28px;
+    }
+    #cj-popups #cj-pop-02 .cj-pop-x{background:rgba(255,255,255,.22);color:#fff;}
+    #cj-popups #cj-pop-02 .cj-pop-x:hover{background:rgba(255,255,255,.36);}
+    #cj-popups #cj-pop-02 .cj-pop-panel{
+      width:100%;border-radius:24px;padding:26px 24px;
+      background:rgba(27,22,20,.62);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.14);
+    }
+    #cj-popups #cj-pop-02 h3{
+      margin:0;font-size:clamp(26px,5.4vw,34px);font-weight:800;line-height:1.1;
+      letter-spacing:-.02em;color:#fff;
+    }
+    #cj-popups #cj-pop-02 h3 b{font-weight:800;color:#fff;}
+    #cj-popups #cj-pop-02 p{margin:12px 0 0;font-size:16px;line-height:1.45;color:rgba(255,255,255,.88);}
+    #cj-popups #cj-pop-02 .cj-pop-cta{margin-top:22px;}
+    #cj-popups #cj-pop-02 .cj-pop-dismiss{color:rgba(255,255,255,.75);}
+    #cj-popups #cj-pop-02 .cj-pop-dismiss:hover{color:#fff;}
+
+    @keyframes cjPopFade{from{opacity:0;}to{opacity:1;}}
+    @keyframes cjPopIn{from{opacity:0;transform:translateY(22px) scale(.97);}to{opacity:1;transform:none;}}
+
+    @media (max-width:520px){
+      #cj-popups .cj-pop{padding:14px;}
+      #cj-popups #cj-pop-01 .cj-pop-card{padding:38px 22px 26px;border-radius:26px;}
+      #cj-popups #cj-pop-02 .cj-pop-card{min-height:420px;padding:18px;border-radius:26px;}
+      #cj-popups #cj-pop-02 .cj-pop-panel{padding:22px 18px;}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #cj-popups .cj-pop-overlay,#cj-popups .cj-pop-card{animation:none;}
+      #cj-popups .cj-pop-cta:hover,#cj-popups .cj-pop-x:hover{transform:none;}
+    }
+  </style>
+
+  <div id="cj-popups">
+
+    <!-- ===== POP-01 — dispara na metade da página ===== -->
+    <div class="cj-pop" id="cj-pop-01" role="dialog" aria-modal="true" aria-labelledby="cj-pop-01-title" hidden>
+      <div class="cj-pop-overlay" data-cj-pop-close="overlay"></div>
+      <div class="cj-pop-card" tabindex="-1">
+        <button class="cj-pop-x" type="button" data-cj-pop-close="x" aria-label="Fechar">&times;</button>
+        <!-- COPY POP-01 — livre para editar -->
+        <span class="cj-pop-eyebrow"><i></i>Ofertas CONARH 2026</span>
+        <h3 id="cj-pop-01-title">70 mil empresas</h3>
+        <p>já oferecem a melhor experiência de benefícios. Fale com o time da Caju e garanta as condições do CONARH.</p>
+        <a class="cj-pop-cta" data-cj-pop-cta href="https://formulario.caju.com.br/">Quero conhecer</a>
+        <button class="cj-pop-dismiss" type="button" data-cj-pop-close="dismiss">Agora não</button>
+      </div>
+    </div>
+
+    <!-- ===== POP-02 — dispara na intenção de saída ===== -->
+    <div class="cj-pop" id="cj-pop-02" role="dialog" aria-modal="true" aria-labelledby="cj-pop-02-title" hidden>
+      <div class="cj-pop-overlay" data-cj-pop-close="overlay"></div>
+      <div class="cj-pop-card" tabindex="-1">
+        <button class="cj-pop-x" type="button" data-cj-pop-close="x" aria-label="Fechar">&times;</button>
+        <div class="cj-pop-panel">
+          <!-- COPY POP-02 — livre para editar -->
+          <h3 id="cj-pop-02-title">Ainda dá tempo de <b>garantir a oferta</b></h3>
+          <p>Até 1 ano de Wellhub isento e até 50% OFF nos módulos da Caju. As condições do CONARH acabam em breve.</p>
+          <a class="cj-pop-cta" data-cj-pop-cta href="https://formulario.caju.com.br/">Quero minha cotação</a>
+          <button class="cj-pop-dismiss" type="button" data-cj-pop-close="dismiss">Continuar na página</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* =======================================================================
+       CONFIGURAÇÃO — mexa só aqui para ajustar comportamento
+    ======================================================================= */
+    var CFG = {
+      destino: 'https://formulario.caju.com.br/',  // para onde os dois CTAs mandam
+      scrollPercent: 0.5,        // pop-01: fração da página rolada (0.5 = metade)
+      tempoMinimoMs: 5000,       // pop-01: só pode abrir depois desse tempo na página
+      exitDelayMs: 5000,         // pop-02: exit-intent só arma depois desse tempo
+      exitScrollUpMobile: true,  // pop-02: fallback de mobile (rolagem rápida pra cima)
+      exitScrollMinDepth: 0.25,  // pop-02 mobile: só arma depois de já ter descido essa fração da página
+      usarUtmSalvaSemUtmNaUrl: false, // ver bloco UTM abaixo antes de ligar isto
+      umaVezPorSessao: true,     // não repete o mesmo pop-up na mesma sessão do navegador
+      naoAbrirComFormNaTela: true, // não abre pop-up se o usuário já está olhando o formulário
+      formNaTelaMin: 0.4,        // quanto da tela o formulário precisa ocupar para bloquear (0.4 = 40%)
+      marcarPopupNaUrl: true,    // acrescenta ?popup=pop_01|pop_02 no destino (para medir a origem)
+      abrirEmNovaAba: false
+    };
+
+    /* Hashes de tagueamento. Deixe VAZIO até receber as hashes oficiais do catálogo
+       (via /taguear). Enquanto vazio, nada é enviado ao dataLayer — evita sujar o GTM
+       com hash inventada. É só colar a hash entre as aspas para o evento passar a subir. */
+    var HASH = {
+      pop01_view:  '',
+      pop01_click: '',
+      pop02_view:  '',
+      pop02_click: ''
+    };
+
+    /* =======================================================================
+       UTM / atribuição
+       Mesma regra do embed do Fillout desta página, para os dois caminhos
+       (formulário na página e pop-up) carregarem exatamente a mesma atribuição:
+       - se a URL atual traz utm_source, usa a URL e completa o que faltar com o
+         `utm` salvo no localStorage (a UTM de chegada no site);
+       - se a URL atual NÃO traz utm_source, usa só o que estiver na URL — ou seja,
+         numa navegação interna sem UTM o link vai limpo, igualzinho ao formulário.
+       Se quiser que o pop-up recupere a UTM de chegada mesmo sem UTM na URL, ligue
+       CFG.usarUtmSalvaSemUtmNaUrl = true — mas aí o pop-up passa a mandar atribuição
+       diferente do formulário embedado logo acima nesta mesma página.
+    ======================================================================= */
+    function ctxWin() { return (window.parent !== window ? window.parent : window); }
+
+    function getStoredUTM() {
+      try { return JSON.parse(ctxWin().localStorage.getItem('utm') || '{}'); }
+      catch (e) { return {}; }
+    }
+    function getClientId() {
+      try {
+        var m = ctxWin().document.cookie.match(/(?:^|;\s*)_ga=([^;]+)/);
+        if (!m) return '';
+        var v = decodeURIComponent(m[1]).split('.');
+        return v.length >= 4 ? v[v.length - 2] + '.' + v[v.length - 1] : m[1];
+      } catch (e) { return ''; }
+    }
+    function getOrigem() {
+      try { return ctxWin().location.pathname.replace(/^\/+/, '') || 'home'; }
+      catch (e) { return ''; }
+    }
+
+    function buildDestino(popupId) {
+      var params = new URLSearchParams();
+      var urlParams, utm = getStoredUTM();
+      try { urlParams = new URLSearchParams(ctxWin().location.search); }
+      catch (e) { urlParams = new URLSearchParams(''); }
+
+      var urlHasUTM = urlParams.get('utm_source') || CFG.usarUtmSalvaSemUtmNaUrl;
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+        var val = urlHasUTM ? (urlParams.get(k) || utm[k]) : urlParams.get(k);
+        if (val) params.set(k, val);
+      });
+
+      var cid = getClientId();
+      var org = getOrigem();
+      var gclid = urlParams.get('gclid') || '';
+      if (cid)   params.set('client_id', cid);
+      if (org)   params.set('origem', org);
+      if (gclid) params.set('gclid', gclid);
+      if (CFG.marcarPopupNaUrl) params.set('popup', popupId);
+
+      var qs = params.toString();
+      return CFG.destino + (qs ? (CFG.destino.indexOf('?') === -1 ? '?' : '&') + qs : '');
+    }
+
+    /* ======================= utilidades ======================= */
+    function ss(action, key, value) {
+      try {
+        if (action === 'get') return window.sessionStorage.getItem(key);
+        window.sessionStorage.setItem(key, value);
+      } catch (e) { /* modo privado / storage bloqueado: pop-up só não memoriza */ }
+      return null;
+    }
+    function jaViu(id) { return CFG.umaVezPorSessao && ss('get', 'cj_' + id + '_visto') === '1'; }
+    function marcarVisto(id) { ss('set', 'cj_' + id + '_visto', '1'); }
+
+    function push(hash, parameters) {
+      if (!hash) return; // sem hash oficial, não envia nada
+      window.dataLayer = window.dataLayer || [];
+      var payload = { event: hash };
+      if (parameters) payload.parameters = parameters;
+      window.dataLayer.push(payload);
+    }
+
+    // Não interrompe quem já está de fato olhando o formulário da página.
+    // Só bloqueia quando o bloco do formulário ocupa uma boa fatia da tela
+    // (CFG.formNaTelaMin) — uma borda entrando no rodapé da viewport não conta,
+    // senão o pop-01 nunca dispararia: o formulário fica logo depois da metade.
+    function formNaTela() {
+      if (!CFG.naoAbrirComFormNaTela) return false;
+      var sec = document.getElementById('conarh-form');
+      if (!sec) return false;
+      var r = sec.getBoundingClientRect();
+      var visivel = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
+      return visivel / window.innerHeight >= CFG.formNaTelaMin;
+    }
+
+    /* ======================= controle dos modais ======================= */
+    var box = document.getElementById('cj-popups');
+    if (!box) return;
+    // Move para o <body>: garante position:fixed confiável em qualquer wrapper do Webflow.
+    if (document.body && box.parentNode !== document.body) document.body.appendChild(box);
+
+    var aberto = null;          // id do pop-up aberto
+    var focoAnterior = null;
+    var overflowAnterior = '';
+    var inicio = Date.now();
+
+    function focaveis(el) {
+      return Array.prototype.filter.call(
+        el.querySelectorAll('a[href],button:not([disabled])'),
+        function (n) { return n.offsetParent !== null; }
+      );
+    }
+
+    // Devolve true só quando o pop-up realmente abriu (quem chama usa isso para
+    // decidir se já pode desligar o gatilho).
+    function abrir(id) {
+      if (aberto || jaViu(id) || formNaTela()) return false;
+      var el = document.getElementById(id);
+      var cta = el && el.querySelector('[data-cj-pop-cta]');
+      if (!el || !cta) return false;
+
+      cta.href = buildDestino(id.replace('cj-pop-', 'pop_'));
+
+      el.hidden = false;
+      el.classList.add('is-open');
+      aberto = id;
+      marcarVisto(id);
+
+      focoAnterior = document.activeElement;
+      overflowAnterior = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      el.querySelector('.cj-pop-card').focus();
+
+      push(id === 'cj-pop-01' ? HASH.pop01_view : HASH.pop02_view);
+      return true;
+    }
+
+    function fechar() {
+      if (!aberto) return;
+      var el = document.getElementById(aberto);
+      el.classList.remove('is-open');
+      el.hidden = true;
+      aberto = null;
+      document.body.style.overflow = overflowAnterior;
+      if (focoAnterior && focoAnterior.focus) focoAnterior.focus();
+    }
+
+    box.addEventListener('click', function (e) {
+      var fecha = e.target.closest('[data-cj-pop-close]');
+      if (fecha) { fechar(); return; }
+
+      var cta = e.target.closest('[data-cj-pop-cta]');
+      if (cta) {
+        var pop = cta.closest('.cj-pop');
+        push(pop.id === 'cj-pop-01' ? HASH.pop01_click : HASH.pop02_click);
+        if (CFG.abrirEmNovaAba) { cta.target = '_blank'; cta.rel = 'noopener'; }
+        // navegação segue normal pelo href já preenchido com as UTMs
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!aberto) return;
+      if (e.key === 'Escape') { fechar(); return; }
+      if (e.key !== 'Tab') return;
+      // prende o Tab dentro do modal
+      var alvos = focaveis(document.getElementById(aberto));
+      if (!alvos.length) return;
+      var primeiro = alvos[0], ultimo = alvos[alvos.length - 1];
+      if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+    });
+
+    /* ======================= GATILHO 1 — metade da página ======================= */
+    (function () {
+      if (jaViu('cj-pop-01')) return;
+      var travado = false;
+      function checar() {
+        travado = false;
+        if (jaViu('cj-pop-01')) { window.removeEventListener('scroll', agendar); return; }
+        if (Date.now() - inicio < CFG.tempoMinimoMs) return;
+
+        var doc = document.documentElement;
+        var rolavel = Math.max(doc.scrollHeight - window.innerHeight, 1);
+        if ((window.pageYOffset || doc.scrollTop) / rolavel >= CFG.scrollPercent) {
+          if (abrir('cj-pop-01')) window.removeEventListener('scroll', agendar);
+        }
+      }
+      function agendar() {
+        if (travado) return;
+        travado = true;
+        window.requestAnimationFrame(checar);
+      }
+      window.addEventListener('scroll', agendar, { passive: true });
+    })();
+
+    /* ======================= GATILHO 2 — intenção de saída ======================= */
+    (function () {
+      if (jaViu('cj-pop-02')) return;
+
+      function armado() { return Date.now() - inicio >= CFG.exitDelayMs && !jaViu('cj-pop-02'); }
+
+      // Desktop: mouse sai pelo topo da janela (barra de endereço / fechar aba).
+      document.addEventListener('mouseout', function (e) {
+        if (!armado() || aberto) return;
+        if (e.relatedTarget || e.toElement) return; // ainda dentro da página
+        if (e.clientY > 0) return;                  // só quando sai por cima
+        abrir('cj-pop-02');
+      });
+
+      // Mobile: não existe mouseout. Em telas sem mouse (hover:none), usa rolagem
+      // rápida para cima depois de já ter descido a página — o gesto típico de quem
+      // está indo embora. É heurística: se gerar abertura indevida, basta
+      // CFG.exitScrollUpMobile = false (aí o pop-02 fica só no desktop).
+      var ehTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+      if (CFG.exitScrollUpMobile && ehTouch) {
+        var ultimoY = window.pageYOffset || 0;
+        var ultimoT = Date.now();
+        var desceu = false;
+        window.addEventListener('scroll', function () {
+          var y = window.pageYOffset || 0;
+          var t = Date.now();
+          var dy = ultimoY - y;                 // positivo = subindo
+          var dt = Math.max(t - ultimoT, 1);
+          var doc = document.documentElement;
+          var rolavel = Math.max(doc.scrollHeight - window.innerHeight, 1);
+          if (y > ultimoY && y / rolavel >= CFG.exitScrollMinDepth) desceu = true;
+          // subida rápida (> 1,2 px/ms) e já perto do topo
+          if (desceu && armado() && !aberto && dy / dt > 1.2 && y < window.innerHeight * 0.4) {
+            abrir('cj-pop-02');
+          }
+          ultimoY = y; ultimoT = t;
+        }, { passive: true });
+      }
+    })();
+  })();
+  </script>
 </section>
