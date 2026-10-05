@@ -1,0 +1,221 @@
+<!--
+  ==========================================================================
+  Caju · Faixa (banner) de chamada para a página de Premiações
+  --------------------------------------------------------------------------
+  Bloco de HTML personalizado para ser colado no Webflow como um Embed,
+  posicionado ENTRE o header e a hero da página.
+
+  - Todo o CSS está escopado sob #cj-premiacoes-strip para não afetar
+    estilos globais do Webflow.
+  - Mesmo padrão visual da faixa do CONARH: fundo laranja #FF7500 com
+    texto branco e seta que avança no hover.
+  - Tipografia Poppins, mesma usada nas LPs da Caju.
+  - A faixa inteira é um único link clicável para /plataforma/premiacoes.
+  ==========================================================================
+-->
+
+<div id="cj-premiacoes-strip">
+  <style>
+    /* ===== Fonte ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    /* ===== Tokens ===== */
+    #cj-premiacoes-strip{
+      --cj-orange:#FF7500;
+      --cj-orange-600:#F06A00;
+      --cj-white:#FFFFFF;
+
+      display:block;
+      width:100%;
+      font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    #cj-premiacoes-strip *,
+    #cj-premiacoes-strip *::before,
+    #cj-premiacoes-strip *::after{box-sizing:border-box;}
+
+    /* ===== A faixa ===== */
+    #cj-premiacoes-strip .cj-strip{
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      width:100%;
+      min-height:64px;
+      padding:12px 24px;
+      text-align:center;
+      text-decoration:none;
+      color:var(--cj-white);
+      background:var(--cj-orange);
+      transition:background .3s ease, box-shadow .3s ease;
+      cursor:pointer;
+    }
+
+    /* Brilho que atravessa a faixa no hover */
+    #cj-premiacoes-strip .cj-strip::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-40%;
+      width:35%;
+      height:100%;
+      pointer-events:none;
+      background:linear-gradient(100deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,.38) 50%,
+        rgba(255,255,255,0) 100%);
+      transform:skewX(-18deg);
+      opacity:0;
+      transition:opacity .2s ease;
+    }
+    @media (hover:hover) and (pointer:fine){
+      #cj-premiacoes-strip .cj-strip:hover::before{
+        opacity:1;
+        animation:cj-prem-shine 1.1s ease forwards;
+      }
+    }
+    #cj-premiacoes-strip .cj-strip:focus-visible::before{
+      opacity:1;
+      animation:cj-prem-shine 1.1s ease forwards;
+    }
+    @keyframes cj-prem-shine{
+      0%{left:-40%;}
+      100%{left:120%;}
+    }
+
+    /* ===== Conteúdo (texto principal + linha miúda) ===== */
+    #cj-premiacoes-strip .cj-strip-copy{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:3px;
+    }
+    #cj-premiacoes-strip .cj-strip-text{
+      position:relative;
+      display:inline-block;
+      font-size:15.5px;
+      font-weight:600;
+      letter-spacing:-.005em;
+      line-height:1.35;
+      /* Sombra sutil: ajuda a leitura do branco sobre o laranja */
+      text-shadow:0 1px 2px rgba(122,45,0,.30);
+    }
+    /* Sublinhado que cresce a partir do centro */
+    #cj-premiacoes-strip .cj-strip-text::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-2px;
+      width:0;
+      height:1.5px;
+      border-radius:2px;
+      background:rgba(255,255,255,.85);
+      transform:translateX(-50%);
+      transition:width .32s cubic-bezier(.4,0,.2,1);
+    }
+    #cj-premiacoes-strip .cj-strip-text strong{font-weight:700;}
+
+    /* Linha miúda (asterisco) */
+    #cj-premiacoes-strip .cj-strip-note{
+      font-size:11.5px;
+      font-weight:400;
+      line-height:1.3;
+      color:rgba(255,255,255,.88);
+      text-shadow:0 1px 2px rgba(122,45,0,.25);
+    }
+
+    /* Seta */
+    #cj-premiacoes-strip .cj-strip-arrow{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:24px;
+      height:24px;
+      border-radius:999px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.42);
+      transition:transform .3s cubic-bezier(.4,0,.2,1), background .3s ease, border-color .3s ease;
+    }
+    #cj-premiacoes-strip .cj-strip-arrow svg{
+      width:12px;
+      height:12px;
+      display:block;
+      stroke:var(--cj-white);
+      stroke-width:2.2;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      transition:stroke .3s ease;
+    }
+
+    /* ===== Hover (só em dispositivos com mouse) / foco ===== */
+    @media (hover:hover) and (pointer:fine){
+      #cj-premiacoes-strip .cj-strip:hover{
+        background:var(--cj-orange-600);
+        box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.30);
+      }
+      #cj-premiacoes-strip .cj-strip:hover .cj-strip-text::after{width:100%;}
+      #cj-premiacoes-strip .cj-strip:hover .cj-strip-arrow{
+        transform:translateX(5px);
+        background:var(--cj-white);
+        border-color:var(--cj-white);
+      }
+      #cj-premiacoes-strip .cj-strip:hover .cj-strip-arrow svg{stroke:var(--cj-orange);}
+    }
+    #cj-premiacoes-strip .cj-strip:focus-visible{
+      background:var(--cj-orange-600);
+      box-shadow:inset 0 -2px 0 0 rgba(255,255,255,.30);
+      outline:2px solid var(--cj-white);
+      outline-offset:-4px;
+    }
+    #cj-premiacoes-strip .cj-strip:focus-visible .cj-strip-text::after{width:100%;}
+    #cj-premiacoes-strip .cj-strip:focus-visible .cj-strip-arrow{
+      transform:translateX(5px);
+      background:var(--cj-white);
+      border-color:var(--cj-white);
+    }
+    #cj-premiacoes-strip .cj-strip:focus-visible .cj-strip-arrow svg{stroke:var(--cj-orange);}
+    #cj-premiacoes-strip .cj-strip:active{background:var(--cj-orange-600);}
+
+    /* ===== Responsivo ===== */
+    @media (max-width:600px){
+      #cj-premiacoes-strip .cj-strip{
+        gap:10px;
+        padding:12px 16px;
+        min-height:62px;
+      }
+      #cj-premiacoes-strip .cj-strip-text{font-size:14px;}
+      #cj-premiacoes-strip .cj-strip-note{font-size:11px;}
+      #cj-premiacoes-strip .cj-strip-arrow{width:22px;height:22px;}
+    }
+
+    /* ===== Acessibilidade: reduzir movimento ===== */
+    @media (prefers-reduced-motion:reduce){
+      #cj-premiacoes-strip .cj-strip,
+      #cj-premiacoes-strip .cj-strip-arrow,
+      #cj-premiacoes-strip .cj-strip-text::after{transition:none;}
+      #cj-premiacoes-strip .cj-strip:hover::before,
+      #cj-premiacoes-strip .cj-strip:focus-visible::before{animation:none;opacity:0;}
+      #cj-premiacoes-strip .cj-strip:hover .cj-strip-arrow{transform:none;}
+    }
+  </style>
+
+  <a class="cj-strip"
+     href="https://www.caju.com.br/plataforma/premiacoes"
+     aria-label="Premiações mais Multibenefícios com cartão custo zero e taxa zero. Contrate agora. Isenção para TKM acima de 600 reais.">
+    <span class="cj-strip-copy">
+      <span class="cj-strip-text">Premiações + Multibenefícios com cartão <strong>custo zero</strong> e <strong>taxa zero</strong>. Contrate agora!</span>
+      <span class="cj-strip-note">*isenção para TKM acima de R$600</span>
+    </span>
+    <span class="cj-strip-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+        <path d="M5 12h13"></path>
+        <path d="M12.5 6l6 6-6 6"></path>
+      </svg>
+    </span>
+  </a>
+</div>
