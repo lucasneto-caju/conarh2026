@@ -837,15 +837,22 @@
     }
     #cj-popups *,#cj-popups *::before,#cj-popups *::after{box-sizing:border-box;}
 
+    /* Quem rola é a camada de fundo, não o card. Assim o botão de fechar acompanha
+       o card e continua alcançável em janela baixa ou com zoom alto do navegador —
+       antes o card rolava por dentro e o "X" sumia. */
     #cj-popups .cj-pop{
       position:fixed;inset:0;z-index:99999;
-      display:none;align-items:center;justify-content:center;
+      display:none;
+      /* coluna + margin:auto no card: centraliza quando sobra espaço e encosta no topo
+         quando falta, em vez de estourar para fora da tela (onde não dá para rolar). */
+      flex-direction:column;align-items:center;
       padding:20px;
+      overflow-y:auto;-webkit-overflow-scrolling:touch;
     }
     #cj-popups .cj-pop.is-open{display:flex;}
 
     #cj-popups .cj-pop-overlay{
-      position:absolute;inset:0;
+      position:fixed;inset:0;   /* fixo: cobre a tela toda mesmo com a camada rolada */
       background:rgba(15,10,10,.68);
       backdrop-filter:blur(3px);
       animation:cjPopFade .22s ease both;
@@ -854,8 +861,10 @@
     #cj-popups .cj-pop-card{
       position:relative;z-index:1;
       width:100%;border-radius:32px;overflow:hidden;
+      /* margin:auto centraliza sem cortar o topo quando o card é mais alto que a tela
+         (o que acontece com align-items:center em container rolável). */
+      margin:auto;
       box-shadow:0 40px 90px -30px rgba(0,0,0,.65);
-      max-height:92vh;overflow-y:auto;
       animation:cjPopIn .28s cubic-bezier(.2,.8,.3,1) both;
     }
     #cj-popups .cj-pop-card:focus{outline:none;}
@@ -919,7 +928,7 @@
       background-image:linear-gradient(180deg,rgba(27,22,20,.15) 0%,rgba(27,22,20,.55) 55%,rgba(27,22,20,.92) 100%),
                        url('https://cdn.prod.website-files.com/68b6fa277e5c017395008330/6a845ec4579a72a086fb70bb_2141532.avif');
       background-size:cover;background-position:center;
-      min-height:440px;display:flex;align-items:flex-end;
+      min-height:440px;min-height:min(440px,70vh);display:flex;align-items:flex-end;
       padding:28px;
     }
     #cj-popups #cj-pop-02 .cj-pop-x{background:rgba(255,255,255,.22);color:#fff;}
@@ -945,7 +954,7 @@
     @media (max-width:520px){
       #cj-popups .cj-pop{padding:14px;}
       #cj-popups #cj-pop-01 .cj-pop-card{padding:38px 22px 26px;border-radius:26px;}
-      #cj-popups #cj-pop-02 .cj-pop-card{min-height:420px;padding:18px;border-radius:26px;}
+      #cj-popups #cj-pop-02 .cj-pop-card{min-height:420px;min-height:min(420px,70vh);padding:18px;border-radius:26px;}
       #cj-popups #cj-pop-02 .cj-pop-panel{padding:22px 18px;}
     }
 
@@ -1083,8 +1092,19 @@
       } catch (e) { /* modo privado / storage bloqueado: pop-up só não memoriza */ }
       return null;
     }
-    function jaViu(id) { return CFG.umaVezPorSessao && ss('get', 'cj_' + id + '_visto') === '1'; }
-    function marcarVisto(id) { ss('set', 'cj_' + id + '_visto', '1'); }
+    // Trava em memória: vale mesmo quando o sessionStorage está indisponível
+    // (Chrome com dados de site bloqueados, política de TI, extensão de privacidade).
+    // Sem ela, o `jaViu` voltava sempre false nesses navegadores e o pop-02 reabria
+    // toda vez que o mouse saía pelo topo — para o usuário, parecia que o X não fechava.
+    var abertosNestaPagina = {};
+    function jaViu(id) {
+      if (abertosNestaPagina[id]) return true;
+      return CFG.umaVezPorSessao && ss('get', 'cj_' + id + '_visto') === '1';
+    }
+    function marcarVisto(id) {
+      abertosNestaPagina[id] = true;
+      ss('set', 'cj_' + id + '_visto', '1');
+    }
 
     function push(hash, parameters) {
       if (!hash) return; // sem hash oficial, não envia nada
@@ -1213,37 +1233,46 @@
 
       function armado() { return Date.now() - inicio >= CFG.exitDelayMs && !jaViu('cj-pop-02'); }
 
+      // Depois que o pop-02 aparece uma vez, os dois gatilhos são desligados — nenhum
+      // deles depende mais de storage para parar de insistir.
+      function desligarGatilhos() {
+        document.removeEventListener('mouseout', aoSairPeloTopo);
+        window.removeEventListener('scroll', aoRolarParaCima);
+      }
+
       // Desktop: mouse sai pelo topo da janela (barra de endereço / fechar aba).
-      document.addEventListener('mouseout', function (e) {
+      function aoSairPeloTopo(e) {
         if (!armado() || aberto) return;
         if (e.relatedTarget || e.toElement) return; // ainda dentro da página
         if (e.clientY > 0) return;                  // só quando sai por cima
-        abrir('cj-pop-02');
-      });
+        if (abrir('cj-pop-02')) desligarGatilhos();
+      }
+      document.addEventListener('mouseout', aoSairPeloTopo);
 
       // Mobile: não existe mouseout. Em telas sem mouse (hover:none), usa rolagem
       // rápida para cima depois de já ter descido a página — o gesto típico de quem
       // está indo embora. É heurística: se gerar abertura indevida, basta
       // CFG.exitScrollUpMobile = false (aí o pop-02 fica só no desktop).
+      var ultimoY = window.pageYOffset || 0;
+      var ultimoT = Date.now();
+      var desceu = false;
+      function aoRolarParaCima() {
+        var y = window.pageYOffset || 0;
+        var t = Date.now();
+        var dy = ultimoY - y;                 // positivo = subindo
+        var dt = Math.max(t - ultimoT, 1);
+        var doc = document.documentElement;
+        var rolavel = Math.max(doc.scrollHeight - window.innerHeight, 1);
+        if (y > ultimoY && y / rolavel >= CFG.exitScrollMinDepth) desceu = true;
+        // subida rápida (> 1,2 px/ms) e já perto do topo
+        if (desceu && armado() && !aberto && dy / dt > 1.2 && y < window.innerHeight * 0.4) {
+          if (abrir('cj-pop-02')) desligarGatilhos();
+        }
+        ultimoY = y; ultimoT = t;
+      }
       var ehTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
       if (CFG.exitScrollUpMobile && ehTouch) {
-        var ultimoY = window.pageYOffset || 0;
-        var ultimoT = Date.now();
-        var desceu = false;
-        window.addEventListener('scroll', function () {
-          var y = window.pageYOffset || 0;
-          var t = Date.now();
-          var dy = ultimoY - y;                 // positivo = subindo
-          var dt = Math.max(t - ultimoT, 1);
-          var doc = document.documentElement;
-          var rolavel = Math.max(doc.scrollHeight - window.innerHeight, 1);
-          if (y > ultimoY && y / rolavel >= CFG.exitScrollMinDepth) desceu = true;
-          // subida rápida (> 1,2 px/ms) e já perto do topo
-          if (desceu && armado() && !aberto && dy / dt > 1.2 && y < window.innerHeight * 0.4) {
-            abrir('cj-pop-02');
-          }
-          ultimoY = y; ultimoT = t;
-        }, { passive: true });
+        window.addEventListener('scroll', aoRolarParaCima, { passive: true });
       }
     })();
   })();
