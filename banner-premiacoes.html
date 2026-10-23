@@ -1,4 +1,5 @@
-<!-- Caju · Faixa de Premiacoes · CSS escopado em #cj-prem · link: /plataforma/premiacoes -->
+<!-- Caju · Faixa de Premiacoes · CSS escopado em #cj-prem -->
+<!-- Link padrao: /plataforma/premiacoes · Quando ja estiver nessa pagina: formulario.caju.com.br -->
 <div id="cj-prem">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700');
@@ -47,4 +48,22 @@
       <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h13"></path><path d="M12.5 6l6 6-6 6"></path></svg>
     </span>
   </a>
+  <script>
+  (function(){
+    /* Se a pessoa JA esta na pagina de Premiacoes, mandar para o formulario. */
+    var DESTINO_ALTERNATIVO = 'https://formulario.caju.com.br/';
+    var PAGINA_PREMIACOES   = '/plataforma/premiacoes';
+
+    var box = document.getElementById('cj-prem');
+    if(!box){ return; }
+    var link = box.querySelector('a.s');
+    if(!link){ return; }
+
+    /* Normaliza: tira barra final e ignora maiusculas/minusculas */
+    var atual = (window.location.pathname || '').toLowerCase().replace(/\/+$/, '');
+    if(atual === PAGINA_PREMIACOES){
+      link.setAttribute('href', DESTINO_ALTERNATIVO);
+    }
+  })();
+  </script>
 </div>
